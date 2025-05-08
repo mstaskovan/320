@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>320</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+body {
+background-color: black;
+color: white;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.item {
+color: white;
+cursor: pointer;
+}
+.selected {
+	color: gray; /* Farba označeného textu */
+	font-size: 1em; /* Zabezpečí konzistenciu pre označené položky */
+	}
+	.special.selected {
+	color: gray; /* Farba označeného textu má prioritu */
+	font-size: 1.2em; /* Ak chceš, aby zväčšenie ostalo aj pri označení */
+	}
+.group-title {
+color: red;
+}
+	.special {
+font-size: 1.2em; /* Zväčšuje písmo */
+font-weight: bold; /* Zároveň ponecháva bold efekt */
+color: #FFD700; /* Pridá výraznú farbu, napríklad zlatú */
+	}
+	.indented {
+margin-left: 20px; /* Nastaví odsadenie od ľavého okraja */
+	}
+	.hidden {
+    display: none;
+	}
+</style>
+</head>
+<body>
+<h3 class="group-title">Preliminary Cockpit Preparation - príprava kokpitu</h3>
+<ul>
+<li class="item indented">Počiatočné bezpečnostné kontroly v kokpite:</li>
+<li class="item indented indented special">Páky ovládania motorov (engine master levers) – VYPRAŤ.</li>
+<li class="item indented indented special">Voliče režimu motora (engine mode selectors) – POLOHA "NORM".</li>
+<li class="item indented indented">Prepínače meteorologického radaru a prediktívneho systému proti námraze na čelnom skle – VYPRAŤ.</li>
+<li class="item indented indented">Páka podvozku – POLOHA DOLE.</li>
+<li class="item indented indented">Voliče stieračov – VYPRAŤ.</li>
+<li class="item indented special">Zapnutie napájania lietadla:</li>
+<li class="item indented indented special">Napätie batérie – SKONTROLOVAŤ (nad 25,5 V, ak bolo lietadlo dlhšie bez napájania).</li>
+<li class="item indented indented special">Externé napájanie – ZAPNÚŤ (ak je dostupné).</li>
+<li class="item indented indented">Počkať na dokončenie autotestov lietadla.</li>
+<li class="item indented special">APU (pomocná energetická jednotka) a nastavenie rádia:</li>
+<li class="item indented indented">Zvážiť potrebu spustenia APU (teplota, počasie).</li>
+<li class="item indented indented special">Rádiá – NASTAVIŤ (hlasitosť, strážna frekvencia VHF 2).</li>
+<li class="item indented indented special">Test požiarneho systému APU – VYKONAŤ.</li>
+<li class="item indented indented special">APU – SPUSTIŤ (počkať min. 3 minúty pred zapnutím APU bleed).</li>
+<li class="item indented special">Zarovnanie IRS (inerciálny referenčný systém):</li>
+<li class="item indented indented special">Proces zarovnania IRS – SPUSTIŤ.</li>
+<li class="item indented indented">Uistiť sa, že lietadlo je počas zarovnávania nehybné.</li>
+<li class="item indented">Osvetlenie kokpitu a EFB (elektronická letová taška):</li>
+<li class="item indented indented">Osvetlenie kokpitu – NASTAVIŤ podľa podmienok.</li>
+<li class="item indented indented">EFB – SPUSTIŤ a SKONTROLOVAŤ AKTUALIZÁCIE (softvér, databázy).</li>
+<li class="item indented special">Predbežná inicializácia FMS (systém riadenia letu):</li>
+<li class="item indented indented special">FMS – INICIALIZOVAŤ (cez ACARS/AOC nahrať letové údaje).</li>
+<li class="item indented indented special">Typ lietadla a motora v FMS – OVERIŤ.</li>
+<li class="item indented indented">Číslo letu – ZADAŤ, skontrolovať správy.</li>
+<li class="item indented indented special">Zarovnanie IRS – POTVRDIŤ, dostupnosť GPS.</li>
+<li class="item indented">Preberanie lietadla:</li>
+<li class="item indented indented special">Predchádzajúce poruchy – VYVOLAŤ (recall button).</li>
+<li class="item indented indented">Denník údržby, položky MEL, súhrn konfigurácie lietadla – SKONTROLOVAŤ.</li>
+<li class="item indented indented">Bulletiny OEB od Airbusu – SKONTROLOVAŤ.</li>
+<li class="item indented special">Predbežný výpočet výkonnosti:</li>
+<li class="item indented indented special">Potrebné množstvo paliva – VYPOČÍTAŤ (zohľadniť počasie, možné čakanie).</li>
+<li class="item indented indented special">Vzletová hmotnosť a výkonnosť – VYPOČÍTAŤ (všímať si obmedzenia).</li>
+<li class="item indented special">Základná kontrola stavu systémov:</li>
+<li class="item indented indented special">Tlak kyslíka – SKONTROLOVAŤ.</li>
+<li class="item indented indented special">Množstvo hydraulickej kvapaliny – OVERIŤ.</li>
+<li class="item indented indented special">Množstvo motorového oleja – SKONTROLOVAŤ (v prípade potreby aktivovať FADEC).</li>
+<li class="item indented indented special">Páky klapiek a rýchlostných bŕzd – SPRÁVNA POLOHA.</li>
+<li class="item indented indented special">Parkovacia brzda a tlak v brzdách – SKONTROLOVAŤ.</li>
+<li class="item indented indented">Ističe – SKONTROLOVAŤ (či nie je niektorý vypadnutý).</li>
+<li class="item special">Detailná prehliadka kokpitu (systematický sken panelov)</li>
+<li class="item indented">Všeobecný postup prehliadky:</li>
+<li class="item indented indented">Horný panel: Zľava doprava, zdola nahor.</li>
+<li class="item indented indented">Hlavný panel: Nadol a potom nahor v tvare U.</li>
+<li class="item indented indented">Podstavec (Pedestal): Zhora nadol, zľava doprava.</li>
+<li class="item indented special">Horný panel (Overhead Panel):</li>
+<li class="item indented indented">Tlačidlá volania (call buttons) – NESMÚ BYŤ STLAČENÉ.</li>
+<li class="item indented indented special">Prívod kyslíka pre posádku (crew supply) – ZAPNÚŤ.</li>
+<li class="item indented indented special">Spínač pozemného ovládania záznamníka (recorder ground control switch) – ZAPNÚŤ.</li>
+<li class="item indented indented special">Test CVR (záznamník hlasu v kokpite) – VYKONAŤ.</li>
+<li class="item indented indented">Panel evakuácie (evacuation panel) – SKONTROLOVAŤ.</li>
+<li class="item indented indented special">Prepínače svetiel, APU a bezpečnostných pásov – NASTAVIŤ.</li>
+<li class="item indented indented">Svetlá signalizácie (annunciator lights) – SKONTROLOVAŤ, jas NASTAVIŤ.</li>
+<li class="item indented indented">Požadovaná výška kabíny (cabin altitude) – NASTAVIŤ.</li>
+<li class="item indented indented">Panel klimatizácie (air conditioning panel) – SKONTROLOVAŤ.</li>
+<li class="item indented indented">Nabíjanie batérií – SKONTROLOVAŤ SPRÁVNOSŤ.</li>
+<li class="item indented indented special">Palivové čerpadlá (fuel pumps) – ZAPNÚŤ.</li>
+<li class="item indented indented">Hydraulický panel (hydraulic panel) – SKONTROLOVAŤ.</li>
+<li class="item indented indented special">Testy požiarneho systému motorov (engine fire tests) – SPUSTIŤ.</li>
+<li class="item indented indented">Systém vykurovania nákladného priestoru (cargo heat system) – NASTAVIŤ (ak je k dispozícii).</li>
+<li class="item indented indented special">Spínač PA (palubný rozhlas) – POTIAHNUŤ/AKTIVOVAŤ.</li>
+<li class="item indented special">Hlavný panel (Main Panel):</li>
+<li class="item indented indented special">Tlak QNH na záložnom výškomere (standby altimeter) – NASTAVIŤ SPRÁVNY.</li>
+<li class="item indented indented">Zobrazenie terénu (terrain display) na navigačnom displeji (ND) – VYPRAŤ.</li>
+<li class="item indented indented">Zobrazovacie jednotky (DCU - Display Control Units) – UISTIŤ SA, ŽE SÚ ZAPNUTÉ.</li>
+<li class="item indented indented">Dátum a čas – SKONTROLOVAŤ.</li>
+<li class="item indented indented">Prepínač riadenia predného kolesa (anti-skid & nose wheel steering) – SKONTROLOVAŤ.</li>
+<li class="item indented special">Podstavec (Pedestal):</li>
+<li class="item indented indented special">Rádiové frekvencie – NALADIŤ PRÍSLUŠNÉ.</li>
+<li class="item indented indented">Nastavenia zvuku (audio selections) – VYKONAŤ SPRÁVNE.</li>
+<li class="item indented indented">Meteorologický radar (weather radar) – SKONTROLOVAŤ.</li>
+<li class="item indented indented">Poloha rýchlostných bŕzd (speed brakes), parkovacia brzda, poloha klapiek (flaps) – SKONTROLOVAŤ.</li>
+<li class="item indented indented special">Transpondér (odpovedač) – NASTAVIŤ.</li>
+</ul>
+<p class="hidden">
+<h3 class="group-title">Predletová vonkajšia kontrola (Walkaround) lietadla Airbus A320</h3>
+<ul>
+<li class="item">A. Ľavá predná časť trupu:</li>
+<li class="item indented">Skontrolovať sondu uhla nábehu (AOA).</li>
+<li class="item indented">Skontrolovať statické porty kapitána a prvého dôstojníka.</li>
+<li class="item indented">Skontrolovať ventil a vstupný ventil avionického zariadenia.</li>
+<li class="item indented">Skontrolovať kyslíkovú komoru.</li>
+<li class="item indented">Skontrolovať servisné dvere toalety (ak sú nainštalované).</li>
+<li class="item">B. Nosová časť:</li>
+<li class="item indented">Skontrolovať Pitotove trubice.</li>
+<li class="item indented">Skontrolovať sondu uhla nábehu.</li>
+<li class="item indented">Skontrolovať indikátory námrazy.</li>
+<li class="item indented">Skontrolovať avionickú komoru.</li>
+<li class="item indented">Skontrolovať uzemňovacie elektronické pripojenia.</li>
+<li class="item">C. Podvozok predného kolesa:</li>
+<li class="item indented">Skontrolovať klinové podložky.</li>
+<li class="item indented">Skontrolovať stav tesnení a pneumatík.</li>
+<li class="item indented">Skontrolovať konštrukciu podvozku.</li>
+<li class="item indented">Skontrolovať svetlá pre taxi, vzlet a odbočenie na dráhu.</li>
+<li class="item indented">Skontrolovať hydraulické vedenia a elektrické káble.</li>
+<li class="item indented">Skontrolovať priestor pre koleso.</li>
+<li class="item indented special">Overiť, či je bezpečnostný kolík odstránený.</li>
+<li class="item">D. Pravá predná časť trupu:</li>
+<li class="item indented">Skontrolovať Pitotovu sondu.</li>
+<li class="item indented">Skontrolovať sondu uhla nábehu a indikátory námrazy.</li>
+<li class="item indented">Skontrolovať vstupy vzduchu a západky.</li>
+<li class="item indented">Skontrolovať pohotovostný statický port.</li>
+<li class="item indented">Skontrolovať dvere avionickej komory.</li>
+<li class="item indented">Skontrolovať statické porty.</li>
+<li class="item indented">Skontrolovať predné nákladné dvere.</li>
+<li class="item indented">Skontrolovať antény.</li>
+<li class="item indented">Skontrolovať vstupy vzduchu.</li>
+<li class="item indented">Skontrolovať magnetickú indikáciu hladiny paliva.</li>
+<li class="item indented">Skontrolovať dvere pripojenia pre nízky a vysoký tlak vzduchu na zemi.</li>
+<li class="item">E. Stredná časť krídla a motor:</li>
+<li class="item indented">Skontrolovať panel dopĺňania paliva.</li>
+<li class="item indented">Skontrolovať výsuvné pristávacie lamely.</li>
+<li class="item indented">Skontrolovať nábežné hrany.</li>
+<li class="item indented">Skontrolovať olejové dvere.</li>
+<li class="item indented">Skontrolovať reverzné dvere.</li>
+<li class="item indented">Skontrolovať nábežné hrany lopatiek ventilátora.</li>
+<li class="item indented">Skontrolovať akustické obloženie.</li>
+<li class="item indented">Skontrolovať nábežnú hranu kapotáže.</li>
+<li class="item indented">Skontrolovať západky kapotáže motora.</li>
+<li class="item indented">Skontrolovať magnetickú páku paliva.</li>
+<li class="item indented">Skontrolovať vypúšťacie ventily.</li>
+<li class="item indented">Skontrolovať vzduchové prieduchy pre ventilačný systém nádrže krídla.</li>
+<li class="item indented">Skontrolovať navigačné svetlá.</li>
+<li class="item indented">Skontrolovať stroboskopické svetlá.</li>
+<li class="item indented">Skontrolovať plot na konci krídla (wing fence).</li>
+<li class="item indented">Skontrolovať statické vybíjače (static wicks).</li>
+<li class="item indented">Skontrolovať krídielko (aileron).</li>
+<li class="item indented">Skontrolovať kapotáže klapiek.</li>
+<li class="item">F. Hlavný podvozok (ľavý aj pravý):</li>
+<li class="item indented">Hľadať známky poškodenia alebo úniku.</li>
+<li class="item indented">Skontrolovať stav pneumatík.</li>
+<li class="item indented">Skontrolovať kolíky indikátora opotrebenia bŕzd.</li>
+<li class="item indented">Skontrolovať brzdový ventilátor (ak je inštalovaný).</li>
+<li class="item indented">Skontrolovať všeobecné štruktúry v priestore pre koleso.</li>
+<li class="item indented">Skontrolovať pristávacie svetlo (na strane kde je umiestnené).</li>
+<li class="item">G. Zadná časť trupu:</li>
+<li class="item indented">Skontrolovať nákladné dvere.</li>
+<li class="item indented">Skontrolovať výstupný ventil (outflow valve).</li>
+<li class="item indented">Skontrolovať servisné dvere toalety.</li>
+<li class="item indented">Skontrolovať vypúšťacie otvory.</li>
+<li class="item indented">Skontrolovať prístupové dvere k zapisovaču letových údajov.</li>
+<li class="item indented">Skontrolovať horizontálny stabilizátor.</li>
+<li class="item indented">Skontrolovať vertikálny stabilizátor a smerové kormidlo.</li>
+<li class="item indented">Skontrolovať zadné vstupné dvere.</li>
+<li class="item indented">Skontrolovať prístupové dvere údržby pre APU.</li>
+<li class="item indented">Skontrolovať chvostovú lyžinu (tail skid, ak je nainštalovaná).</li>
+<li class="item indented">Skontrolovať zadné svetlá.</li>
+<li class="item indented">Skontrolovať indikáciu polohy horizontálneho stabilizátora.</li>
+<li class="item indented">Skontrolovať dvere odpadového systému.</li>
+<li class="item">H. Druhá strana lietadla:</li>
+<li class="item indented">Vykonať rovnaké kontroly ako na prvej prechádzanej strane (zrkadlovo pre podvozok, motor, krídlo, trup).</li>
+<li class="item indented">Skontrolovať stav podvozku.</li>
+<li class="item indented">Skontrolovať pneumatiky.</li>
+<li class="item indented">Skontrolovať kolíky indikátora opotrebenia bŕzd.</li>
+<li class="item indented">Skontrolovať svetlo pristátia.</li>
+<li class="item indented">Skontrolovať zadnú časť motora.</li>
+<li class="item indented">Skontrolovať statické vybíjače.</li>
+<li class="item indented">Skontrolovať navigačné svetlá (červené/zelené).</li>
+<li class="item indented">Skontrolovať stav motora (vstupy, výstupy, západky).</li>
+<li class="item indented">Skontrolovať nábežné hrany.</li>
+<li class="item indented">Skontrolovať ventilátor.</li>
+</ul>
+<p>
+<h3 class="group-title">Preflight Procedure - predletová príprava</h3>
+<ul>
+<li class="item">Všeobecný postup prehliadky panelov:</li>
+<li class="item indented">Horný panel: Postupujte zľava doprava a zdola nahor.</li>
+<li class="item indented">Hlavný panel: Postupujte nadol a potom nahor v tvare písmena U.</li>
+<li class="item indented">Podstavec (Pedestal): Postupujte zhora nadol a zľava doprava.</li>
+<li class="item">Podrobný postup:</li>
+<li class="item">1. Horný panel (Overhead Panel)</li>
+<li class="item indented special">Skontrolujte, či nie je stlačené žiadne tlačidlo volania (call button).</li>
+<li class="item indented special">Zapnite prívod kyslíka pre posádku (crew supply).</li>
+<li class="item indented special">Zapnite spínač pozemného ovládania záznamníka (recorder ground control switch).</li>
+<li class="item indented special">Vykonajte test CVR (záznamník hlasu v kokpite).</li>
+<li class="item indented">Skontrolujte panel evakuácie (evacuation panel).</li>
+<li class="item indented special">Nastavte prepínače svetiel, APU (pomocná energetická jednotka) a bezpečnostných pásov.</li>
+<li class="item indented">Skontrolujte svetlá signalizácie (annunciator lights) a nastavte ich jas.</li>
+<li class="item indented special">Nastavte požadovanú výšku kabíny (cabin altitude).</li>
+<li class="item indented">Skontrolujte panel klimatizácie (air conditioning panel).</li>
+<li class="item indented special">Skontrolujte, či sa batérie správne nabíjajú.</li>
+<li class="item indented special">Zapnite palivové čerpadlá (fuel pumps).</li>
+<li class="item indented">Skontrolujte hydraulický panel (hydraulic panel).</li>
+<li class="item indented special">Spustite testy požiarneho systému motorov (engine fire tests).</li>
+<li class="item indented">Nastavte systém vykurovania nákladného priestoru (cargo heat system), ak je k dispozícii.</li>
+<li class="item indented special">Potiahnite spínač PA (palubný rozhlas).</li>
+<li class="item">2. Hlavný panel (Main Panel)</li>
+<li class="item indented special">Nastavte správny tlak QNH na záložnom výškomere (standby altimeter).</li>
+<li class="item indented">Vypnite zobrazenie terénu (terrain display) na navigačnom displeji (ND).</li>
+<li class="item indented special">Uistite sa, že sú zapnuté zobrazovacie jednotky (DCU - Display Control Units).</li>
+<li class="item indented">Skontrolujte dátum a čas.</li>
+<li class="item indented special">Skontrolujte prepínač riadenia predného kolesa (anti-skid & nose wheel steering).</li>
+<li class="item">3. Podstavec (Pedestal)</li>
+<li class="item indented special">Nalaďte príslušné rádiové frekvencie.</li>
+<li class="item indented special">Vykonajte správne nastavenia zvuku (audio selections).</li>
+<li class="item indented">Skontrolujte meteorologický radar (weather radar).</li>
+<li class="item indented special">Skontrolujte polohu rýchlostných bŕzd (speed brakes), parkovaciu brzdu a polohu klapiek (flaps).</li>
+<li class="item indented special">Nastavte transpondér (odpovedač).</li>
+</ul>
+
+<h3 class="group-title">FMS Preflight - predletová príprava FMS</h3>
+<ul>
+<li class="item indented">Deselektujte akékoľvek nefunkčné navigačné pomôcky, ak je potrebné.</li>
+<li class="item indented special">Na stránke INIT overte trasu, záložné letisko a zadajte volací znak ATC, nákladový index, cestovnú hladinu/teplotu, tropopauzu a prízemnú teplotu.</li>
+<li class="item indented special">Na stránke letového plánu zadajte informácie o odlete a prílete, vrátane dráhy, SID, STAR a akýchkoľvek potrebných prechodov alebo priblížení.</li>
+<li class="item indented">Zadajte akékoľvek plánované postupné stúpania alebo klesania.</li>
+<li class="item indented special">Použite režim plánu na navigačnom displeji na kontrolu celého letového plánu.</li>
+<li class="item indented special">Overte, či sa trasa zhoduje s trasou ATC a porovnajte vzdialenosť letového plánu s OFP.</li>
+<li class="item indented special">Naprogramujte postup pri zlyhaní motora v sekundárnom letovom pláne, vrátane vyčkávacích obrazcov a postupov okamžitého návratu.</li>
+<li class="item indented special">Vizualizujte trasu pri zlyhaní motora na navigačnom displeji pomocou stránky s informáciami o pevnom bode.</li>
+<li class="item indented">Nastavte navigačné rádiá podľa potreby.</li>
+<li class="item indented special">Na stránke PROGRESS potvrďte primárne GPS a vysokú presnosť a zadajte odletovú dráhu.</li>
+<li class="item indented special">Na stránke INIT zadajte informácie o výkone, ako je nulová palivová hmotnosť, blokové palivo a zložka vetra.</li>
+<li class="item indented special">Na stránke PERFORMANCE zadajte údaje o vzlete, ako sú klapky, teplota flex a rýchlosti vzletu.</li>
+<li class="item indented special">Overte údaje FMS oproti odletovej mape a skontrolujte navigačné body a obmedzenia.</li>
+<li class="item special">Príprava kokpitu:</li>
+<li class="item indented special">Na FCU nastavte počiatočnú stúpaciu povolenú výšku a uistite sa, že sú zapnuté letové riadiace systémy.</li>
+<li class="item indented">Nakonfigurujte ovládací panel EIS, vrátane výberu rozsahu a režimu.</li>
+<li class="item indented special">Nastavte QNH na oboch stranách.</li>
+<li class="item special">Kontrola kyslíka:</li>
+<li class="item indented">Komunikujte s pozemným personálom prostredníctvom interkomu.</li>
+<li class="item indented special">Otestujte kyslíkovú masku stlačením tlačidla test a počúvaním prietoku kyslíka a funkčnosti mikrofónu.</li>
+<li class="item special">Kontrola prístrojov:</li>
+<li class="item indented special">Uistite sa, že nič neblokuje ovládacie prvky a podľa potreby nastavte svetlá.</li>
+<li class="item indented special">Overte, či sa zhodujú kurz, výška, hladina a rýchlosti a potvrďte polohu na navigačnom displeji.</li>
+</ul>
+<p class="hidden">
+<h3 class="group-title">Koncept "Smartenie briefingu" a kontrolný zoznam prípravy kokpitu</h3>
+<ul>
+<li class="item special">Kontrola pred briefingom: Pred briefingom zadá letiaci pilot (PF) údaje do systému FMS a monitorujúci pilot (PM) overí ich presnosť.</li>
+<li class="item">Prostredie bez rušenia: Zatvorte dvere kokpitu, aby ste sa mohli sústrediť.</li>
+<li class="item special">Briefing monitorujúceho pilota (PM):</li>
+<li class="item indented">Dráha vzletu a akákoľvek použiteľná križovatka.</li>
+<li class="item indented">SID a jeho označenie.</li>
+<li class="item indented">Počiatočná povolená výška.</li>
+<li class="item indented">Minimálna sektorová výška (MSA) alebo minimálna prekážková výška (MOA) pre stúpanie.</li>
+<li class="item indented">Extra palivo a dostupný čas.</li>
+<li class="item special">Briefing letiaceho pilota (PF):</li>
+<li class="item indented">Horúce miesta na plánovanej pojazdnej dráhe.</li>
+<li class="item indented">Rezerva na zastavenie pri prerušenom vzlete.</li>
+<li class="item indented">Postup pri zlyhaní motora.</li>
+<li class="item indented">Postupy pre okamžitý návrat alebo odklon.</li>
+<li class="item indented">Špeciálne prevádzkové postupy (SOP, ktoré sa nevykonávajú denne, napr. použitie odmrazovania).</li>
+<li class="item indented">Neštandardné prevádzkové postupy (situácie bez SOP, napr. nezvyčajné obmedzenia rýchlosti).</li>
+<li class="item special">Diskusia o hrozbách a ich zmiernení: PM identifikuje hrozby, PF identifikuje hrozby, obaja diskutujú o tom, ako tieto hrozby zmierniť.</li>
+<li class="item">Rôzne položky: Akékoľvek ďalšie relevantné informácie, napríklad plánovaný čas manuálneho letu.</li>
+<li class="item special">Kontrolný zoznam prípravy kokpitu:</li>
+<li class="item indented special">Kolíky a kryty podvozku: Uistite sa, že sú odstránené.</li>
+<li class="item indented special">Množstvo paliva: Skontrolujte rovnováhu paliva a celkové množstvo na palivovej stránke.</li>
+<li class="item indented special">Bezpečnostné pásy: Overte, či sú zapnuté, prostredníctvom ECAM a polohy spínača.</li>
+<li class="item indented special">ADIRS: Potvrďte, že všetky tri sú v režime NAV v FMS (nie na hornom paneli).</li>
+<li class="item indented special">Referencia Baro: Skontrolujte nastavenie QNH na PFD, ISIS a PFD.</li>
+<li class="item">Po kontrolnom zozname: Kapitán oznámi privítanie cestujúcich a kabínovému personálu sa poskytnú konečné detaily pred zatvorením dverí.</li>
+</ul>
+<p>
+<h3 class="group-title">Before Start, Engine Start, After start Procedures - postupy pred štartom, štartu motora a po štarte</h3>
+<ul>
+<li class="item special">Postup pred štartom:</li>
+<li class="item indented special">Skontrolujte presnosť záverečného dokumentu o zaťažení a porovnajte hodnoty ako nulová palivová hmotnosť a ťažisko. Zadajte ťažisko na stránku výkonnosti.</li>
+<li class="item indented special">Potvrďte, že palivo na palube zodpovedá požadovanému množstvu.</li>
+<li class="item indented special">Nastavte systém FMS na letový plán na strane monitorujúceho pilota a na výkonnosť na strane letiaceho pilota.</li>
+<li class="item indented special">Vyžiadajte si povolenie na odtlačenie a štart od riadenia letovej prevádzky (ATC).</li>
+<li class="item indented special">Nastavte transpondér na auto.</li>
+<li class="item indented special">Zapnite maják a uistite sa, že všetky okná sú správne zatvorené.</li>
+<li class="item indented special">Overte, či sú šmykľavky aktivované a všetky dvere sú zatvorené.</li>
+<li class="item indented special">Potvrďte, že páky ťahu sú v polohe voľnobeh a parkovacia brzda je nastavená.</li>
+<li class="item indented special">Dokončite kontrolný zoznam pred štartom, vrátane kontroly parkovacej brzdy, rýchlostí vzletu, nastavení ťahu a okien.</li>
+<li class="item indented">Uistite sa, že sa zobrazuje poznámka o odpojení riadenia predného kolesa.</li>
+<li class="item special">Postup štartu motora:</li>
+<li class="item indented special">Komunikujte s pozemným personálom, aby ste potvrdili pripravenosť na odtlačenie a štart motora.</li>
+<li class="item indented special">Uvoľnite parkovaciu brzdu a začnite odtláčať lietadlo, pričom sa uistite, že je voľné od akýchkoľvek prekážok pred štartom motorov.</li>
+<li class="item indented special">Nastavte prepínač režimu motora na zapaľovanie/štart.</li>
+<li class="item indented special">Naštartujte motory postupne (najprv druhý, potom prvý) presunutím hlavného spínača motora do prednej polohy.</li>
+<li class="item indented special">Monitorujte parametre štartu motora, ako je tlak oleja, N1, N2, EGT a prietok paliva.</li>
+<li class="item special">Postup po štarte:</li>
+<li class="item indented special">Nastavte prepínač režimu motora na normálny.</li>
+<li class="item indented special">Vypnite odber vzduchu z APU a APU (ak nie sú potrebné pre špecifické operácie) a podľa potreby nastavte odmrazovanie.</li>
+<li class="item indented special">Aktivujte spojlery, vynulujte trim kormidla, nastavte klapky a trim podľa potreby.</li>
+<li class="item indented special">Skontrolujte stránku stavu ECAM pre akékoľvek varovania alebo správy.</li>
+<li class="item indented">Uistite sa, že sa už nezobrazuje poznámka o odpojení riadenia predného kolesa.</li>
+<li class="item indented special">Dokončite kontrolný zoznam po štarte, vrátane kontroly odmrazovania, stavu ECAM, trimu výšky a trimu kormidla.</li>
+<li class="item indented special">Potvrďte hlásenie o zabezpečení kabíny.</li>
+</ul>
+
+<h3 class="group-title">Taxi - postupy pojazdenia (taxi)</h3>
+<ul>
+<li class="item">Príprava:</li>
+<li class="item indented">Uistite sa, že stôl je odložený.</li>
+<li class="item indented special">Vykonajte kontrolu letových riadení: plne hore, plne dole a späť do neutrálnej polohy na postrannej páke; kontrola krídelok: plne vľavo, plne vpravo a neutrál; kontrola smerovky: plne vľavo, plne vpravo a neutrál, po stlačení tlačidla odpojenia pedálov; nezabudnite potom tlačidlo odpojenia uvoľniť.</li>
+<li class="item special">Začatie pojazdenia:</li>
+<li class="item indented special">Získajte povolenie na rolovanie.</li>
+<li class="item indented">Skontrolujte, či sú ľavá a pravá strana voľné.</li>
+<li class="item indented special">Nastavte nosové svetlo na rolovanie a zapnite svetlá na odbočenie z dráhy.</li>
+<li class="item indented special">Uvoľnite parkovaciu brzdu.</li>
+<li class="item indented">Skontrolujte, či brzdy fungujú.</li>
+<li class="item">rolovanie:</li>
+<li class="item indented">Minimalizujte používanie bŕzd, aby ste predišli prehriatiu.</li>
+<li class="item indented">Pred zákrutami spomaľte na približne 7 uzlov.</li>
+<li class="item indented">Dodržiavajte rýchlostné limity: 10 uzlov v ostrých zákrutách, 15 uzlov na stojiskách, 30 uzlov na dlhých rovných pojazdových dráhach a 50 uzlov pri pojazdení po dráhe v opačnom smere.</li>
+<li class="item indented">Monitorujúci pilot (PM) potvrdí povolenie ATC.</li>
+<li class="item indented">Letiaci pilot (PF) potvrdí odletový briefing.</li>
+<li class="item special">Priebeh pojazdenia:</li>
+<li class="item indented special">Monitorujúci pilot (PM) začne priebeh pojazdenia: Autobrake on, Terrain na ND (ak je potrebné), Skontrolujte transpondér, Zapnite meteorologický radar a nastavte prediktívne strihanie vetra na auto, Stlačte tlačidlo konfigurácie vzletu.</li>
+<li class="item special">Kontrolný zoznam pojazdenia:</li>
+<li class="item indented">Letové riadenia: skontrolované.</li>
+<li class="item indented">Nastavenie klapiek: overte správnu konfiguráciu.</li>
+<li class="item indented">Radar a prediktívne strihanie vetra: skontrolujte indikácie.</li>
+<li class="item indented">Prepínač štartu motora: skontrolujte polohu.</li>
+<li class="item indented special">ECAM memo: takeoff, no blue.</li>
+<li class="item special">Položky pred zaradením na dráhu:</li>
+<li class="item indented">Ventilátor bŕzd: vypnutý.</li>
+<li class="item indented special">Povolenie na zaradenie na dráhu: prijaté.</li>
+<li class="item indented">Informujte kabínu, aby sa pripravila na odlet.</li>
+<li class="item indented special">Overte a potvrďte dráhu.</li>
+<li class="item indented">Skontrolujte priblíženie.</li>
+<li class="item indented special">Podľa potreby prepnite okruhy klimatizácie (packs).</li>
+<li class="item indented">Uistite sa, že posuvné stolíky sú odložené.</li>
+<li class="item special">Kontrolný zoznam pred zaradením na dráhu:</li>
+<li class="item indented">Vzletová dráha.</li>
+<li class="item indented">TAS.</li>
+<li class="item indented">Okruhy klimatizácie (packs).</li>
+</ul>
+
+<h3 class="group-title">Takeoff and Initila Climb - postupy vzletu a počiatočného stúpania</h3>
+<ul>
+<li class="item special">Pred vzletom a zaradenie na dráhu:</li>
+<li class="item indented special">Letiaci pilot prepne zábleskové svetlá na 'on'.</li>
+<li class="item indented special">Po získaní povolenia na vzlet sa pristávacie svetlá a nosové svetlo prepnú na 'on' alebo 'takeoff'.</li>
+<li class="item indented special">Okruhy klimatizácie (packs) sa vypnú 20 sekúnd pred nastavením vzletového ťahu, aby sa šetrilo palivo.</li>
+<li class="item special">Postup vzletu:</li>
+<li class="item indented special">Pilot ohlási vzlet a nastaví páky ťahu na 50 %.</li>
+<li class="item indented">Pre motory používajúce EPR, nastavte EPR 1.05 a stabilizujte sa.</li>
+<li class="item indented special">Pri bočnom vetre pod 20 uzlov a bez zadného vetra posuňte postranú páku o polovicu dopredu; plne dopredu, ak bočný vietor presahuje 20 uzlov.</li>
+<li class="item indented special">Po stabilizácii motorov ich nastavte na zárez flex alebo TO/GA.</li>
+<li class="item indented">Overte, či sa ťah zvýši na 70 %, potom na vzletový ťah pri rýchlosti 40 uzlov po zemi.</li>
+<li class="item indented special">Spustite chronometer na meranie chodu motora pri vzletovom ťahu.</li>
+<li class="item indented special">Pri 80 uzloch zavolajte "thrust set" (ťah nastavený).</li>
+<li class="item indented special">Postranú páku vráťte do neutrálnej polohy pri 100 uzloch.</li>
+<li class="item indented">Pri 100 uzloch skontrolujte indikácie rýchlosti.</li>
+<li class="item indented special">Pri rýchlosti V1 dajte ruky preč od pák ťahu.</li>
+<li class="item indented special">Začnite rotáciu pri 3° za sekundu smerom k polohe 15° (12.5°, ak zlyhá motor).</li>
+<li class="item indented">Minimalizujte bočné vstupy, aby ste predišli vysunutiu spoilerov.</li>
+<li class="item indented special">Po pozorovaní pozitívneho stúpania zatiahnuť podvozok.</li>
+<li class="item indented special">Zapnite autopilota.</li>
+<li class="item special">Počiatočné stúpanie:</li>
+<li class="item indented special">Na výške zníženia ťahu/zrýchlenia (2 500 stôp) znížte páky ťahu na stúpací ťah po sklopení nosa a pozitívnom zrýchlení.</li>
+<li class="item indented special">Oznámte "thrust climb" (stúpací ťah) a "auto thrust" (automaťah).</li>
+<li class="item indented special">Zatiahnuť klapky, keď rýchlosť prekročí rýchlosť S.</li>
+<li class="item indented special">Pri stúpacom ťahu zapnite prvý okruh klimatizácie (pack).</li>
+<li class="item indented special">Zvoľte polohu klapiek nula, deaktivujte spojlery a vypnite nosové/pojazdné svetlá.</li>
+<li class="item indented special">Zapnite druhý okruh klimatizácie (pack), s odstupom minimálne 10 sekúnd medzi zapnutím okruhov.</li>
+<li class="item indented special">Nastavte vyššiu výšku, napríklad cestovnú hladinu.</li>
+<li class="item indented special">Pri prechode prechodovou výškou nastavte výškomery na štandard.</li>
+<li class="item special">Záverečný prehľad:</li>
+<li class="item indented special">Skontrolujte klapky, spojlery, prepínač štartu motora, podvozok (hore) a okruhy klimatizácie (packs - zapnuté).</li>
+</ul>
+
+<h3 class="group-title">Climb - postupy stúpania</h3>
+<ul>
+<li class="item special">Stúpanie na 10 000 stôp a ďalšie úvahy:</li>
+<li class="item indented special">Vypnite pristávacie svetlá.</li>
+<li class="item indented">Podľa potreby upravte signalizáciu bezpečnostných pásov, zvážte sklon a turbulencie.</li>
+<li class="item indented">Vykonajte výbery na ovládacom paneli EIS, rozhodnite sa, či zostanete na obmedzeniach.</li>
+<li class="item indented special">Vymažte a skopírujte vo FMS: Vymažte VOR na stránke rádiových navigačných pomôcok; Skopírujte aktívny letový plán do sekundárneho letového plána; Vymažte manévre pri zlyhaní motora zo stránky pevných informácií; Na stránke PROGRESS porovnajte cestovnú hladinu, optimálnu a maximálnu dosiahnuteľnú výšku a zadajte informácie o záložnom letisku.</li>
+<li class="item special">Úvahy po vzlete:</li>
+<li class="item indented">Signalizáciu bezpečnostných pásov je možné vypnúť, ak je sklon pod 7.5 stupňa a neočakávajú sa turbulencie.</li>
+<li class="item indented">Monitorujte námrazové podmienky, zvážte teplotu a prítomnosť oblakov.</li>
+<li class="item indented special">Ak je teplota +10 °C alebo menej a vstupujete do oblakov, zapnite protinámrazový systém motorov.</li>
+<li class="item indented special">Protinámrazový systém krídel je potrebný pri silnej námraze alebo na odstránenie existujúcej námrazy.</li>
+<li class="item indented special">Na kontrolu námrazy použite stierače a indikátor námrazy.</li>
+<li class="item indented">V noci použite svetlo indikátora námrazy pre lepšiu viditeľnosť.</li>
+<li class="item special">Cestovná výška:</li>
+<li class="item indented">FMS môže podceniť optimálnu a maximálnu výšku.</li>
+<li class="item indented special">Na presnejšie výpočty použite externý výkonnostný softvér.</li>
+<li class="item indented">Skutočná optimálna výška je často o približne 1 500 stôp vyššia, než ukazuje FMS.</li>
+<li class="item indented">Pre úsporu paliva zostaňte čo najbližšie k skutočnej optimálnej výške.</li>
+<li class="item indented">FMS vypočítava maximálnu dosiahnuteľnú výšku na základe rezervy 1.3g do pádového nárazu, ale túto možno znížiť na 1.2g.</li>
+<li class="item special">Režimy autopilota:</li>
+<li class="item indented">Vertikálne režimy: Climb; Open Climb; Vertical Speed; Pre okamžité vyrovnanie stlačte volič vertikálnej rýchlosti.</li>
+<li class="item indented">Autothrust: Funguje v režime stúpacieho ťahu s pákami v stúpacom záreze; MCT sa používa len v prípade zlyhania motora.</li>
+<li class="item indented">Iné režimy: Speed alebo Mach (vybrané potiahnutím ovládača rýchlosti); Riadený režim je vo všeobecnosti najefektívnejší, pokiaľ nezasiahne ATC.</li>
+<li class="item special">Úvahy o TCAS:</li>
+<li class="item indented special">Pri približovaní sa k povolenej výške obmedzte vertikálnu rýchlosť, aby ste predišli nepríjemným upozorneniam TCAS.</li>
+<li class="item indented">Upravte vertikálnu rýchlosť na základe zostávajúcej vzdialenosti do povolenej výšky (napr. vertikálna rýchlosť plus 1 000 stôp, keď ste v rámci posledných 1 000 stôp).</li>
+<li class="item special">Monitorovanie systémov:</li>
+<li class="item indented special">Monitorujte ECAM, najmä výšku v kabíne.</li>
+<li class="item indented">Výška v kabíne by počas cestovného letu nemala typicky presiahnuť 8 000 stôp.</li>
+<li class="item special">Priblíženie k povolenej výške:</li>
+<li class="item indented special">Pri 1 000 stôp od povolenej výšky monitorujúci pilot (PM) zavolá "1,000 to go", čím posilní koncept sterilného kokpitu.</li>
+<li class="item indented">Pri zmene FCU výšky po tom, čo lietadlo začne zachytávať výšku, buďte opatrní, pretože sa môže vrátiť do režimu vertikálnej rýchlosti.</li>
+</ul>
+
+<h3 class="group-title">Cruise - fáza cestovného letu</h3>
+<ul>
+<li class="item">Kontroly na ECAM (Electronic Centralized Aircraft Monitoring):</li>
+<li class="item indented">Piloti by mali vykonať kontrolu ECAM minimálne raz za hodinu.</li>
+<li class="item indented special">Na stránke Cruise sledujte informácie ako spotreba paliva motorov, množstvo oleja, indikácie vibrácií, informácie o vzdušnom systéme (výška pristátia, výška v kabíne, vertikálna rýchlosť v kabíne, diferenčný tlak) a teploty v kabíne.</li>
+<li class="item indented">Skontrolujte nasledujúce špecifické stránky:</li>
+<li class="item indented indented special">Engine page: Monitorujte tlak a teplotu oleja.</li>
+<li class="item indented indented special">Bleed page: Skontrolujte parametre odberu vzduchu ako výstupný tlak a teplota.</li>
+<li class="item indented indented special">Pressurization page: Monitorujte stav výpustného ventilu (outflow valve).</li>
+<li class="item indented indented special">Electrical pages: Monitorujte všeobecné parametre a zaťaženie generátorov.</li>
+<li class="item indented indented special">Hydraulic page: Uistite sa, že tlaky a množstvá hydraulickej kvapaliny sú v medziach.</li>
+<li class="item indented indented special">Fuel page: Skontrolujte distribúciu paliva a porovnajte spotrebované palivo.</li>
+<li class="item indented indented">Condition page: Skontrolujte teploty v potrubí a zónach.</li>
+<li class="item indented indented special">Door page: Uistite sa, že tlak kyslíka je konštantný.</li>
+<li class="item indented indented">Wheel page: Monitorujte teploty bŕzd a tlak v pneumatikách.</li>
+<li class="item indented indented">Flight control page: Všimnite si akékoľvek nezvyčajné polohy riadiacich plôch.</li>
+<li class="item">Kontroly paliva:</li>
+<li class="item indented">Kontroly paliva sú potrebné pri prelete nad navigačným bodom (waypoint) alebo minimálne každých 30 minút.</li>
+<li class="item indented special">Ak chcete vykonať kontrolu paliva, prejdite na stránku letového plánu a poznačte si posledný preletený navigačný bod.</li>
+<li class="item indented special">Porovnajte skutočné množstvo paliva s plánovaným množstvom paliva pre tento navigačný bod.</li>
+<li class="item indented special">Vypočítajte celkovú spotrebu paliva sčítaním aktuálneho paliva na palube a spotrebovaného paliva a porovnajte ho s množstvom paliva na palube pri odlete.</li>
+<li class="item">Optimalizácia letu:</li>
+<li class="item indented special">Pre optimalizáciu spotreby paliva môžu piloti zadať postupné stúpanie (step climb) do systému FMS.</li>
+<li class="item indented special">Zadajte požadovanú výšku bez priradeného navigačného bodu do vertikálnej revízie navigačného bodu a Airbus vypočíta optimálne miesto pre postupné stúpanie.</li>
+<li class="item">Vyžiadanie údajov o vetre:</li>
+<li class="item indented">Nové údaje o vetre sú k dispozícii každých 6 hodín.</li>
+<li class="item indented special">Piloti môžu požiadať o aktualizované údaje o vetre prostredníctvom funkcie "wind request" (vyžiadanie vetra) vo FMS, aby získali najnovšie údaje pre fázu cestovného letu a klesania.</li>
+<li class="item">Dodatočné postupy:</li>
+<li class="item indented special">Nepretržite monitorujte priebeh letu.</li>
+<li class="item indented">Buďte si vedomí špeciálnych postupov, ako sú ETOPS (Extended-range Twin-engine Operational Performance Standards) a operácie v špecifických regiónoch.</li>
+</ul>
+	
+<h3 class="group-title">Descent Preparation - príprava na klesanie</h3>
+<ul>
+<li class="item">1. Počiatočné úkony a získavanie informácií:</li>
+<li class="item indented">Začnite s prípravou na klesanie minimálne 80 námorných míľ od vrcholu klesania (Top of Descent), ideálne medzi 120-160 námornými míľami.</li>
+<li class="item indented special">Získajte najnovšie informácie o počasí pomocou ACARS, vrátane METAR pre destináciu.</li>
+<li class="item indented special">Poznačte si hodnotu QNH a nastavte ju na hlavných aj záložných prístrojoch.</li>
+<li class="item indented special">Potvrďte používanú dráhu, ideálne prostredníctvom ATIS.</li>
+<li class="item">2. Pristávací výkon a konfigurácia:</li>
+<li class="item indented special">Skontrolujte stav ECAM pre akékoľvek nezvyčajné indikácie.</li>
+<li class="item indented special">Vypočítajte pristávací výkon pomocou elektronickej letovej tašky, zvážte faktory ako mokrá dráha.</li>
+<li class="item indented">Odhadnite pristávaciu hmotnosť, zohľadnite spotrebu paliva.</li>
+<li class="item indented special">Nastavte automatické brzdenie na LOW, zvoľte konfiguráciu klapiek na FULL a zapnite automaťah (autothrust).</li>
+<li class="item indented special">Overte požadovanú pristávaciu vzdialenosť (LDR) a uistite sa, že je v rámci dostupnej pristávacej vzdialenosti, zvážte faktor 1.15 LDR.</li>
+<li class="item">3. Príprava FMS:</li>
+<li class="item indented">Postupujte podľa logiky FMS Airbus: Flight Plan, NAV RAD, Progress, PERF, Fuel Pred, Secondary Flight Plan.</li>
+<li class="item indented">Stránka Flight Plan:</li>
+<li class="item indented indented special">Overte alebo podľa potreby znovu vyberte STAR (Standard Terminal Arrival Route), použite stránku Arrivals, ak je to nutné.</li>
+<li class="item indented indented special">Vložte a skontrolujte STAR, porovnajte navigačné body a obmedzenia s mapou priblíženia.</li>
+<li class="item indented indented special">Použite režim plánu (plan mode) na kontrolu obmedzení.</li>
+<li class="item indented">Stránka NAV RAD:</li>
+<li class="item indented indented special">Zadajte navigačné frekvencie pre priblíženie (napr. VOR).</li>
+<li class="item indented">Stránka Progress:</li>
+<li class="item indented indented special">Overte GPS PRIMARY a HIGH presnosť.</li>
+<li class="item indented indented special">Zadajte pristávaciu dráhu.</li>
+<li class="item indented">Stránka Performance:</li>
+<li class="item indented indented special">Overte, či je RNP vhodný pre priblíženie.</li>
+<li class="item indented indented special">Overte rýchlosť klesania kabíny.</li>
+<li class="item indented indented special">Skontrolujte a podľa potreby upravte cieľovú rýchlosť klesania.</li>
+<li class="item indented indented special">Vo fáze priblíženia zadajte informácie o QNH, teplote a vetre.</li>
+<li class="item indented indented special">Nastavte minimálnu výšku klesania (napr. 278 stôp pre priblíženie ILS).</li>
+<li class="item indented indented special">Potvrďte pristávaciu konfiguráciu (napr. klapky full).</li>
+<li class="item indented indented special">Na stránke Go-around zadajte výšku zrýchlenia pri zlyhaní motora.</li>
+<li class="item indented">Stránka Fuel Prediction:</li>
+<li class="item indented indented special">Skontrolujte predpokladané množstvo paliva pri pristátí.</li>
+<li class="item indented">Stránka Secondary Flight Plan:</li>
+<li class="item indented indented special">Skopírujte aktívny letový plán a vložte alternatívny plán v prípade zmeny dráhy.</li>
+<li class="item indented indented special">Uistite sa, že všetky relevantné informácie sú zadané aj v sekundárnom letovom pláne.</li>
+<li class="item">4. Záverečné kroky:</li>
+<li class="item indented special">Na hornom paneli zvoľte vopred vypočítané nastavenie automatického brzdenia (napr. LOW).</li>
+</ul>
+
+<h3 class="group-title">Approach Briefing - briefing pred priblížením</h3>
+<ul>
+<li class="item special">Vzájomná kontrola (Cross-checking): Monitorujúci pilot (PM) overí všetky záznamy, ktoré letiaci pilot (PF) vykonal v predchádzajúcej fáze prípravy na klesanie.</li>
+<li class="item special">Briefing monitorujúceho pilota (PM):</li>
+<li class="item indented">Minimálna výška mimo trate (off-road altitude).</li>
+<li class="item indented">Minimálna výška prekážkovej voľnosti alebo minimálna bezpečná výška pre plánovanú trajektóriu (MSA/MOCA/MSA).</li>
+<li class="item indented">STAR (Standard Terminal Arrival Route).</li>
+<li class="item indented">Typ priblíženia (napr. ILS, RNAV).</li>
+<li class="item indented">Minimums (minimálna výška rozhodnutia alebo minimálna zostupová výška).</li>
+<li class="item indented">Trajektória pri prerušení priblíženia (Go-around trajectory).</li>
+<li class="item indented">Extra palivo a dostupný čas.</li>
+<li class="item special">Briefing letiaceho pilota (PF):</li>
+<li class="item indented">Vedenie pre priblíženie (napr. režim priblíženia, surové dáta, režim FPA pre nepresné priblíženia).</li>
+<li class="item indented">Nastavenie klapiek pre pristátie.</li>
+<li class="item indented">Rezerva na zastavenie (Stop margin).</li>
+<li class="item indented">Použitie reverzorov (voľnobeh alebo maximum).</li>
+<li class="item indented">Plánovaný výjazd z dráhy.</li>
+<li class="item indented">Horúce miesta pre rolovanie (hot spots).</li>
+<li class="item indented">Špeciálne alebo neštandardné postupy.</li>
+<li class="item special">Identifikácia hrozieb:</li>
+<li class="item indented">Monitorujúci pilot (PM) identifikuje potenciálne hrozby.</li>
+<li class="item indented">Letiaci pilot (PF) pridá akékoľvek ďalšie hrozby.</li>
+<li class="item indented">Obaja piloti diskutujú o zmiernení identifikovaných hrozieb.</li>
+<li class="item special">Rôzne položky:</li>
+<li class="item indented">Môžu sa diskutovať akékoľvek ďalšie relevantné informácie.</li>
+<li class="item special">Oznam pre cestujúcich (PA):</li>
+<li class="item indented">Oznam pre cestujúcich sa zvyčajne vykonáva nejaký čas pred vrcholom klesania (Top of Descent), aby sa predišlo prerušeniam počas klesania.</li>
+</ul>
+
+<h3 class="group-title">Descent - klesanie</h3>
+<ul>
+<li class="item special">Začatie klesania:</li>
+<li class="item indented special">Ak chcete začať klesanie, stlačte gombík nadmorskej výšky (push the altitude knob in).</li>
+<li class="item indented special">Ak ATC povoluje skoršie klesanie, zapnutie režimu klesania (descent mode) stlačením gombíka výšky po nastavení nižšej výšky spustí klesanie rýchlosťou 1 000 stôp/min až do zachytenia dráhy.</li>
+<li class="item indented">Ak sa povolenie na klesanie oneskorí za vrchol klesania (top of descent), systém zobrazí správu "top of descent reached" alebo "decelerate", čo naznačuje zníženie rýchlosti na Green Dot.</li>
+<li class="item special">Monitorovanie klesania:</li>
+<li class="item indented special">Piloti zvyčajne používajú stránky progress alebo performance descent na monitorovanie klesania.</li>
+<li class="item indented">Stránka performance descent ponúka predpovede, zatiaľ čo stránka progress zobrazuje vertikálnu odchýlku.</li>
+<li class="item indented special">Monitorujúci pilot (PM) si zvyčajne necháva zobrazenú stránku letového plánu, aby videl predpovede výšok a navigačných bodov.</li>
+<li class="item special">Funkcie Airbusu počas klesania:</li>
+<li class="item indented">Airbus sa vyrovná na obmedzenej výške, ak plánuje na tomto bode vyrovnať, čo je indikované purpurovou výškou na PFD.</li>
+<li class="item indented special">Ak nechcete, aby sa vyrovnal, môžete použiť režim otvoreného klesania (open descent) potiahnutím gombíka.</li>
+<li class="item indented">Po prelete navigačného bodu bude Airbus v režime klesania smerovať ku konštantnej vertikálnej rýchlosti medzi obmedzeniami.</li>
+<li class="item special">Použitie protinámrazového systému:</li>
+<li class="item indented special">Počas klesania použite protinámrazový systém, keď je skutočná teplota vzduchu (True Air Temperature) +10 °C alebo menej.</li>
+<li class="item indented">Zapnutie protinámrazového systému môže spôsobiť dočasnú chybovú kontrolku.</li>
+<li class="item special">Indikácie na navigačnom displeji (ND):</li>
+<li class="item indented special">Symbol podobný blesku označuje, kde lietadlo opäť zachytí vertikálnu dráhu.</li>
+<li class="item indented special">Jantárová bodka: Toto je bod spomalenia (deceleration point).</li>
+<li class="item special">Signalizácia bezpečnostných pásov:</li>
+<li class="item indented special">Signalizácia bezpečnostných pásov by mala byť zapnutá 15 minút pred pristátím alebo pri prelete letovej hladiny 115, podľa toho, čo nastane skôr.</li>
+<li class="item special">Riadenie rýchlosti:</li>
+<li class="item indented">Cieľová rýchlosť je zobrazená v strede PFD, s maximálnou a minimálnou rýchlosťou zobrazenou hore a dole v režime klesania.</li>
+<li class="item indented special">Zvyšovanie rýchlosti klesania pomocou zvolenej rýchlosti (selected speed) je palivovo efektívnejšie ako použitie aerodynamických bŕzd (speed brakes), ak ste vysoko nad profilom.</li>
+<li class="item indented special">Ak ste pod požadovaným profilom, použite zvolenú rýchlosť a režim vertikálnej rýchlosti na úpravu rýchlosti klesania.</li>
+<li class="item special">Dodatočné poznámky:</li>
+<li class="item indented">Lietadlo automaticky monitoruje námrazové podmienky a ak je to potrebné, vyzve posádku na zapnutie protinámrazového systému.</li>
+<li class="item indented">Kombinácia klesania a spomaľovania je efektívnejšia ako spomaľovanie pri vyrovnaní.</li>
+</ul>
+
+<h3 class="group-title">Approach - priblíženie</h3>
+<ul>
+<li class="item special">Priebeh na 10 000 stôp</li>
+<li class="item indented special">Pristávacie svetlá a spínač bezpečnostných pásov: Zapnite oba spínače.</li>
+<li class="item indented special">Ovládacie panely EFIS: Uistite sa, že sú vybrané obmedzenia (constraints) a pristávací systém, a nastavte vhodný rozsah.</li>
+<li class="item indented special">Stránka FMS Progress: Overte vysokú presnosť pre priblíženie a správnu požadovanú presnosť.</li>
+<li class="item indented special">Prepínač režimu motora: Pre štandardné priblíženia nastavte na "Norm".</li>
+<li class="item special">Kontrolný zoznam klesania a priblíženia</li>
+<li class="item indented special">Komunikácia s kabínou: Vypočujte si hlásenie palubného personálu o pripravenosti kabíny na pristátie.</li>
+<li class="item indented special">Pokračujúce klesanie: Začnite klesanie na 3 000 stôp, čo je výška pre zachytenie ILS.</li>
+<li class="item indented special">Nastavenie QNH: Nastavte a vzájomne skontrolujte QNH.</li>
+<li class="item indented special">Kontrolný zoznam priblíženia: Dokončite kontrolný zoznam priblíženia, vrátane nastavenia bŕzd a prepínača štartu motora.</li>
+<li class="item special">Vektorovanie radarom a sekvenovanie letového plánu</li>
+<li class="item indented special">Stránka Direct: Vyberte vhodný navigačný bod (zvyčajne Final Approach Fix).</li>
+<li class="item indented special">Radial In: Zvoľte vhodný radiál In na základe kurzu finálneho priblíženia.</li>
+<li class="item indented special">Kurz: Uistite sa, že ste znova potiahli gombík kurzu, aby ste zrušili neúmyselnú aktiváciu režimu nav.</li>
+<li class="item special">Riadenie energie a aktivácia fázy priblíženia</li>
+<li class="item indented special">Posúdenie energie: Použite lištu na ND na posúdenie potreby dodatočného odporu (drag).</li>
+<li class="item indented special">Stránka Performance: Aktivujte fázu priblíženia na stránke výkonnosti FMS.</li>
+<li class="item indented special">Riadená rýchlosť (Managed Speed): Vráťte sa k riadenej rýchlosti, aby lietadlo mohlo automaticky znížiť rýchlosť.</li>
+<li class="item indented special">Klapky 1: Vysuňte klapky do polohy jedna.</li>
+<li class="item special">Štandardný profil priblíženia</li>
+<li class="item indented special">Zachytenie zostupovej dráhy (Glide Slope): Zachyťte zostupovú dráhu s klapkami 1 pri rýchlosti S a 2 000 stôp nad úrovňou zeme.</li>
+<li class="item indented special">Klapky 2 a podvozok dole: Akonáhle sú klapky v polohe dva, vysuňte podvozok.</li>
+<li class="item indented special">Klapky 3 a 4: Po vysunutí podvozka vysuňte klapky 3 a potom klapky full, keď to rýchlosť dovolí.</li>
+<li class="item special">Finálne priblíženie a pristávacia konfigurácia</li>
+<li class="item indented special">Tlačidlo Approach: Stlačte tlačidlo approach, keď dostanete povolenie na priblíženie a pozorujete správne indikácie na PFD.</li>
+<li class="item indented special">Duálny autopilot: Overte zapojenie duálneho autopilota.</li>
+<li class="item indented special">Výška pre prerušenie priblíženia (Missed Approach Altitude): Nastavte výšku pre prerušenie priblíženia.</li>
+<li class="item indented special">Klapky 2, podvozok dole, klapky 3 a full: Pri 2 000 stôp nad zemou vysuňte klapky 2, potom podvozok dole, následne klapky 3 a full.</li>
+<li class="item indented special">Spoilery a svetlá: Aktivujte spojlery a zapnite nosové pristávacie svetlo a svetlá na odbočenie z dráhy.</li>
+<li class="item indented special">Stabilizované priblíženie: Uistite sa, že lietadlo je stabilizované do 500 stôp.</li>
+<li class="item indented special">Kontrolný zoznam pristátia: Dokončite kontrolný zoznam pristátia.</li>
+</ul>
+
+<h3 class="group-title">Landing - pristátie</h3>
+<ul>
+<li class="item special">Odpojenie autopilota: Pre manuálne pristátie sa odporúča vypnúť autopilota do výšky 300 stôp nad zemou.</li>
+<li class="item special">Príprava na vyrovnanie (Flare): Približne vo výške 30 stôp mierne zdvihnite nos lietadla o jeden alebo dva stupne nahor.</li>
+<li class="item special">Redukcia ťahu: Vo výške 20 stôp budete počuť hlásenie "Retard", čo je pripomienka na zníženie ťahu, ale prispôsobte to situácii.</li>
+<li class="item special">Dotyk a reverzný ťah: Keď sa hlavné podvozky dotknú dráhy, začnite s de-rotáciou (sklopením nosa) a nastavte páky ťahu do polohy reverzného voľnobehu (reverse idle) alebo maximálneho reverzu (maximum reverse). Akonáhle je zvolený reverzný ťah, prerušenie pristátia (go-around) už nie je možné.</li>
+<li class="item special">Maximálny reverzný ťah: Okamžite zvoľte maximálny reverzný ťah v prípade núdze, neočakávaného spomalenia, poruchy ovplyvňujúcej pristávací výkon, dlhého vyrovnania alebo dotyku, alebo neočakávaného zadného vetra.</li>
+<li class="item special">Vysunutie spoilerov: Po dotyku monitorujte vysunutie spoilerov, viditeľné na stránke Wheel. Ak sa nevysunú, uistite sa, že páky ťahu sú vo voľnobehu (idle) a nastavte reverzy na maximum.</li>
+<li class="item special">Overenie aktivácie reverzného ťahu: Skontrolujte zelenú indikáciu "reverse" na displeji upozornení motorov (engine warning display).</li>
+<li class="item special">Overenie spomalenia: Po dotyku overte spomalenie.</li>
+<li class="item special">70 uzlov: Znížte ťah na reverzný voľnobeh (reverse idle) približne pri rýchlosti 70 uzlov.</li>
+<li class="item special">20 uzlov: Odpojte automatické brzdenie (autobrake) pred rýchlosťou 20 uzlov pomocou brzdových pedálov.</li>
+<li class="item special">Opustenie dráhy: Nezastavujte lietadlo, kým celé lietadlo nie je za čiarou vyznačujúcou okraj dráhy.</li>
+<li class="item special">Hlásenia po pristátí: Po pristátí zahláste "spoilers reverse green".</li>
+<li class="item">Autothrust: Autothrust môže zostať zapnutý alebo byť vypnutý, podľa uváženia letovej posádky.</li>
+<li class="item special">Dôležité poznámky:</li>
+<li class="item indented">Hlavným cieľom nie je hladké pristátie; prioritou je bezpečne pristáť s lietadlom na stredovej čiare v rámci pristávacej zóny.</li>
+<li class="item indented">ECAM upozornenia, ktoré sa objavia neskoro pri priblížení a nesúvisia priamo s bezpečnosťou pristátia, by sa mali v tejto kritickej fáze ignorovať (podľa kontextu videa, kde šlo o problém simulátora).</li>
+</ul>
+
+<h3 class="group-title">After Landing and Taxi-In - po pristátí a rolovanie na stojisko</h3>
+<ul>
+<li class="item special">Postup po pristátí:</li>
+<li class="item indented special">Letiaci pilot (PF) deaktivuje pozemné spojlery (ground spoilers).</li>
+<li class="item indented special">Monitorujúci pilot (PM) začne postup po pristátí.</li>
+<li class="item indented">Letiaci pilot môže nastaviť vonkajšie svetlá alebo požiadať monitorujúceho pilota, aby tak urobil:</li>
+<li class="item indented indented special">Zábleskové svetlá (strobe lights) sa nastavia na off.</li>
+<li class="item indented indented special">Pristávacie svetlá (landing lights) sa nastavia na off.</li>
+<li class="item indented indented special">Pojazdové svetlá (taxi lights) sa nastavia na on.</li>
+<li class="item indented special">Monitorujúci pilot vypne meteorologický radar.</li>
+<li class="item indented">Monitorujúci pilot nastaví klapky:</li>
+<li class="item indented indented special">Klapky sa nastavia na 1, ak je teplota 30 °C alebo vyššia.</li>
+<li class="item indented indented special">V opačnom prípade sa klapky nastavia na 0.</li>
+<li class="item indented indented">Dôležité: Ak boli počas priblíženia podmienky námrazy alebo ak bola dráha kontaminovaná, klapky nezatahujte, kým sa nevypnú motory a neobdržíte potvrdenie od pozemného personálu, že klapky a sloty sú čisté.</li>
+<li class="item indented special">Transpondér sa nastaví na standby.</li>
+<li class="item indented">Monitorujúci pilot spustí APU:</li>
+<li class="item indented indented special">Hlavný vypínač sa zapne.</li>
+<li class="item indented indented">Počkajte 3 sekundy.</li>
+<li class="item indented indented special">Štartér APU sa zapne.</li>
+<li class="item indented special">Podľa potreby sa vypne protinámrazový systém.</li>
+<li class="item indented special">Spustite kontrolný zoznam po pristátí:</li>
+<li class="item indented indented">Overte, že nie je indikácia radaru.</li>
+<li class="item indented indented">Potvrďte jantárovú indikáciu prediktívneho strihania vetra.</li>
+<li class="item special">Postup pojazdenia na stojisko:</li>
+<li class="item indented special">Obmedzte ťah na normálne nastavenia pojazdenia.</li>
+<li class="item indented special">Spustite časovač na minimálne 2 minúty po opustení dráhy, alebo 3 minúty po použití veľmi vysokého ťahu (čas na dochladenie motorov).</li>
+<li class="item indented special">Vykonajte rolovanie na jedno motor (štandardný postup):</li>
+<li class="item indented indented special">Overte, že na ECAM sa zobrazuje "APU Avail".</li>
+<li class="item indented indented special">Vypnite motor číslo dva (nikdy nevypínajte motor číslo jeden).</li>
+<li class="item indented indented special">Okamžite zapnite elektrické hydraulické čerpadlo (LDG).</li>
+<li class="item indented indented">Poznámka: rolovanie na jedno motor by sa nemalo používať na klzkých povrchoch alebo pri pojazdení do kopca.</li>
+<li class="item indented special">Pri približovaní sa k parkovacej bráne vypnite nosové a odbočovacie svetlá.</li>
+<li class="item indented">Skontrolujte meteorologický radar a uistite sa, že svetlá sú vypnuté.</li>
+<li class="item indented special">Pojazdite k bráne pomalou rýchlosťou (okolo 5 uzlov).</li>
+<li class="item indented special">Zastavte lietadlo a zatiahnite parkovaciu brzdu.</li>
+</ul>
+
+<h3 class="group-title">Shutdown and Securing - vypnutie a zabezpečenie lietadla</h3>
+<ul>
+<li class="item special">Postup vypnutia (Shutdown Procedure):</li>
+<li class="item indented special">Kontrola tlaku akumulátora: Pred zatiahnutím parkovacej brzdy sa uistite, že tlak akumulátora je v zelenom pásme.</li>
+<li class="item indented special">Parkovacia brzda: Zatiahnite parkovaciu brzdu. (Poznámka: ak je teplota bŕzd vysoká (nad 500°C, alebo 350°C so zapnutými ventilátormi bŕzd), vyhýbajte sa jej použitiu, pokiaľ to nie je nevyhnutné).</li>
+<li class="item indented special">Tlak bŕzd: Po zatiahnutí parkovacej brzdy skontrolujte indikáciu tlaku bŕzd a držte stlačené brzdové pedále, kým indikácie nie sú nad zeleným pásmom.</li>
+<li class="item indented special">Protinámrazový systém: Vypnite protinámrazový systém.</li>
+<li class="item indented special">Odber vzduchu z APU (APU Bleed): Nastavte tlačidlo APU bleed na "on", ale len bezprostredne pred vypnutím motora, aby ste zabránili vniknutiu výparov do klimatizácie.</li>
+<li class="item indented special">Elektrické hydraulické čerpadlo: Ak bolo použité rolovanie na jeden motor, vypnite elektrické hydraulické čerpadlo.</li>
+<li class="item indented special">Oznam pre palubný personál: Monitorujúci pilot (PM) vykoná oznam "cabin crew all done park".</li>
+<li class="item indented special">Signalizácia bezpečnostných pásov a maják: Vypnite signalizáciu bezpečnostných pásov, následne vypnite maják.</li>
+<li class="item indented special">Palivové čerpadlá: Vypnite palivové čerpadlá.</li>
+<li class="item indented special">Svetlo na krídle: Uistite sa, že svetlo na krídle je vypnuté, najmä na lietadlách A321, aby ste predišli potenciálnemu riziku požiaru v blízkosti nástupného mosta.</li>
+<li class="item indented special">Transpondér: Na transpondéri zvoľte standby.</li>
+<li class="item indented special">Výkonnosť IRS: Skontrolujte výkonnosť inerciálnych referenčných systémov (IRS), všimnite si akýkoľvek drift.</li>
+<li class="item indented special">Kontrolný zoznam parkovania: Dokončite kontrolný zoznam parkovania: parkovacia brzda, zakladacie kliny (chocks), motory vypnuté, svetlo na krídle vypnuté, palivové čerpadlá vypnuté.</li>
+<li class="item indented special">Vypnutie APU (voliteľné): Ak je k dispozícii pozemné napájanie a podmienky to umožňujú, vypnite APU.</li>
+<li class="item special">Postup zabezpečenia lietadla (Securing the Aircraft Procedure):</li>
+<li class="item indented">Načasovanie: Tento postup aplikujte po odchode všetkých cestujúcich z lietadla a keď sa ďalší let nepredpokladá.</li>
+<li class="item indented special">Parkovacia brzda: Uistite sa, že rukoväť parkovacej brzdy je v polohe "on" pre zníženie rýchlosti úniku hydraulickej kvapaliny.</li>
+<li class="item indented special">Kyslík pre posádku: Vypnite tlačidlo kyslíka pre posádku.</li>
+<li class="item indented special">Prepínače režimov IR: Vypnite všetky prepínače režimov IR (1, 2, 3).</li>
+<li class="item indented special">Vonkajšie svetlá: Vypnite všetky vonkajšie svetlá.</li>
+<li class="item indented special">Signalizácia pripútania pásov a zákazu fajčenia: Vypnite signalizáciu pripútania pásov a zákazu fajčenia.</li>
+<li class="item indented special">Núdzové osvetlenie: Vypnite núdzové osvetlenie (emergency lights), uistite sa, že na palube nie sú žiadni cestujúci.</li>
+<li class="item indented special">Odber vzduchu z APU (APU Bleed): Uistite sa, že tlačidlo APU bleed je vypnuté.</li>
+<li class="item indented special">Externé napájanie: Ak je potrebné, uistite sa, že je pripojené externé napájanie.</li>
+<li class="item indented special">Vypnutie APU a batérií: Vypnite APU a počkajte približne 2 minúty po zhasnutí kontrolky "APU ail" (pre úplné zatvorenie klapky APU), potom vypnite batérie 1 a 2.</li>
+<li class="item indented indented">Poznámka: Vypnutie batérií pred zatvorením klapky APU môže spôsobiť dym v kabíne počas ďalšieho letu.</li>
+<li class="item indented special">Okná: Skontrolujte, či sú všetky okná zatvorené a zamknuté.</li>
+<li class="item indented special">Kontrolný zoznam zabezpečenia lietadla: Dokončite kontrolný zoznam: kyslík vypnutý, núdzové osvetlenie vypnuté, batérie vypnuté.</li>
+<li class="item indented">Zbernica pozemných služieb (voliteľné): Ak chcete dosiahnuť väčšiu realitu pri opúšťaní lietadla v noci, môžete použiť zbernicu pozemných služieb, ktorá sa nachádza tu (podľa videa).</li>
+<li class="item indented">Pozemné napájanie (voliteľné): Pozemné napájanie môže zostať zapnuté, ak je to potrebné; inak ho vypnite.</li>
+</ul>
+
+<script>
+const items = document.querySelectorAll('.item');
+let selectedIndex = -1;
+
+document.body.addEventListener('click', (event) => {
+if (event.target.tagName !== 'BUTTON' && event.button === 0) { // Ľavé tlačidlo myši (označenie)
+if (selectedIndex < items.length - 1) {
+selectedIndex++;
+items[selectedIndex].classList.add('selected');
+items[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Posun na viditeľné miesto
+}
+}
+});
+
+document.body.addEventListener('contextmenu', (event) => {
+event.preventDefault();
+if (event.target.tagName !== 'BUTTON') { // Pravé tlačidlo myši (odznačenie)
+if (selectedIndex >= 0) {
+items[selectedIndex].classList.remove('selected');
+selectedIndex--;
+if (selectedIndex >= 0) {
+items[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Posun na viditeľné miesto
+}
+}
+}
+});
+</script>
+</body>
+</html>
