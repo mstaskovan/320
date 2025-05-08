@@ -395,53 +395,32 @@
         <li class="item indented">Pri zmene FCU výšky po tom, čo lietadlo začne zachytávať výšku, buďte opatrní, pretože sa môže vrátiť do režimu vertikálnej rýchlosti.</li>
     </ul>
 
+<script>
+    const items = document.querySelectorAll('.item');
+    let selectedIndex = -1;
 
-    <script>
-    const items = document.querySelectorAll('.item');
-    let selectedIndex = -1;
-
-    document.body.addEventListener('click', (event) => {
-        // Skontroluje, či bolo kliknuté ľavým tlačidlom myši (event.button === 0)
-        // a či cieľom kliknutia nebol BUTTON (aby sa neaktivovalo označovanie pri kliknutí na tlačidlá, ak by boli)
-        if (event.button === 0 && event.target.tagName !== 'BUTTON') {
-            if (selectedIndex < items.length - 1) {
-                // Ak je už niečo označené, predtým označenú položku odznačíme
-                if (selectedIndex >= 0) {
-                    items[selectedIndex].classList.remove('selected');
-                }
-                // Označíme nasledujúcu položku
-                selectedIndex++;
-                items[selectedIndex].classList.add('selected');
-                // Posunieme na viditeľné miesto
-                items[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else if (selectedIndex === items.length - 1) {
-                // Ak je označená posledná položka a klikneme znova, môžeme zvoliť, čo sa stane
-                // Aktuálne to neurobí nič. Ak by ste chceli odznačiť poslednú, dalo by sa to upraviť.
-                // Pre zatiaľ ponecháme označenú poslednú.
+    document.body.addEventListener('click', (event) => {
+        if (event.target.tagName !== 'BUTTON' && event.button === 0) { // Ľavé tlačidlo myši (označenie)
+            if (selectedIndex < items.length - 1) {
+                selectedIndex++;
+                items[selectedIndex].classList.add('selected');
+                items[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Posun na viditeľné miesto
             }
-        }
-    });
+        }
+    });
 
-    document.body.addEventListener('contextmenu', (event) => {
-        event.preventDefault(); // Zruší predvolené kontextové menu prehliadača
-        // Skontroluje, či bol kliknutý pravým tlačidlom myši (event.button === 2)
-        // a či cieľom kliknutia nebol BUTTON
-        if (event.button === 2 && event.target.tagName !== 'BUTTON') {
-            if (selectedIndex >= 0) {
-                // Odznačíme aktuálnu položku
-                items[selectedIndex].classList.remove('selected');
-                selectedIndex--;
-                // Ak existuje predchádzajúca položka, posunieme na ňu
-                if (selectedIndex >= 0) {
-                    items[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    // Ak sme odznačili poslednú položku a nie je žiadna predchádzajúca,
-                    // resetujeme pozíciu (napr. na začiatok stránky, alebo nič)
-                    // document.body.scrollTo({ top: 0, behavior: 'smooth' }); // Voliteľné: posun na začiatok
+    document.body.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+        if (event.target.tagName !== 'BUTTON') { // Pravé tlačidlo myši (odznačenie)
+            if (selectedIndex >= 0) {
+                items[selectedIndex].classList.remove('selected');
+                selectedIndex--;
+                if (selectedIndex >= 0) {
+                    items[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Posun na viditeľné miesto
                 }
-            }
-        }
-    });
+            }
+        }
+    });
 </script>
 </body>
 </html>
