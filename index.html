@@ -1,608 +1,869 @@
 <!DOCTYPE html>
-<html lang="sk">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>320</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!DOCTYPE html>
+<html lang="sk"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>A320 Checklist</title>
 <style>
-
 body {
-background-color: black;
-color: white;
-	font-family: Arial, Helvetica, sans-serif;
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 10px;
+}
+p {
+  margin-top: 10px;
+  font-style: italic;
+  color: #aaa;
+}
+.group-title {
+  color: #ff4444;
+  font-size: 1.4em;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+.subsection-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #ccc;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+.checklist {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 30px;
 }
 .item {
-color: white;
-cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px dotted gray;
+  padding: 6px 0;
+  gap: 10px;
+  transition: background 0.3s, border-left 0.3s;
 }
-.selected {
-	color: gray; /* Farba označeného textu */
-	font-size: 1em; /* Zabezpečí konzistenciu pre označené položky */
-	}
-	.special.selected {
-	color: gray; /* Farba označeného textu má prioritu */
-	font-size: 1.2em; /* Ak chceš, aby zväčšenie ostalo aj pri označení */
-	}
+.item .label {
+  text-align: left;
+  word-break: break-word;
+  font-weight: bold;
+}
+.item .status {
+  text-align: right;
+  color: #FFD700;
+  white-space: nowrap;
+  font-style: italic;
+}
+.selected .label,
+.selected .status {
+  color: gray;
+}
+.subitem,
+.linked-subitem {
+  padding-left: 20px;
+  font-style: italic;
+  font-size: 0.95em;
+  opacity: 0.85;
+}
+.subitem {
+  cursor: pointer;
+}
+.spacer {
+  height: 20px;
+  border: none;
+  pointer-events: none;
+}
+.divider {
+  border-top: 1px solid #fff;
+  margin: 10px 0;
+  pointer-events: none;
+}
+.tag {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-right: 8px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: bold;
+  color: white;
+  background-color: #666;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: fit-content;
+  max-width: max-content;
+}
+.tag.g1000 {
+  background-color: #007ACC;
+}
+.tag.classic {
+  background-color: #AA0000;
+}
+.tag.wbsim {
+  background-color: #228B22;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  margin-bottom: 30px;
+}
+table, th, td {
+  border: 1px solid gray;
+}
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+th {
+  background-color: #222;
+  font-weight: bold;
+}
+#sectionMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  color: white;
+  z-index: 998;
+  overflow-y: auto;
+  padding: 40px 20px;
+  display: none;
+}
+#sectionMenu.visible {
+  display: block;
+}
+#sectionMenu.hidden {
+  display: none;
+}
+#sectionMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#sectionMenu li {
+  padding: 5px;
+  font-size: 15px;
+  border-bottom: 1px solid gray;
+  transition: background 0.2s;
+}
+#sectionMenu li.active {
+  background: #666;
+}
+.menu-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#scrollTopBtn,
+#menuToggle {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+#scrollTopBtn {
+  bottom: 70px;
+}
+#menuToggle {
+  bottom: 20px;
+}
+
+.checklist > .item {
+  border-bottom: 1px dotted gray;
+}
+
+.grouped-block.item,
+.grouped-block.subitem,
+.grouped-block.linked-subitem {
+  border-bottom: none;
+}
+
+.group-end {
+  border-bottom: 1px dotted gray;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+}
+  img {
+    max-width: 100%;
+    height: auto;
+}
+
+.tag.pm { background-color: #007ACC; }
+html { scroll-behavior: smooth; }
+h1 { margin: 12px 0 4px; font-size: 1.6em; }
+.notice { color:#aaa; font-style:italic; line-height:1.45; }
+.group-title { scroll-margin-top: 12px; }
+.item { user-select:none; }
+.selected { background: #181818; }
+
 .group-title {
-color: red;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
-	.special {
-font-size: 1.2em; /* Zväčšuje písmo */
-font-weight: bold; /* Zároveň ponecháva bold efekt */
-color: #FFD700; /* Pridá výraznú farbu, napríklad zlatú */
-	}
-	.indented {
-margin-left: 20px; /* Nastaví odsadenie od ľavého okraja */
-	}
+.group-controls {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.72rem;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: normal;
+}
+.group-select-btn {
+  color: #fff;
+  background: #333;
+  border: 1px solid #777;
+  border-radius: 5px;
+  padding: 6px 9px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.group-select-btn:hover { background: #555; }
+.group-select-btn.group-complete { background: #1d5630; border-color: #3b8b55; }
+.image-link {
+  display: inline-block;
+  color: #8ecbff;
+  border: 1px solid #35627e;
+  border-radius: 5px;
+  padding: 5px 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+.image-link:hover { background: #173448; color: #fff; }
 </style>
-</head>
-<body>
-<h3 class="group-title">Preliminary Cockpit Preparation - príprava kokpitu</h3>
-<ul>
-<li class="item indented indented special">Páky ovládania motorov (engine master levers) – IDLE.</li>
-<li class="item indented indented special">Hlavne spínače motorov – OFF</li>
-<li class="item indented indented special">Voliče režimu motora (engine mode selectors) – NORM.</li>
-<li class="item indented indented special">Prepínače meteorologického radaru a prediktívneho systému proti strihu vetra - OFF.</li>
-<li class="item indented indented special">GAIN to CAL, MULTISCAN to AUTO, GCS to AUTO.</li>
-<li class="item indented indented special">Páka podvozku – POLOHA DOLE.</li>
-<li class="item indented indented special">Voliče stieračov – OFF.</li>
-<li class="item indented">Zapnutie napájania lietadla:</li>
-<li class="item indented indented special">Napätie batérie – SKONTROLOVAŤ (nad 25,5 V, ak bolo lietadlo dlhšie bez napájania).</li>
-<li class="item indented indented special">Externé napájanie – ZAPNÚŤ (ak je dostupné).</li>
-<li class="item indented indented">Počkať na dokončenie autotestov lietadla.</li>
-<li class="item indented special">APU (pomocná energetická jednotka) a nastavenie rádia:</li>
-<li class="item indented indented">Zvážiť potrebu spustenia APU (teplota, počasie).</li>
-<li class="item indented indented special">Rádiá – NASTAVIŤ (hlasitosť, strážna frekvencia VHF 2).</li>
-<li class="item indented indented special">Test požiarneho systému APU – VYKONAŤ.</li>
-<li class="item indented indented special">APU – SPUSTIŤ (počkať min. 3 minúty pred zapnutím APU bleed).</li>
-<li class="item indented special">Zarovnanie IRS (inerciálny referenčný systém):</li>
-<li class="item indented indented special">Proces zarovnania IRS – SPUSTIŤ.</li>
-<li class="item indented indented">Uistiť sa, že lietadlo je počas zarovnávania nehybné.</li>
-<li class="item indented">Osvetlenie kokpitu a EFB (elektronická letová taška):</li>
-<li class="item indented indented">Osvetlenie kokpitu – NASTAVIŤ podľa podmienok.</li>
-<li class="item indented indented">EFB – SPUSTIŤ a SKONTROLOVAŤ AKTUALIZÁCIE (softvér, databázy).</li>
-<li class="item indented special">Predbežná inicializácia FMS (systém riadenia letu):</li>
-<li class="item indented indented special">FMS – INICIALIZOVAŤ (cez ACARS/AOC nahrať letové údaje).</li>
-<li class="item indented indented special">Typ lietadla a motora v FMS – OVERIŤ.</li>
-<li class="item indented indented">Číslo letu – ZADAŤ, skontrolovať správy.</li>
-<li class="item indented indented special">Zarovnanie IRS – POTVRDIŤ, dostupnosť GPS.</li>
-<li class="item indented">Preberanie lietadla:</li>
-<li class="item indented indented special">Predchádzajúce poruchy – VYVOLAŤ (recall button).</li>
-<li class="item indented indented">Denník údržby, položky MEL, súhrn konfigurácie lietadla – SKONTROLOVAŤ.</li>
-<li class="item indented indented">Bulletiny OEB od Airbusu – SKONTROLOVAŤ.</li>
-<li class="item indented special">Predbežný výpočet výkonnosti:</li>
-<li class="item indented indented special">Potrebné množstvo paliva – VYPOČÍTAŤ (zohľadniť počasie, možné čakanie).</li>
-<li class="item indented indented special">Vzletová hmotnosť a výkonnosť – VYPOČÍTAŤ (všímať si obmedzenia).</li>
-<li class="item indented special">Základná kontrola stavu systémov:</li>
-<li class="item indented indented special">Tlak kyslíka – SKONTROLOVAŤ.</li>
-<li class="item indented indented special">Množstvo hydraulickej kvapaliny – OVERIŤ.</li>
-<li class="item indented indented special">Množstvo motorového oleja – SKONTROLOVAŤ (v prípade potreby aktivovať FADEC).</li>
-<li class="item indented indented special">Páky klapiek a rýchlostných bŕzd – SPRÁVNA POLOHA.</li>
-<li class="item indented indented special">Parkovacia brzda a tlak v brzdách – SKONTROLOVAŤ.</li>
-<li class="item indented indented">Ističe – SKONTROLOVAŤ (či nie je niektorý vypadnutý).</li>
-<li class="item special">Detailná prehliadka kokpitu (systematický sken panelov)</li>
-<li class="item indented">Všeobecný postup prehliadky:</li>
-<li class="item indented indented">Horný panel: Zľava doprava, zdola nahor.</li>
-<li class="item indented indented">Hlavný panel: Nadol a potom nahor v tvare U.</li>
-<li class="item indented indented">Podstavec (Pedestal): Zhora nadol, zľava doprava.</li>
-<li class="item indented special">Horný panel (Overhead Panel):</li>
-<li class="item indented indented">Tlačidlá volania (call buttons) – NESMÚ BYŤ STLAČENÉ.</li>
-<li class="item indented indented special">Prívod kyslíka pre posádku (crew supply) – ZAPNÚŤ.</li>
-<li class="item indented indented special">Spínač pozemného ovládania záznamníka (recorder ground control switch) – ZAPNÚŤ.</li>
-<li class="item indented indented special">Test CVR (záznamník hlasu v kokpite) – VYKONAŤ.</li>
-<li class="item indented indented">Panel evakuácie (evacuation panel) – SKONTROLOVAŤ.</li>
-<li class="item indented indented special">Prepínače svetiel, APU a bezpečnostných pásov – NASTAVIŤ.</li>
-<li class="item indented indented">Svetlá signalizácie (annunciator lights) – SKONTROLOVAŤ, jas NASTAVIŤ.</li>
-<li class="item indented indented">Požadovaná výška kabíny (cabin altitude) – NASTAVIŤ.</li>
-<li class="item indented indented">Panel klimatizácie (air conditioning panel) – SKONTROLOVAŤ.</li>
-<li class="item indented indented">Nabíjanie batérií – SKONTROLOVAŤ SPRÁVNOSŤ.</li>
-<li class="item indented indented special">Palivové čerpadlá (fuel pumps) – ZAPNÚŤ.</li>
-<li class="item indented indented">Hydraulický panel (hydraulic panel) – SKONTROLOVAŤ.</li>
-<li class="item indented indented special">Testy požiarneho systému motorov (engine fire tests) – SPUSTIŤ.</li>
-<li class="item indented indented">Systém vykurovania nákladného priestoru (cargo heat system) – NASTAVIŤ (ak je k dispozícii).</li>
-<li class="item indented indented special">Spínač PA (palubný rozhlas) – POTIAHNUŤ/AKTIVOVAŤ.</li>
-<li class="item indented special">Hlavný panel (Main Panel):</li>
-<li class="item indented indented special">Tlak QNH na záložnom výškomere (standby altimeter) – NASTAVIŤ SPRÁVNY.</li>
-<li class="item indented indented">Zobrazenie terénu (terrain display) na navigačnom displeji (ND) – VYPRAŤ.</li>
-<li class="item indented indented">Zobrazovacie jednotky (DCU - Display Control Units) – UISTIŤ SA, ŽE SÚ ZAPNUTÉ.</li>
-<li class="item indented indented">Dátum a čas – SKONTROLOVAŤ.</li>
-<li class="item indented indented">Prepínač riadenia predného kolesa (anti-skid & nose wheel steering) – SKONTROLOVAŤ.</li>
-<li class="item indented special">Podstavec (Pedestal):</li>
-<li class="item indented indented special">Rádiové frekvencie – NALADIŤ PRÍSLUŠNÉ.</li>
-<li class="item indented indented">Nastavenia zvuku (audio selections) – VYKONAŤ SPRÁVNE.</li>
-<li class="item indented indented">Meteorologický radar (weather radar) – SKONTROLOVAŤ.</li>
-<li class="item indented indented">Poloha rýchlostných bŕzd (speed brakes), parkovacia brzda, poloha klapiek (flaps) – SKONTROLOVAŤ.</li>
-<li class="item indented indented special">Transpondér (odpovedač) – NASTAVIŤ.</li>
+</head><body>
+<h1>A320 — Normal Procedures / Single-Pilot Checklist</h1>
+<p class="notice">Simulačný checklist: základ vychádza z priloženého Fenix A320 CFM QRH – Normal Procedures (revízia uvedená v PDF: 27-Apr-22), porovnaný a doplnený o vybrané postupy z dokumentu OMB SOPs Version 4 (17-Jan-2024). Tieto dokumenty sa môžu v detailoch líšiť; nejde o oficiálny prevádzkový dokument ani náhradu aktuálneho QRH/FCOM. Používaj iba v simulátore a over si položky podľa konkrétnej verzie lietadla/add-onu.</p>
+<p class="notice">Ľavým tlačidlom na checklist klikáš postupne na ďalšie položky; pravým tlačidlom vrátiš poslednú akciu. Tlačidlo „Označiť celú skupinu“ označí alebo odznačí všetky položky fázy. Odkaz „Obrázok“ otvorí súbor z priečinka images/ — cesty k obrázkom si môžeš upraviť v HTML. Položky vykonávané PM majú modrý štítok PM; ostatné sú bez štítka.</p>
+<p><span class="tag pm">PM</span> = Pilot Monitoring</p><p class="notice">Cesty k obrázkom: v každej skupine uprav atribút href odkazu „Obrázok“ (predvolené images/ID-SKUPINY.jpg).</p>
+<h3 class="group-title" id="safety">Safety – Exterior Inspection<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Safety – Exterior Inspection" class="group-select-btn" data-group="safety" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/safety.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Safety – Exterior Inspection">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> Wheel chocks</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flight / cargo doors</span><span class="status">CHECK POSITION</span></li>
+<li class="item"><span class="label">APU area</span><span class="status">CHECK</span></li>
 </ul>
-
-<h3 class="group-title">Preflight Procedure - predletová príprava</h3>
-<ul>
-<li class="item">Všeobecný postup prehliadky panelov:</li>
-<li class="item indented">Horný panel: Postupujte zľava doprava a zdola nahor.</li>
-<li class="item indented">Hlavný panel: Postupujte nadol a potom nahor v tvare písmena U.</li>
-<li class="item indented">Podstavec (Pedestal): Postupujte zhora nadol a zľava doprava.</li>
-<li class="item">Podrobný postup:</li>
-<li class="item">1. Horný panel (Overhead Panel)</li>
-<li class="item indented special">Skontrolujte, či nie je stlačené žiadne tlačidlo volania (call button).</li>
-<li class="item indented special">Zapnite prívod kyslíka pre posádku (crew supply).</li>
-<li class="item indented special">Zapnite spínač pozemného ovládania záznamníka (recorder ground control switch).</li>
-<li class="item indented special">Vykonajte test CVR (záznamník hlasu v kokpite).</li>
-<li class="item indented">Skontrolujte panel evakuácie (evacuation panel).</li>
-<li class="item indented special">Nastavte prepínače svetiel, APU (pomocná energetická jednotka) a bezpečnostných pásov.</li>
-<li class="item indented">Skontrolujte svetlá signalizácie (annunciator lights) a nastavte ich jas.</li>
-<li class="item indented special">Nastavte požadovanú výšku kabíny (cabin altitude).</li>
-<li class="item indented">Skontrolujte panel klimatizácie (air conditioning panel).</li>
-<li class="item indented special">Skontrolujte, či sa batérie správne nabíjajú.</li>
-<li class="item indented special">Zapnite palivové čerpadlá (fuel pumps).</li>
-<li class="item indented">Skontrolujte hydraulický panel (hydraulic panel).</li>
-<li class="item indented special">Spustite testy požiarneho systému motorov (engine fire tests).</li>
-<li class="item indented">Nastavte systém vykurovania nákladného priestoru (cargo heat system), ak je k dispozícii.</li>
-<li class="item indented special">Potiahnite spínač PA (palubný rozhlas).</li>
-<li class="item">2. Hlavný panel (Main Panel)</li>
-<li class="item indented special">Nastavte správny tlak QNH na záložnom výškomere (standby altimeter).</li>
-<li class="item indented">Vypnite zobrazenie terénu (terrain display) na navigačnom displeji (ND).</li>
-<li class="item indented special">Uistite sa, že sú zapnuté zobrazovacie jednotky (DCU - Display Control Units).</li>
-<li class="item indented">Skontrolujte dátum a čas.</li>
-<li class="item indented special">Skontrolujte prepínač riadenia predného kolesa (anti-skid & nose wheel steering).</li>
-<li class="item">3. Podstavec (Pedestal)</li>
-<li class="item indented special">Nalaďte príslušné rádiové frekvencie.</li>
-<li class="item indented special">Vykonajte správne nastavenia zvuku (audio selections).</li>
-<li class="item indented">Skontrolujte meteorologický radar (weather radar).</li>
-<li class="item indented special">Skontrolujte polohu rýchlostných bŕzd (speed brakes), parkovaciu brzdu a polohu klapiek (flaps).</li>
-<li class="item indented special">Nastavte transpondér (odpovedač).</li>
+<h3 class="group-title" id="prelim">Preliminary Cockpit Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Preliminary Cockpit Preparation" class="group-select-btn" data-group="prelim" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/prelim.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Preliminary Cockpit Preparation">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">ENG masters 1, 2</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">NORM</span></li>
+<li class="item"><span class="label">Weather radar</span><span class="status">OFF</span></li><li class="item"><span class="label">Predictive windshear</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">Landing gear lever</span><span class="status">DOWN</span></li>
+<li class="item"><span class="label">Both wiper selectors</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">BAT</span><span class="status">CHECK / AUTO</span></li>
+<li class="item"><span class="label">EXT PWR pushbutton</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">APU FIRE</span><span class="status">CHECK / TEST</span></li>
+<li class="item"><span class="label">APU</span><span class="status">START</span></li>
+<li class="item"><span class="label">When APU AVAIL: EXT PWR</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">AIR COND panel</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Cockpit lights</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> All EFB</span><span class="status">START</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> EFB / eQRH version</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">ACARS</span><span class="status">INITIALIZE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Engine &amp; aircraft type</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Database valid</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flight number &amp; FROM/TO</span><span class="status">INSERT / CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> EFB Synchro Avionics</span><span class="status">CLICK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> EFB STATUS page</span><span class="status">INSERT / CHECK</span></li>
+<li class="item"><span class="label">ECAM/LOGBOOK check – PRG PD</span><span class="status">PRESS 3 s</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> LOGBOOK</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> MEL/CDL</span><span class="status">CHECK DISPATCH CONDITIONS</span></li>
+<li class="item"><span class="label">Aircraft acceptance</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Airfield data</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Preliminary loading (if LOADSHEET app used)</span><span class="status">COMPUTE / X-CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> MEL/CDL items</span><span class="status">CHECK ACTIVATED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Preliminary takeoff performance data</span><span class="status">COMPUTE / CROSSCHECK</span></li>
+<li class="item"><span class="label">OEB</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">ECAM OXY pressure / HYD quantity / ENG oil quantity</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Flaps</span><span class="status">CHECK POSITION</span></li>
+<li class="item"><span class="label">Speed brake lever</span><span class="status">CHECK RETRACTED AND DISARMED</span></li>
+<li class="item"><span class="label">Parking brake handle</span><span class="status">ON</span></li>
+<li class="item"><span class="label">Accumulator / brakes pressure</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Emergency equipment</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Rain repellent</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Security check</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">Circuit breaker panels</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Gear pins and covers</span><span class="status">CHECK ONBOARD / STOWED</span></li>
+<li class="item"><span class="label">NAV &amp; LOGO lights</span><span class="status">ON</span></li><li class="item"><span class="label">Fan cowl flags</span><span class="status">CHECK</span></li><li class="item"><span class="label">Cockpit door locking system</span><span class="status">CHECK</span></li><li class="item"><span class="label">Exterior walkaround</span><span class="status">PERFORM</span></li>
 </ul>
-
-<h3 class="group-title">FMS Preflight - predletová príprava FMS</h3>
-<ul>
-<li class="item indented">Deselektujte akékoľvek nefunkčné navigačné pomôcky, ak je potrebné.</li>
-<li class="item indented special">Na stránke INIT overte trasu, záložné letisko a zadajte volací znak ATC, nákladový index, cestovnú hladinu/teplotu, tropopauzu a prízemnú teplotu.</li>
-<li class="item indented special">Na stránke letového plánu zadajte informácie o odlete a prílete, vrátane dráhy, SID, STAR a akýchkoľvek potrebných prechodov alebo priblížení.</li>
-<li class="item indented">Zadajte akékoľvek plánované postupné stúpania alebo klesania.</li>
-<li class="item indented special">Použite režim plánu na navigačnom displeji na kontrolu celého letového plánu.</li>
-<li class="item indented special">Overte, či sa trasa zhoduje s trasou ATC a porovnajte vzdialenosť letového plánu s OFP.</li>
-<li class="item indented special">Naprogramujte postup pri zlyhaní motora v sekundárnom letovom pláne, vrátane vyčkávacích obrazcov a postupov okamžitého návratu.</li>
-<li class="item indented special">Vizualizujte trasu pri zlyhaní motora na navigačnom displeji pomocou stránky s informáciami o pevnom bode.</li>
-<li class="item indented">Nastavte navigačné rádiá podľa potreby.</li>
-<li class="item indented special">Na stránke PROGRESS potvrďte primárne GPS a vysokú presnosť a zadajte odletovú dráhu.</li>
-<li class="item indented special">Na stránke INIT zadajte informácie o výkone, ako je nulová palivová hmotnosť, blokové palivo a zložka vetra.</li>
-<li class="item indented special">Na stránke PERFORMANCE zadajte údaje o vzlete, ako sú klapky, teplota flex a rýchlosti vzletu.</li>
-<li class="item indented special">Overte údaje FMS oproti odletovej mape a skontrolujte navigačné body a obmedzenia.</li>
-<li class="item special">Príprava kokpitu:</li>
-<li class="item indented special">Na FCU nastavte počiatočnú stúpaciu povolenú výšku a uistite sa, že sú zapnuté letové riadiace systémy.</li>
-<li class="item indented">Nakonfigurujte ovládací panel EIS, vrátane výberu rozsahu a režimu.</li>
-<li class="item indented special">Nastavte QNH na oboch stranách.</li>
-<li class="item special">Kontrola kyslíka:</li>
-<li class="item indented">Komunikujte s pozemným personálom prostredníctvom interkomu.</li>
-<li class="item indented special">Otestujte kyslíkovú masku stlačením tlačidla test a počúvaním prietoku kyslíka a funkčnosti mikrofónu.</li>
-<li class="item special">Kontrola prístrojov:</li>
-<li class="item indented special">Uistite sa, že nič neblokuje ovládacie prvky a podľa potreby nastavte svetlá.</li>
-<li class="item indented special">Overte, či sa zhodujú kurz, výška, hladina a rýchlosti a potvrďte polohu na navigačnom displeji.</li>
+<h3 class="group-title" id="cockpit">Cockpit Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Cockpit Preparation" class="group-select-btn" data-group="cockpit" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/cockpit.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Cockpit Preparation">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> Cockpit door</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">All white lights</span><span class="status">EXTINGUISH</span></li>
+<li class="item"><span class="label">RCDR GND CTL pushbutton</span><span class="status">ON</span></li>
+<li class="item"><span class="label">CVR test pushbutton</span><span class="status">PRESS</span></li>
+<li class="item"><span class="label">CAPT &amp; PURS / CAPT switch</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">All IR mode selectors</span><span class="status">NAV</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
+<li class="item"><span class="label">Signs</span><span class="status">SET</span></li>
+<li class="item"><span class="label">Probe/window heat</span><span class="status">AUTO</span></li>
+<li class="item"><span class="label">Landing elevation</span><span class="status">AUTO</span></li>
+<li class="item"><span class="label">Pack flow</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">ELEC panel</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Batteries</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">ENG FIRE</span><span class="status">CHECK / TEST</span></li>
+<li class="item"><span class="label">Audio switch</span><span class="status">NORM</span></li>
+<li class="item"><span class="label">VENT panel</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">PA (3rd occupant)</span><span class="status">RECEPT</span></li>
+<li class="item"><span class="label">MAINT panel</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">ISIS</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Clock</span><span class="status">CHECK / SET</span></li>
+<li class="item"><span class="label">A/SKID &amp; N/W STRG switch</span><span class="status">ON</span></li>
+<li class="item"><span class="label">PIP</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Switching panel</span><span class="status">NORM</span></li>
+<li class="item"><span class="label">Thrust levers</span><span class="status">CHECK IDLE</span></li>
+<li class="item"><span class="label">ENG masters</span><span class="status">CHECK OFF</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">CHECK NORM</span></li>
+<li class="item"><span class="label">Parking brake</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Gravity gear extension</span><span class="status">CHECK STOWED</span></li>
+<li class="item"><span class="label">ATC</span><span class="status">STBY</span></li>
+<li class="item"><span class="label">RMP</span><span class="status">SET</span></li>
+<li class="item"><span class="label">MCDU message record</span><span class="status">ERASE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Navigation charts clipboard</span><span class="status">PREPARE</span></li>
+<li class="item"><span class="label">FMS</span><span class="status">PREPARE / CHECK</span></li><li class="item"><span class="label">Navaid deselection</span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label">INIT A</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">ADIRS position</span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label">F-PLAN</span><span class="status">COMPLETE / CHECK</span></li><li class="item"><span class="label">RADIO NAV</span><span class="status">CHECK</span></li><li class="item"><span class="label">INIT B</span><span class="status">ENTER PLANNED DATA</span></li><li class="item"><span class="label">SEC F-PLAN</span><span class="status">AS APPROPRIATE</span></li><li class="item"><span class="label">FMS preparation</span><span class="status">CROSSCHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Barometric reference</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flight directors</span><span class="status">CHECK ON</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> LS / ILS</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> ND mode and range</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> VOR / ADF selector</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">FCU</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Oxygen mask</span><span class="status">TEST</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> PFD-ND brightness</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Loudspeaker knob</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> PFD-ND</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">LDG ELEV (ECAM)</span><span class="status">CHECK AUTO</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> IRS alignment</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">ECAM STATUS</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Takeoff briefing</span><span class="status">PERFORM</span></li>
 </ul>
-
-<h3 class="group-title">Before Start, Engine Start, After start Procedures - postupy pred štartom, štartu motora a po štarte</h3>
-<ul>
-<li class="item special">Postup pred štartom:</li>
-<li class="item indented special">Skontrolujte presnosť záverečného dokumentu o zaťažení a porovnajte hodnoty ako nulová palivová hmotnosť a ťažisko. Zadajte ťažisko na stránku výkonnosti.</li>
-<li class="item indented special">Potvrďte, že palivo na palube zodpovedá požadovanému množstvu.</li>
-<li class="item indented special">Nastavte systém FMS na letový plán na strane monitorujúceho pilota a na výkonnosť na strane letiaceho pilota.</li>
-<li class="item indented special">Vyžiadajte si povolenie na odtlačenie a štart od riadenia letovej prevádzky (ATC).</li>
-<li class="item indented special">Nastavte transpondér na auto.</li>
-<li class="item indented special">Zapnite maják a uistite sa, že všetky okná sú správne zatvorené.</li>
-<li class="item indented special">Overte, či sú šmykľavky aktivované a všetky dvere sú zatvorené.</li>
-<li class="item indented special">Potvrďte, že páky ťahu sú v polohe voľnobeh a parkovacia brzda je nastavená.</li>
-<li class="item indented special">Dokončite kontrolný zoznam pred štartom, vrátane kontroly parkovacej brzdy, rýchlostí vzletu, nastavení ťahu a okien.</li>
-<li class="item indented">Uistite sa, že sa zobrazuje poznámka o odpojení riadenia predného kolesa.</li>
-<li class="item special">Postup štartu motora:</li>
-<li class="item indented special">Komunikujte s pozemným personálom, aby ste potvrdili pripravenosť na odtlačenie a štart motora.</li>
-<li class="item indented special">Uvoľnite parkovaciu brzdu a začnite odtláčať lietadlo, pričom sa uistite, že je voľné od akýchkoľvek prekážok pred štartom motorov.</li>
-<li class="item indented special">Nastavte prepínač režimu motora na zapaľovanie/štart.</li>
-<li class="item indented special">Naštartujte motory postupne (najprv druhý, potom prvý) presunutím hlavného spínača motora do prednej polohy.</li>
-<li class="item indented special">Monitorujte parametre štartu motora, ako je tlak oleja, N1, N2, EGT a prietok paliva.</li>
-<li class="item special">Postup po štarte:</li>
-<li class="item indented special">Nastavte prepínač režimu motora na normálny.</li>
-<li class="item indented special">Vypnite odber vzduchu z APU a APU (ak nie sú potrebné pre špecifické operácie) a podľa potreby nastavte odmrazovanie.</li>
-<li class="item indented special">Aktivujte spojlery, vynulujte trim kormidla, nastavte klapky a trim podľa potreby.</li>
-<li class="item indented special">Skontrolujte stránku stavu ECAM pre akékoľvek varovania alebo správy.</li>
-<li class="item indented">Uistite sa, že sa už nezobrazuje poznámka o odpojení riadenia predného kolesa.</li>
-<li class="item indented special">Dokončite kontrolný zoznam po štarte, vrátane kontroly odmrazovania, stavu ECAM, trimu výšky a trimu kormidla.</li>
-<li class="item indented special">Potvrďte hlásenie o zabezpečení kabíny.</li>
+<h3 class="group-title" id="pushback">Before Pushback or Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Before Pushback or Start" class="group-select-btn" data-group="pushback" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushback.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Before Pushback or Start">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> Final loadsheet</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> FOB</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">ACARS fuel report</span><span class="status">PREPARE</span></li>
+<li class="item"><span class="label">If takeoff conditions changed: final T.O. performance data</span><span class="status">RECOMPUTE</span></li>
+<li class="item"><span class="label">FMS takeoff data</span><span class="status">REVISE</span></li>
+<li class="item"><span class="label">FMS final T.O. performance data</span><span class="status">CROSSCHECK</span></li>
+<li class="item"><span class="label">EFB / MCDU green dot</span><span class="status">COMPARE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Seating position</span><span class="status">ADJUST</span></li>
+<li class="item"><span class="label">FMS PERF TO page</span><span class="status">SELECT</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> FMS F-PLN page</span><span class="status">SELECT</span></li>
+<li class="item"><span class="label">External power</span><span class="status">CHECK AVAIL</span></li>
+<li class="item"><span class="label">External power disconnection</span><span class="status">REQUEST</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Before Start C/L – above the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Windows / doors</span><span class="status">CHECK CLOSED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Slides</span><span class="status">CHECK ARMED</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
+<li class="item"><span class="label">Thrust levers</span><span class="status">IDLE</span></li>
+<li class="item"><span class="label">Accumulator pressure</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">N/W steering disconnect</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Parking brake</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Before Start C/L – below the line</span><span class="status">COMPLETE</span></li>
 </ul>
-
-<h3 class="group-title">Taxi - postupy pojazdenia (taxi)</h3>
-<ul>
-<li class="item">Príprava:</li>
-<li class="item indented">Uistite sa, že stôl je odložený.</li>
-<li class="item indented special">Vykonajte kontrolu letových riadení: plne hore, plne dole a späť do neutrálnej polohy na postrannej páke; kontrola krídelok: plne vľavo, plne vpravo a neutrál; kontrola smerovky: plne vľavo, plne vpravo a neutrál, po stlačení tlačidla odpojenia pedálov; nezabudnite potom tlačidlo odpojenia uvoľniť.</li>
-<li class="item special">Začatie pojazdenia:</li>
-<li class="item indented special">Získajte povolenie na rolovanie.</li>
-<li class="item indented">Skontrolujte, či sú ľavá a pravá strana voľné.</li>
-<li class="item indented special">Nastavte nosové svetlo na rolovanie a zapnite svetlá na odbočenie z dráhy.</li>
-<li class="item indented special">Uvoľnite parkovaciu brzdu.</li>
-<li class="item indented">Skontrolujte, či brzdy fungujú.</li>
-<li class="item">rolovanie:</li>
-<li class="item indented">Minimalizujte používanie bŕzd, aby ste predišli prehriatiu.</li>
-<li class="item indented">Pred zákrutami spomaľte na približne 7 uzlov.</li>
-<li class="item indented">Dodržiavajte rýchlostné limity: 10 uzlov v ostrých zákrutách, 15 uzlov na stojiskách, 30 uzlov na dlhých rovných pojazdových dráhach a 50 uzlov pri pojazdení po dráhe v opačnom smere.</li>
-<li class="item indented">Monitorujúci pilot (PM) potvrdí povolenie ATC.</li>
-<li class="item indented">Letiaci pilot (PF) potvrdí odletový briefing.</li>
-<li class="item special">Priebeh pojazdenia:</li>
-<li class="item indented special">Monitorujúci pilot (PM) začne priebeh pojazdenia: Autobrake on, Terrain na ND (ak je potrebné), Skontrolujte transpondér, Zapnite meteorologický radar a nastavte prediktívne strihanie vetra na auto, Stlačte tlačidlo konfigurácie vzletu.</li>
-<li class="item special">Kontrolný zoznam pojazdenia:</li>
-<li class="item indented">Letové riadenia: skontrolované.</li>
-<li class="item indented">Nastavenie klapiek: overte správnu konfiguráciu.</li>
-<li class="item indented">Radar a prediktívne strihanie vetra: skontrolujte indikácie.</li>
-<li class="item indented">Prepínač štartu motora: skontrolujte polohu.</li>
-<li class="item indented special">ECAM memo: takeoff, no blue.</li>
-<li class="item special">Položky pred zaradením na dráhu:</li>
-<li class="item indented">Ventilátor bŕzd: vypnutý.</li>
-<li class="item indented special">Povolenie na zaradenie na dráhu: prijaté.</li>
-<li class="item indented">Informujte kabínu, aby sa pripravila na odlet.</li>
-<li class="item indented special">Overte a potvrďte dráhu.</li>
-<li class="item indented">Skontrolujte priblíženie.</li>
-<li class="item indented special">Podľa potreby prepnite okruhy klimatizácie (packs).</li>
-<li class="item indented">Uistite sa, že posuvné stolíky sú odložené.</li>
-<li class="item special">Kontrolný zoznam pred zaradením na dráhu:</li>
-<li class="item indented">Vzletová dráha.</li>
-<li class="item indented">TAS.</li>
-<li class="item indented">Okruhy klimatizácie (packs).</li>
+<h3 class="group-title" id="pushclear">At Pushback / Start Clearance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: At Pushback / Start Clearance" class="group-select-btn" data-group="pushclear" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushclear.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu At Pushback / Start Clearance">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label">Pushback / start clearance from ground crew</span><span class="status">OBTAIN</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Pushback / start clearance from ATC</span><span class="status">OBTAIN</span></li><li class="item"><span class="label">Beacon</span><span class="status">ON</span></li><li class="item"><span class="label">PED (EFB / phone)</span><span class="status">FLIGHT MODE</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Transponder</span><span class="status">AUTO</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> If pushback is not required: Before Start checklist</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">If pushback is required: N/W STEER DISC memo</span><span class="status">CHECK</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Before Start checklist (after clearance)</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">Elapsed time</span><span class="status">START</span></li></ul><h3 class="group-title" id="start">Engine Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Engine Start" class="group-select-btn" data-group="start" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/start.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Engine Start">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">IGN / START</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Engine 2 start</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label">ENG MASTER 2</span><span class="status">ON</span></li>
+<li class="item"><span class="label">Engine idle parameters</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Engine 1 start</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label">Repeat start sequence for engine 1</span><span class="status">PERFORM</span></li>
 </ul>
-
-<h3 class="group-title">Takeoff and Initila Climb - postupy vzletu a počiatočného stúpania</h3>
-<ul>
-<li class="item special">Pred vzletom a zaradenie na dráhu:</li>
-<li class="item indented special">Letiaci pilot prepne zábleskové svetlá na 'on'.</li>
-<li class="item indented special">Po získaní povolenia na vzlet sa pristávacie svetlá a nosové svetlo prepnú na 'on' alebo 'takeoff'.</li>
-<li class="item indented special">Okruhy klimatizácie (packs) sa vypnú 20 sekúnd pred nastavením vzletového ťahu, aby sa šetrilo palivo.</li>
-<li class="item special">Postup vzletu:</li>
-<li class="item indented special">Pilot ohlási vzlet a nastaví páky ťahu na 50 %.</li>
-<li class="item indented">Pre motory používajúce EPR, nastavte EPR 1.05 a stabilizujte sa.</li>
-<li class="item indented special">Pri bočnom vetre pod 20 uzlov a bez zadného vetra posuňte postranú páku o polovicu dopredu; plne dopredu, ak bočný vietor presahuje 20 uzlov.</li>
-<li class="item indented special">Po stabilizácii motorov ich nastavte na zárez flex alebo TO/GA.</li>
-<li class="item indented">Overte, či sa ťah zvýši na 70 %, potom na vzletový ťah pri rýchlosti 40 uzlov po zemi.</li>
-<li class="item indented special">Spustite chronometer na meranie chodu motora pri vzletovom ťahu.</li>
-<li class="item indented special">Pri 80 uzloch zavolajte "thrust set" (ťah nastavený).</li>
-<li class="item indented special">Postranú páku vráťte do neutrálnej polohy pri 100 uzloch.</li>
-<li class="item indented">Pri 100 uzloch skontrolujte indikácie rýchlosti.</li>
-<li class="item indented special">Pri rýchlosti V1 dajte ruky preč od pák ťahu.</li>
-<li class="item indented special">Začnite rotáciu pri 3° za sekundu smerom k polohe 15° (12.5°, ak zlyhá motor).</li>
-<li class="item indented">Minimalizujte bočné vstupy, aby ste predišli vysunutiu spoilerov.</li>
-<li class="item indented special">Po pozorovaní pozitívneho stúpania zatiahnuť podvozok.</li>
-<li class="item indented special">Zapnite autopilota.</li>
-<li class="item special">Počiatočné stúpanie:</li>
-<li class="item indented special">Na výške zníženia ťahu/zrýchlenia (2 500 stôp) znížte páky ťahu na stúpací ťah po sklopení nosa a pozitívnom zrýchlení.</li>
-<li class="item indented special">Oznámte "thrust climb" (stúpací ťah) a "auto thrust" (automaťah).</li>
-<li class="item indented special">Zatiahnuť klapky, keď rýchlosť prekročí rýchlosť S.</li>
-<li class="item indented special">Pri stúpacom ťahu zapnite prvý okruh klimatizácie (pack).</li>
-<li class="item indented special">Zvoľte polohu klapiek nula, deaktivujte spojlery a vypnite nosové/pojazdné svetlá.</li>
-<li class="item indented special">Zapnite druhý okruh klimatizácie (pack), s odstupom minimálne 10 sekúnd medzi zapnutím okruhov.</li>
-<li class="item indented special">Nastavte vyššiu výšku, napríklad cestovnú hladinu.</li>
-<li class="item indented special">Pri prechode prechodovou výškou nastavte výškomery na štandard.</li>
-<li class="item special">Záverečný prehľad:</li>
-<li class="item indented special">Skontrolujte klapky, spojlery, prepínač štartu motora, podvozok (hore) a okruhy klimatizácie (packs - zapnuté).</li>
+<h3 class="group-title" id="afterstart">After Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Start" class="group-select-btn" data-group="afterstart" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/afterstart.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu After Start">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">NORM</span></li>
+<li class="item"><span class="label">APU BLEED pushbutton</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">ENG ANTI ICE</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">WING ANTI ICE</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">APU MASTER switch</span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label">Yellow electric pump</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> ECAM STATUS</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">N/W STEER DISC memo</span><span class="status">CHECK NOT DISPLAYED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Clear to disconnect</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> After Start checklist</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Ground spoilers</span><span class="status">ARM</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Rudder trim</span><span class="status">ZERO</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flaps</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Pitch trim</span><span class="status">SET</span></li>
 </ul>
-
-<h3 class="group-title">Climb - postupy stúpania</h3>
-<ul>
-<li class="item special">Stúpanie na 10 000 stôp a ďalšie úvahy:</li>
-<li class="item indented special">Vypnite pristávacie svetlá.</li>
-<li class="item indented">Podľa potreby upravte signalizáciu bezpečnostných pásov, zvážte sklon a turbulencie.</li>
-<li class="item indented">Vykonajte výbery na ovládacom paneli EIS, rozhodnite sa, či zostanete na obmedzeniach.</li>
-<li class="item indented special">Vymažte a skopírujte vo FMS: Vymažte VOR na stránke rádiových navigačných pomôcok; Skopírujte aktívny letový plán do sekundárneho letového plána; Vymažte manévre pri zlyhaní motora zo stránky pevných informácií; Na stránke PROGRESS porovnajte cestovnú hladinu, optimálnu a maximálnu dosiahnuteľnú výšku a zadajte informácie o záložnom letisku.</li>
-<li class="item special">Úvahy po vzlete:</li>
-<li class="item indented">Signalizáciu bezpečnostných pásov je možné vypnúť, ak je sklon pod 7.5 stupňa a neočakávajú sa turbulencie.</li>
-<li class="item indented">Monitorujte námrazové podmienky, zvážte teplotu a prítomnosť oblakov.</li>
-<li class="item indented special">Ak je teplota +10 °C alebo menej a vstupujete do oblakov, zapnite protinámrazový systém motorov.</li>
-<li class="item indented special">Protinámrazový systém krídel je potrebný pri silnej námraze alebo na odstránenie existujúcej námrazy.</li>
-<li class="item indented special">Na kontrolu námrazy použite stierače a indikátor námrazy.</li>
-<li class="item indented">V noci použite svetlo indikátora námrazy pre lepšiu viditeľnosť.</li>
-<li class="item special">Cestovná výška:</li>
-<li class="item indented">FMS môže podceniť optimálnu a maximálnu výšku.</li>
-<li class="item indented special">Na presnejšie výpočty použite externý výkonnostný softvér.</li>
-<li class="item indented">Skutočná optimálna výška je často o približne 1 500 stôp vyššia, než ukazuje FMS.</li>
-<li class="item indented">Pre úsporu paliva zostaňte čo najbližšie k skutočnej optimálnej výške.</li>
-<li class="item indented">FMS vypočítava maximálnu dosiahnuteľnú výšku na základe rezervy 1.3g do pádového nárazu, ale túto možno znížiť na 1.2g.</li>
-<li class="item special">Režimy autopilota:</li>
-<li class="item indented">Vertikálne režimy: Climb; Open Climb; Vertical Speed; Pre okamžité vyrovnanie stlačte volič vertikálnej rýchlosti.</li>
-<li class="item indented">Autothrust: Funguje v režime stúpacieho ťahu s pákami v stúpacom záreze; MCT sa používa len v prípade zlyhania motora.</li>
-<li class="item indented">Iné režimy: Speed alebo Mach (vybrané potiahnutím ovládača rýchlosti); Riadený režim je vo všeobecnosti najefektívnejší, pokiaľ nezasiahne ATC.</li>
-<li class="item special">Úvahy o TCAS:</li>
-<li class="item indented special">Pri približovaní sa k povolenej výške obmedzte vertikálnu rýchlosť, aby ste predišli nepríjemným upozorneniam TCAS.</li>
-<li class="item indented">Upravte vertikálnu rýchlosť na základe zostávajúcej vzdialenosti do povolenej výšky (napr. vertikálna rýchlosť plus 1 000 stôp, keď ste v rámci posledných 1 000 stôp).</li>
-<li class="item special">Monitorovanie systémov:</li>
-<li class="item indented special">Monitorujte ECAM, najmä výšku v kabíne.</li>
-<li class="item indented">Výška v kabíne by počas cestovného letu nemala typicky presiahnuť 8 000 stôp.</li>
-<li class="item special">Priblíženie k povolenej výške:</li>
-<li class="item indented special">Pri 1 000 stôp od povolenej výšky monitorujúci pilot (PM) zavolá "1,000 to go", čím posilní koncept sterilného kokpitu.</li>
-<li class="item indented">Pri zmene FCU výšky po tom, čo lietadlo začne zachytávať výšku, buďte opatrní, pretože sa môže vrátiť do režimu vertikálnej rýchlosti.</li>
+<h3 class="group-title" id="taxi">Taxi<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Taxi" class="group-select-btn" data-group="taxi" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/taxi.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Taxi">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> Taxi clearance</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
+<li class="item"><span class="label">Parking brake handle</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Brakes pressure</span><span class="status">CHECK AT ZERO</span></li>
+<li class="item"><span class="label">Thrust levers</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Brakes</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Tiller or rudder pedals</span><span class="status">USE AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flight controls</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">ATC clearance</span><span class="status">CONFIRM</span></li>
+<li class="item"><span class="label">If takeoff conditions changed: final T.O. performance data</span><span class="status">RECOMPUTE</span></li>
+<li class="item"><span class="label">FMS takeoff data</span><span class="status">REVISE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> FMS revised T.O. performance data</span><span class="status">CROSSCHECK</span></li>
+<li class="item"><span class="label">EFB / MCDU green dot</span><span class="status">COMPARE</span></li>
+<li class="item"><span class="label">Flaps lever</span><span class="status">AS APPROPRIATE</span></li>
+<li class="item"><span class="label">FMS F-PLAN / SPD</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">FCU ALT / HDG</span><span class="status">SET</span></li>
+<li class="item"><span class="label">Both flight directors</span><span class="status">CHECK ON</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> PFD / ND</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Takeoff briefing</span><span class="status">CONFIRM</span></li>
+<li class="item"><span class="label">Predictive windshear system</span><span class="status">AUTO</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> ATC code</span><span class="status">CONFIRM / SET FOR TAKEOFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Terrain on ND</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Autobrake</span><span class="status">MAX</span></li>
+<li class="item"><span class="label">T.O. CONFIG pushbutton</span><span class="status">TEST</span></li>
+<li class="item"><span class="label">T.O. memo</span><span class="status">CHECK NO BLUE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Cabin report</span><span class="status">RECEIVE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Before Takeoff C/L – above the line</span><span class="status">COMPLETE</span></li>
 </ul>
-
-<h3 class="group-title">Cruise - fáza cestovného letu</h3>
-<ul>
-<li class="item">Kontroly na ECAM (Electronic Centralized Aircraft Monitoring):</li>
-<li class="item indented">Piloti by mali vykonať kontrolu ECAM minimálne raz za hodinu.</li>
-<li class="item indented special">Na stránke Cruise sledujte informácie ako spotreba paliva motorov, množstvo oleja, indikácie vibrácií, informácie o vzdušnom systéme (výška pristátia, výška v kabíne, vertikálna rýchlosť v kabíne, diferenčný tlak) a teploty v kabíne.</li>
-<li class="item indented">Skontrolujte nasledujúce špecifické stránky:</li>
-<li class="item indented indented special">Engine page: Monitorujte tlak a teplotu oleja.</li>
-<li class="item indented indented special">Bleed page: Skontrolujte parametre odberu vzduchu ako výstupný tlak a teplota.</li>
-<li class="item indented indented special">Pressurization page: Monitorujte stav výpustného ventilu (outflow valve).</li>
-<li class="item indented indented special">Electrical pages: Monitorujte všeobecné parametre a zaťaženie generátorov.</li>
-<li class="item indented indented special">Hydraulic page: Uistite sa, že tlaky a množstvá hydraulickej kvapaliny sú v medziach.</li>
-<li class="item indented indented special">Fuel page: Skontrolujte distribúciu paliva a porovnajte spotrebované palivo.</li>
-<li class="item indented indented">Condition page: Skontrolujte teploty v potrubí a zónach.</li>
-<li class="item indented indented special">Door page: Uistite sa, že tlak kyslíka je konštantný.</li>
-<li class="item indented indented">Wheel page: Monitorujte teploty bŕzd a tlak v pneumatikách.</li>
-<li class="item indented indented">Flight control page: Všimnite si akékoľvek nezvyčajné polohy riadiacich plôch.</li>
-<li class="item">Kontroly paliva:</li>
-<li class="item indented">Kontroly paliva sú potrebné pri prelete nad navigačným bodom (waypoint) alebo minimálne každých 30 minút.</li>
-<li class="item indented special">Ak chcete vykonať kontrolu paliva, prejdite na stránku letového plánu a poznačte si posledný preletený navigačný bod.</li>
-<li class="item indented special">Porovnajte skutočné množstvo paliva s plánovaným množstvom paliva pre tento navigačný bod.</li>
-<li class="item indented special">Vypočítajte celkovú spotrebu paliva sčítaním aktuálneho paliva na palube a spotrebovaného paliva a porovnajte ho s množstvom paliva na palube pri odlete.</li>
-<li class="item">Optimalizácia letu:</li>
-<li class="item indented special">Pre optimalizáciu spotreby paliva môžu piloti zadať postupné stúpanie (step climb) do systému FMS.</li>
-<li class="item indented special">Zadajte požadovanú výšku bez priradeného navigačného bodu do vertikálnej revízie navigačného bodu a Airbus vypočíta optimálne miesto pre postupné stúpanie.</li>
-<li class="item">Vyžiadanie údajov o vetre:</li>
-<li class="item indented">Nové údaje o vetre sú k dispozícii každých 6 hodín.</li>
-<li class="item indented special">Piloti môžu požiadať o aktualizované údaje o vetre prostredníctvom funkcie "wind request" (vyžiadanie vetra) vo FMS, aby získali najnovšie údaje pre fázu cestovného letu a klesania.</li>
-<li class="item">Dodatočné postupy:</li>
-<li class="item indented special">Nepretržite monitorujte priebeh letu.</li>
-<li class="item indented">Buďte si vedomí špeciálnych postupov, ako sú ETOPS (Extended-range Twin-engine Operational Performance Standards) a operácie v špecifických regiónoch.</li>
+<h3 class="group-title" id="departurechange">Departure Change (if required)<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Departure Change (if required)" class="group-select-btn" data-group="departurechange" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/departurechange.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Departure Change (if required)">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label">FMS F-PLN / SID</span><span class="status">REVISE AS REQUIRED</span></li><li class="item"><span class="label">FCU altitude</span><span class="status">CHECK / SET</span></li><li class="item"><span class="label">Takeoff data</span><span class="status">REVISE AS REQUIRED</span></li><li class="item"><span class="label">Flaps</span><span class="status">CHECK / SET</span></li><li class="item"><span class="label">Departure re-briefing</span><span class="status">COMPLETE</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Departure Change checklist</span><span class="status">COMPLETE</span></li></ul><h3 class="group-title" id="beforetakeoff">Before Takeoff<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Before Takeoff" class="group-select-btn" data-group="beforetakeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/beforetakeoff.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Before Takeoff">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">Brake temperature (if brake fan running)</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Brake fan pushbutton (if running)</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Line-up clearance</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Brakes pressure</span><span class="status">CHECK AT ZERO</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
+<li class="item"><span class="label">TCAS mode selector</span><span class="status">TA or TA/RA</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Approach path</span><span class="status">CLEARED OF TRAFFIC</span></li>
+<li class="item"><span class="label">Cabin crew</span><span class="status">ADVISE</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Sliding table</span><span class="status">STOW</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> All EFB transmitting mode</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> All EFB without mounted equipment</span><span class="status">STOW</span></li>
+<li class="item"><span class="label">Thrust bump</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Takeoff runway</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Packs</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Before Takeoff C/L – below the line</span><span class="status">COMPLETE</span></li>
 </ul>
-	
-<h3 class="group-title">Descent Preparation - príprava na klesanie</h3>
-<ul>
-<li class="item">1. Počiatočné úkony a získavanie informácií:</li>
-<li class="item indented">Začnite s prípravou na klesanie minimálne 80 námorných míľ od vrcholu klesania (Top of Descent), ideálne medzi 120-160 námornými míľami.</li>
-<li class="item indented special">Získajte najnovšie informácie o počasí pomocou ACARS, vrátane METAR pre destináciu.</li>
-<li class="item indented special">Poznačte si hodnotu QNH a nastavte ju na hlavných aj záložných prístrojoch.</li>
-<li class="item indented special">Potvrďte používanú dráhu, ideálne prostredníctvom ATIS.</li>
-<li class="item">2. Pristávací výkon a konfigurácia:</li>
-<li class="item indented special">Skontrolujte stav ECAM pre akékoľvek nezvyčajné indikácie.</li>
-<li class="item indented special">Vypočítajte pristávací výkon pomocou elektronickej letovej tašky, zvážte faktory ako mokrá dráha.</li>
-<li class="item indented">Odhadnite pristávaciu hmotnosť, zohľadnite spotrebu paliva.</li>
-<li class="item indented special">Nastavte automatické brzdenie na LOW, zvoľte konfiguráciu klapiek na FULL a zapnite automaťah (autothrust).</li>
-<li class="item indented special">Overte požadovanú pristávaciu vzdialenosť (LDR) a uistite sa, že je v rámci dostupnej pristávacej vzdialenosti, zvážte faktor 1.15 LDR.</li>
-<li class="item">3. Príprava FMS:</li>
-<li class="item indented">Postupujte podľa logiky FMS Airbus: Flight Plan, NAV RAD, Progress, PERF, Fuel Pred, Secondary Flight Plan.</li>
-<li class="item indented">Stránka Flight Plan:</li>
-<li class="item indented indented special">Overte alebo podľa potreby znovu vyberte STAR (Standard Terminal Arrival Route), použite stránku Arrivals, ak je to nutné.</li>
-<li class="item indented indented special">Vložte a skontrolujte STAR, porovnajte navigačné body a obmedzenia s mapou priblíženia.</li>
-<li class="item indented indented special">Použite režim plánu (plan mode) na kontrolu obmedzení.</li>
-<li class="item indented">Stránka NAV RAD:</li>
-<li class="item indented indented special">Zadajte navigačné frekvencie pre priblíženie (napr. VOR).</li>
-<li class="item indented">Stránka Progress:</li>
-<li class="item indented indented special">Overte GPS PRIMARY a HIGH presnosť.</li>
-<li class="item indented indented special">Zadajte pristávaciu dráhu.</li>
-<li class="item indented">Stránka Performance:</li>
-<li class="item indented indented special">Overte, či je RNP vhodný pre priblíženie.</li>
-<li class="item indented indented special">Overte rýchlosť klesania kabíny.</li>
-<li class="item indented indented special">Skontrolujte a podľa potreby upravte cieľovú rýchlosť klesania.</li>
-<li class="item indented indented special">Vo fáze priblíženia zadajte informácie o QNH, teplote a vetre.</li>
-<li class="item indented indented special">Nastavte minimálnu výšku klesania (napr. 278 stôp pre priblíženie ILS).</li>
-<li class="item indented indented special">Potvrďte pristávaciu konfiguráciu (napr. klapky full).</li>
-<li class="item indented indented special">Na stránke Go-around zadajte výšku zrýchlenia pri zlyhaní motora.</li>
-<li class="item indented">Stránka Fuel Prediction:</li>
-<li class="item indented indented special">Skontrolujte predpokladané množstvo paliva pri pristátí.</li>
-<li class="item indented">Stránka Secondary Flight Plan:</li>
-<li class="item indented indented special">Skopírujte aktívny letový plán a vložte alternatívny plán v prípade zmeny dráhy.</li>
-<li class="item indented indented special">Uistite sa, že všetky relevantné informácie sú zadané aj v sekundárnom letovom pláne.</li>
-<li class="item">4. Záverečné kroky:</li>
-<li class="item indented special">Na hornom paneli zvoľte vopred vypočítané nastavenie automatického brzdenia (napr. LOW).</li>
+<h3 class="group-title" id="takeoff">Takeoff<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Takeoff" class="group-select-btn" data-group="takeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/takeoff.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Takeoff">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> Takeoff clearance</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Takeoff</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label">Brakes</span><span class="status">RELEASE</span></li>
+<li class="item"><span class="label">Thrust levers</span><span class="status">FLX or TOGA</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Chrono</span><span class="status">START</span></li>
+<li class="item"><span class="label">Directional control</span><span class="status">USE RUDDER</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Below 80 kt: N1</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Thrust set</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> PFD and engine indications</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At 100 kt</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label">100 kt</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At V1</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At VR</span><span class="status">ROTATION ORDER</span></li>
+<li class="item"><span class="label">Rotation</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> When positive climb</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Landing gear</span><span class="status">SELECT UP</span></li>
+<li class="item"><span class="label">Autopilot</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">At thrust reduction altitude: thrust levers</span><span class="status">CL</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Packs 1+2 (if applicable)</span><span class="status">CL</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At F speed: flaps 1</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At S speed: flaps 0</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Ground spoilers</span><span class="status">DISARM</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 </ul>
-
-<h3 class="group-title">Approach Briefing - briefing pred priblížením</h3>
-<ul>
-<li class="item special">Vzájomná kontrola (Cross-checking): Monitorujúci pilot (PM) overí všetky záznamy, ktoré letiaci pilot (PF) vykonal v predchádzajúcej fáze prípravy na klesanie.</li>
-<li class="item special">Briefing monitorujúceho pilota (PM):</li>
-<li class="item indented">Minimálna výška mimo trate (off-road altitude).</li>
-<li class="item indented">Minimálna výška prekážkovej voľnosti alebo minimálna bezpečná výška pre plánovanú trajektóriu (MSA/MOCA/MSA).</li>
-<li class="item indented">STAR (Standard Terminal Arrival Route).</li>
-<li class="item indented">Typ priblíženia (napr. ILS, RNAV).</li>
-<li class="item indented">Minimums (minimálna výška rozhodnutia alebo minimálna zostupová výška).</li>
-<li class="item indented">Trajektória pri prerušení priblíženia (Go-around trajectory).</li>
-<li class="item indented">Extra palivo a dostupný čas.</li>
-<li class="item special">Briefing letiaceho pilota (PF):</li>
-<li class="item indented">Vedenie pre priblíženie (napr. režim priblíženia, surové dáta, režim FPA pre nepresné priblíženia).</li>
-<li class="item indented">Nastavenie klapiek pre pristátie.</li>
-<li class="item indented">Rezerva na zastavenie (Stop margin).</li>
-<li class="item indented">Použitie reverzorov (voľnobeh alebo maximum).</li>
-<li class="item indented">Plánovaný výjazd z dráhy.</li>
-<li class="item indented">Horúce miesta pre rolovanie (hot spots).</li>
-<li class="item indented">Špeciálne alebo neštandardné postupy.</li>
-<li class="item special">Identifikácia hrozieb:</li>
-<li class="item indented">Monitorujúci pilot (PM) identifikuje potenciálne hrozby.</li>
-<li class="item indented">Letiaci pilot (PF) pridá akékoľvek ďalšie hrozby.</li>
-<li class="item indented">Obaja piloti diskutujú o zmiernení identifikovaných hrozieb.</li>
-<li class="item special">Rôzne položky:</li>
-<li class="item indented">Môžu sa diskutovať akékoľvek ďalšie relevantné informácie.</li>
-<li class="item special">Oznam pre cestujúcich (PA):</li>
-<li class="item indented">Oznam pre cestujúcich sa zvyčajne vykonáva nejaký čas pred vrcholom klesania (Top of Descent), aby sa predišlo prerušeniam počas klesania.</li>
+<h3 class="group-title" id="aftertakeoff">After Takeoff / Climb<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Takeoff / Climb" class="group-select-btn" data-group="aftertakeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/aftertakeoff.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu After Takeoff / Climb">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">APU BLEED pushbutton</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">APU MASTER switch</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">TCAS mode selector</span><span class="status">TA/RA</span></li>
+<li class="item"><span class="label">Anti-ice pushbuttons</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> After Takeoff / Climb C/L – above the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label">MCDU</span><span class="status">PROG / PERF DESCENT or F-PLN</span></li>
+<li class="item"><span class="label">FCU / FMGS</span><span class="status">SET IF AP ON</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At transition altitude: barometric reference</span><span class="status">SET STD / X-CHECK</span></li>
+<li class="item"><span class="label">Standby altimeter</span><span class="status">SET STD / X-CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> After Takeoff / Climb C/L – below the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label">Radar</span><span class="status">ADJUST AS APPROPRIATE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Engine anti-ice</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">At 10,000 ft: landing lights</span><span class="status">RETRACT</span></li>
+<li class="item"><span class="label">Seat belts switch</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> EFIS options</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">ECAM memo</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Navaids</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Secondary flight plan</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">OPT / MAX ALT</span><span class="status">AS REQUIRED</span></li>
 </ul>
-
-<h3 class="group-title">Descent - klesanie</h3>
-<ul>
-<li class="item special">Začatie klesania:</li>
-<li class="item indented special">Ak chcete začať klesanie, stlačte gombík nadmorskej výšky (push the altitude knob in).</li>
-<li class="item indented special">Ak ATC povoluje skoršie klesanie, zapnutie režimu klesania (descent mode) stlačením gombíka výšky po nastavení nižšej výšky spustí klesanie rýchlosťou 1 000 stôp/min až do zachytenia dráhy.</li>
-<li class="item indented">Ak sa povolenie na klesanie oneskorí za vrchol klesania (top of descent), systém zobrazí správu "top of descent reached" alebo "decelerate", čo naznačuje zníženie rýchlosti na Green Dot.</li>
-<li class="item special">Monitorovanie klesania:</li>
-<li class="item indented special">Piloti zvyčajne používajú stránky progress alebo performance descent na monitorovanie klesania.</li>
-<li class="item indented">Stránka performance descent ponúka predpovede, zatiaľ čo stránka progress zobrazuje vertikálnu odchýlku.</li>
-<li class="item indented special">Monitorujúci pilot (PM) si zvyčajne necháva zobrazenú stránku letového plánu, aby videl predpovede výšok a navigačných bodov.</li>
-<li class="item special">Funkcie Airbusu počas klesania:</li>
-<li class="item indented">Airbus sa vyrovná na obmedzenej výške, ak plánuje na tomto bode vyrovnať, čo je indikované purpurovou výškou na PFD.</li>
-<li class="item indented special">Ak nechcete, aby sa vyrovnal, môžete použiť režim otvoreného klesania (open descent) potiahnutím gombíka.</li>
-<li class="item indented">Po prelete navigačného bodu bude Airbus v režime klesania smerovať ku konštantnej vertikálnej rýchlosti medzi obmedzeniami.</li>
-<li class="item special">Použitie protinámrazového systému:</li>
-<li class="item indented special">Počas klesania použite protinámrazový systém, keď je skutočná teplota vzduchu (True Air Temperature) +10 °C alebo menej.</li>
-<li class="item indented">Zapnutie protinámrazového systému môže spôsobiť dočasnú chybovú kontrolku.</li>
-<li class="item special">Indikácie na navigačnom displeji (ND):</li>
-<li class="item indented special">Symbol podobný blesku označuje, kde lietadlo opäť zachytí vertikálnu dráhu.</li>
-<li class="item indented special">Jantárová bodka: Toto je bod spomalenia (deceleration point).</li>
-<li class="item special">Signalizácia bezpečnostných pásov:</li>
-<li class="item indented special">Signalizácia bezpečnostných pásov by mala byť zapnutá 15 minút pred pristátím alebo pri prelete letovej hladiny 115, podľa toho, čo nastane skôr.</li>
-<li class="item special">Riadenie rýchlosti:</li>
-<li class="item indented">Cieľová rýchlosť je zobrazená v strede PFD, s maximálnou a minimálnou rýchlosťou zobrazenou hore a dole v režime klesania.</li>
-<li class="item indented special">Zvyšovanie rýchlosti klesania pomocou zvolenej rýchlosti (selected speed) je palivovo efektívnejšie ako použitie aerodynamických bŕzd (speed brakes), ak ste vysoko nad profilom.</li>
-<li class="item indented special">Ak ste pod požadovaným profilom, použite zvolenú rýchlosť a režim vertikálnej rýchlosti na úpravu rýchlosti klesania.</li>
-<li class="item special">Dodatočné poznámky:</li>
-<li class="item indented">Lietadlo automaticky monitoruje námrazové podmienky a ak je to potrebné, vyzve posádku na zapnutie protinámrazového systému.</li>
-<li class="item indented">Kombinácia klesania a spomaľovania je efektívnejšia ako spomaľovanie pri vyrovnaní.</li>
+<h3 class="group-title" id="cruise">Cruise<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Cruise" class="group-select-btn" data-group="cruise" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/cruise.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Cruise">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> ECAM memo / SD pages</span><span class="status">REVIEW</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flight progress</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Fuel</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Navigation accuracy</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">Radar</span><span class="status">ADJUST AS APPROPRIATE</span></li>
 </ul>
-
-<h3 class="group-title">Approach - priblíženie</h3>
-<ul>
-<li class="item special">Priebeh na 10 000 stôp</li>
-<li class="item indented special">Pristávacie svetlá a spínač bezpečnostných pásov: Zapnite oba spínače.</li>
-<li class="item indented special">Ovládacie panely EFIS: Uistite sa, že sú vybrané obmedzenia (constraints) a pristávací systém, a nastavte vhodný rozsah.</li>
-<li class="item indented special">Stránka FMS Progress: Overte vysokú presnosť pre priblíženie a správnu požadovanú presnosť.</li>
-<li class="item indented special">Prepínač režimu motora: Pre štandardné priblíženia nastavte na "Norm".</li>
-<li class="item special">Kontrolný zoznam klesania a priblíženia</li>
-<li class="item indented special">Komunikácia s kabínou: Vypočujte si hlásenie palubného personálu o pripravenosti kabíny na pristátie.</li>
-<li class="item indented special">Pokračujúce klesanie: Začnite klesanie na 3 000 stôp, čo je výška pre zachytenie ILS.</li>
-<li class="item indented special">Nastavenie QNH: Nastavte a vzájomne skontrolujte QNH.</li>
-<li class="item indented special">Kontrolný zoznam priblíženia: Dokončite kontrolný zoznam priblíženia, vrátane nastavenia bŕzd a prepínača štartu motora.</li>
-<li class="item special">Vektorovanie radarom a sekvenovanie letového plánu</li>
-<li class="item indented special">Stránka Direct: Vyberte vhodný navigačný bod (zvyčajne Final Approach Fix).</li>
-<li class="item indented special">Radial In: Zvoľte vhodný radiál In na základe kurzu finálneho priblíženia.</li>
-<li class="item indented special">Kurz: Uistite sa, že ste znova potiahli gombík kurzu, aby ste zrušili neúmyselnú aktiváciu režimu nav.</li>
-<li class="item special">Riadenie energie a aktivácia fázy priblíženia</li>
-<li class="item indented special">Posúdenie energie: Použite lištu na ND na posúdenie potreby dodatočného odporu (drag).</li>
-<li class="item indented special">Stránka Performance: Aktivujte fázu priblíženia na stránke výkonnosti FMS.</li>
-<li class="item indented special">Riadená rýchlosť (Managed Speed): Vráťte sa k riadenej rýchlosti, aby lietadlo mohlo automaticky znížiť rýchlosť.</li>
-<li class="item indented special">Klapky 1: Vysuňte klapky do polohy jedna.</li>
-<li class="item special">Štandardný profil priblíženia</li>
-<li class="item indented special">Zachytenie zostupovej dráhy (Glide Slope): Zachyťte zostupovú dráhu s klapkami 1 pri rýchlosti S a 2 000 stôp nad úrovňou zeme.</li>
-<li class="item indented special">Klapky 2 a podvozok dole: Akonáhle sú klapky v polohe dva, vysuňte podvozok.</li>
-<li class="item indented special">Klapky 3 a 4: Po vysunutí podvozka vysuňte klapky 3 a potom klapky full, keď to rýchlosť dovolí.</li>
-<li class="item special">Finálne priblíženie a pristávacia konfigurácia</li>
-<li class="item indented special">Tlačidlo Approach: Stlačte tlačidlo approach, keď dostanete povolenie na priblíženie a pozorujete správne indikácie na PFD.</li>
-<li class="item indented special">Duálny autopilot: Overte zapojenie duálneho autopilota.</li>
-<li class="item indented special">Výška pre prerušenie priblíženia (Missed Approach Altitude): Nastavte výšku pre prerušenie priblíženia.</li>
-<li class="item indented special">Klapky 2, podvozok dole, klapky 3 a full: Pri 2 000 stôp nad zemou vysuňte klapky 2, potom podvozok dole, následne klapky 3 a full.</li>
-<li class="item indented special">Spoilery a svetlá: Aktivujte spojlery a zapnite nosové pristávacie svetlo a svetlá na odbočenie z dráhy.</li>
-<li class="item indented special">Stabilizované priblíženie: Uistite sa, že lietadlo je stabilizované do 500 stôp.</li>
-<li class="item indented special">Kontrolný zoznam pristátia: Dokončite kontrolný zoznam pristátia.</li>
+<h3 class="group-title" id="desprep">Descent Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Descent Preparation" class="group-select-btn" data-group="desprep" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/desprep.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Descent Preparation">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">Weather and landing information</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Navigation charts clipboard</span><span class="status">PREPARE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Landing conditions</span><span class="status">CONFIRM</span></li>
+<li class="item"><span class="label">If landing conditions change: landing performance data</span><span class="status">COMPUTE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Landing performance data</span><span class="status">CROSSCHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> FMS preparation</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">GPWS LDG FLAP 3</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Landing elevation</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Autobrake</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Approach briefing</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Terrain on ND</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Radar</span><span class="status">ADJUST AS APPROPRIATE</span></li>
+<li class="item"><span class="label">Engine anti-ice</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Wing anti-ice</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Descent clearance</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label">Cleared altitude on FCU</span><span class="status">SET</span></li>
 </ul>
-
-<h3 class="group-title">Landing - pristátie</h3>
-<ul>
-<li class="item special">Odpojenie autopilota: Pre manuálne pristátie sa odporúča vypnúť autopilota do výšky 300 stôp nad zemou.</li>
-<li class="item special">Príprava na vyrovnanie (Flare): Približne vo výške 30 stôp mierne zdvihnite nos lietadla o jeden alebo dva stupne nahor.</li>
-<li class="item special">Redukcia ťahu: Vo výške 20 stôp budete počuť hlásenie "Retard", čo je pripomienka na zníženie ťahu, ale prispôsobte to situácii.</li>
-<li class="item special">Dotyk a reverzný ťah: Keď sa hlavné podvozky dotknú dráhy, začnite s de-rotáciou (sklopením nosa) a nastavte páky ťahu do polohy reverzného voľnobehu (reverse idle) alebo maximálneho reverzu (maximum reverse). Akonáhle je zvolený reverzný ťah, prerušenie pristátia (go-around) už nie je možné.</li>
-<li class="item special">Maximálny reverzný ťah: Okamžite zvoľte maximálny reverzný ťah v prípade núdze, neočakávaného spomalenia, poruchy ovplyvňujúcej pristávací výkon, dlhého vyrovnania alebo dotyku, alebo neočakávaného zadného vetra.</li>
-<li class="item special">Vysunutie spoilerov: Po dotyku monitorujte vysunutie spoilerov, viditeľné na stránke Wheel. Ak sa nevysunú, uistite sa, že páky ťahu sú vo voľnobehu (idle) a nastavte reverzy na maximum.</li>
-<li class="item special">Overenie aktivácie reverzného ťahu: Skontrolujte zelenú indikáciu "reverse" na displeji upozornení motorov (engine warning display).</li>
-<li class="item special">Overenie spomalenia: Po dotyku overte spomalenie.</li>
-<li class="item special">70 uzlov: Znížte ťah na reverzný voľnobeh (reverse idle) približne pri rýchlosti 70 uzlov.</li>
-<li class="item special">20 uzlov: Odpojte automatické brzdenie (autobrake) pred rýchlosťou 20 uzlov pomocou brzdových pedálov.</li>
-<li class="item special">Opustenie dráhy: Nezastavujte lietadlo, kým celé lietadlo nie je za čiarou vyznačujúcou okraj dráhy.</li>
-<li class="item special">Hlásenia po pristátí: Po pristátí zahláste "spoilers reverse green".</li>
-<li class="item">Autothrust: Autothrust môže zostať zapnutý alebo byť vypnutý, podľa uváženia letovej posádky.</li>
-<li class="item special">Dôležité poznámky:</li>
-<li class="item indented">Hlavným cieľom nie je hladké pristátie; prioritou je bezpečne pristáť s lietadlom na stredovej čiare v rámci pristávacej zóny.</li>
-<li class="item indented">ECAM upozornenia, ktoré sa objavia neskoro pri priblížení a nesúvisia priamo s bezpečnosťou pristátia, by sa mali v tejto kritickej fáze ignorovať (podľa kontextu videa, kde šlo o problém simulátora).</li>
+<h3 class="group-title" id="descent">Descent<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Descent" class="group-select-btn" data-group="descent" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/descent.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Descent">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">Descent</span><span class="status">INITIATE</span></li>
+<li class="item"><span class="label">MCDU</span><span class="status">PROG / PERF DESCENT</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> MCDU</span><span class="status">F-PLN</span></li>
+<li class="item"><span class="label">Descent</span><span class="status">MONITOR / ADJUST</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> When approaching transition level and cleared: barometric reference</span><span class="status">SET / X-CHECK</span></li>
+<li class="item"><span class="label">ECAM STATUS</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">At 10,000 ft: landing lights</span><span class="status">SET</span></li>
+<li class="item"><span class="label">Seat belts switch</span><span class="status">ON</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> EFIS option</span><span class="status">CSTR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> LS pushbutton</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Radio navigation</span><span class="status">SELECT / IDENT</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">If GPS PRIMARY unavailable: navigation accuracy</span><span class="status">CHECK</span></li>
 </ul>
-
-<h3 class="group-title">After Landing and Taxi-In - po pristátí a rolovanie na stojisko</h3>
-<ul>
-<li class="item special">Postup po pristátí:</li>
-<li class="item indented special">Letiaci pilot (PF) deaktivuje pozemné spojlery (ground spoilers).</li>
-<li class="item indented special">Monitorujúci pilot (PM) začne postup po pristátí.</li>
-<li class="item indented">Letiaci pilot môže nastaviť vonkajšie svetlá alebo požiadať monitorujúceho pilota, aby tak urobil:</li>
-<li class="item indented indented special">Zábleskové svetlá (strobe lights) sa nastavia na off.</li>
-<li class="item indented indented special">Pristávacie svetlá (landing lights) sa nastavia na off.</li>
-<li class="item indented indented special">Pojazdové svetlá (taxi lights) sa nastavia na on.</li>
-<li class="item indented special">Monitorujúci pilot vypne meteorologický radar.</li>
-<li class="item indented">Monitorujúci pilot nastaví klapky:</li>
-<li class="item indented indented special">Klapky sa nastavia na 1, ak je teplota 30 °C alebo vyššia.</li>
-<li class="item indented indented special">V opačnom prípade sa klapky nastavia na 0.</li>
-<li class="item indented indented">Dôležité: Ak boli počas priblíženia podmienky námrazy alebo ak bola dráha kontaminovaná, klapky nezatahujte, kým sa nevypnú motory a neobdržíte potvrdenie od pozemného personálu, že klapky a sloty sú čisté.</li>
-<li class="item indented special">Transpondér sa nastaví na standby.</li>
-<li class="item indented">Monitorujúci pilot spustí APU:</li>
-<li class="item indented indented special">Hlavný vypínač sa zapne.</li>
-<li class="item indented indented">Počkajte 3 sekundy.</li>
-<li class="item indented indented special">Štartér APU sa zapne.</li>
-<li class="item indented special">Podľa potreby sa vypne protinámrazový systém.</li>
-<li class="item indented special">Spustite kontrolný zoznam po pristátí:</li>
-<li class="item indented indented">Overte, že nie je indikácia radaru.</li>
-<li class="item indented indented">Potvrďte jantárovú indikáciu prediktívneho strihania vetra.</li>
-<li class="item special">Postup pojazdenia na stojisko:</li>
-<li class="item indented special">Obmedzte ťah na normálne nastavenia pojazdenia.</li>
-<li class="item indented special">Spustite časovač na minimálne 2 minúty po opustení dráhy, alebo 3 minúty po použití veľmi vysokého ťahu (čas na dochladenie motorov).</li>
-<li class="item indented special">Vykonajte rolovanie na jedno motor (štandardný postup):</li>
-<li class="item indented indented special">Overte, že na ECAM sa zobrazuje "APU Avail".</li>
-<li class="item indented indented special">Vypnite motor číslo dva (nikdy nevypínajte motor číslo jeden).</li>
-<li class="item indented indented special">Okamžite zapnite elektrické hydraulické čerpadlo (LDG).</li>
-<li class="item indented indented">Poznámka: rolovanie na jedno motor by sa nemalo používať na klzkých povrchoch alebo pri pojazdení do kopca.</li>
-<li class="item indented special">Pri približovaní sa k parkovacej bráne vypnite nosové a odbočovacie svetlá.</li>
-<li class="item indented">Skontrolujte meteorologický radar a uistite sa, že svetlá sú vypnuté.</li>
-<li class="item indented special">Pojazdite k bráne pomalou rýchlosťou (okolo 5 uzlov).</li>
-<li class="item indented special">Zastavte lietadlo a zatiahnite parkovaciu brzdu.</li>
+<h3 class="group-title" id="approachconfig">Aircraft Configuration for Approach<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Aircraft Configuration for Approach" class="group-select-btn" data-group="approachconfig" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/approachconfig.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Aircraft Configuration for Approach">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">Initial approach: F-PLN sequencing</span><span class="status">ADJUST</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> MCDU</span><span class="status">F-PLN</span></li>
+<li class="item"><span class="label">Approx. 15 NM from touchdown: APPR phase</span><span class="status">ACTIVATE or set green dot</span></li>
+<li class="item"><span class="label">Managed speed</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Flight path</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Navigation accuracy</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">Speed brakes lever</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Radar</span><span class="status">ADJUST AS APPROPRIATE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At green dot: flaps 1</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label">S speed</span><span class="status">CHECK OR SET</span></li>
+<li class="item"><span class="label">TCAS</span><span class="status">TA or TA/RA</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At 2,000 ft AGL minimum: flaps 2</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label">F speed</span><span class="status">CHECK OR SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> When flaps 2: landing gear</span><span class="status">ORDER / SELECT DOWN</span></li>
+<li class="item"><span class="label">Autobrake</span><span class="status">CONFIRM</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Ground spoilers</span><span class="status">ARM</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> When landing gear down: flaps 3</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label">ECAM wheel page</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> When flaps 3: flaps FULL</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label">Speed target</span><span class="status">CHECK OR SET</span></li>
+<li class="item"><span class="label">Autothrust</span><span class="status">CHECK SPD or OFF</span></li>
+<li class="item"><span class="label">Wing anti-ice (if not required)</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Sliding table</span><span class="status">STOW</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> All EFB without mounted equipment</span><span class="status">STOW</span></li>
+<li class="item"><span class="label">Landing memo</span><span class="status">CHECK NO BLUE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Cabin report</span><span class="status">RECEIVE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Landing checklist</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label">Announce any FMA modification</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flight parameters</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Announce deviations: V/S &gt; 1000 ft/min; IAS +10/-5 kt; pitch -2.5°/+10°; bank 7°</span><span class="status">MONITOR / ANNOUNCE</span></li>
 </ul>
-
-<h3 class="group-title">Shutdown and Securing - vypnutie a zabezpečenie lietadla</h3>
-<ul>
-<li class="item special">Postup vypnutia (Shutdown Procedure):</li>
-<li class="item indented special">Kontrola tlaku akumulátora: Pred zatiahnutím parkovacej brzdy sa uistite, že tlak akumulátora je v zelenom pásme.</li>
-<li class="item indented special">Parkovacia brzda: Zatiahnite parkovaciu brzdu. (Poznámka: ak je teplota bŕzd vysoká (nad 500°C, alebo 350°C so zapnutými ventilátormi bŕzd), vyhýbajte sa jej použitiu, pokiaľ to nie je nevyhnutné).</li>
-<li class="item indented special">Tlak bŕzd: Po zatiahnutí parkovacej brzdy skontrolujte indikáciu tlaku bŕzd a držte stlačené brzdové pedále, kým indikácie nie sú nad zeleným pásmom.</li>
-<li class="item indented special">Protinámrazový systém: Vypnite protinámrazový systém.</li>
-<li class="item indented special">Odber vzduchu z APU (APU Bleed): Nastavte tlačidlo APU bleed na "on", ale len bezprostredne pred vypnutím motora, aby ste zabránili vniknutiu výparov do klimatizácie.</li>
-<li class="item indented special">Elektrické hydraulické čerpadlo: Ak bolo použité rolovanie na jeden motor, vypnite elektrické hydraulické čerpadlo.</li>
-<li class="item indented special">Oznam pre palubný personál: Monitorujúci pilot (PM) vykoná oznam "cabin crew all done park".</li>
-<li class="item indented special">Signalizácia bezpečnostných pásov a maják: Vypnite signalizáciu bezpečnostných pásov, následne vypnite maják.</li>
-<li class="item indented special">Palivové čerpadlá: Vypnite palivové čerpadlá.</li>
-<li class="item indented special">Svetlo na krídle: Uistite sa, že svetlo na krídle je vypnuté, najmä na lietadlách A321, aby ste predišli potenciálnemu riziku požiaru v blízkosti nástupného mosta.</li>
-<li class="item indented special">Transpondér: Na transpondéri zvoľte standby.</li>
-<li class="item indented special">Výkonnosť IRS: Skontrolujte výkonnosť inerciálnych referenčných systémov (IRS), všimnite si akýkoľvek drift.</li>
-<li class="item indented special">Kontrolný zoznam parkovania: Dokončite kontrolný zoznam parkovania: parkovacia brzda, zakladacie kliny (chocks), motory vypnuté, svetlo na krídle vypnuté, palivové čerpadlá vypnuté.</li>
-<li class="item indented special">Vypnutie APU (voliteľné): Ak je k dispozícii pozemné napájanie a podmienky to umožňujú, vypnite APU.</li>
-<li class="item special">Postup zabezpečenia lietadla (Securing the Aircraft Procedure):</li>
-<li class="item indented">Načasovanie: Tento postup aplikujte po odchode všetkých cestujúcich z lietadla a keď sa ďalší let nepredpokladá.</li>
-<li class="item indented special">Parkovacia brzda: Uistite sa, že rukoväť parkovacej brzdy je v polohe "on" pre zníženie rýchlosti úniku hydraulickej kvapaliny.</li>
-<li class="item indented special">Kyslík pre posádku: Vypnite tlačidlo kyslíka pre posádku.</li>
-<li class="item indented special">Prepínače režimov IR: Vypnite všetky prepínače režimov IR (1, 2, 3).</li>
-<li class="item indented special">Vonkajšie svetlá: Vypnite všetky vonkajšie svetlá.</li>
-<li class="item indented special">Signalizácia pripútania pásov a zákazu fajčenia: Vypnite signalizáciu pripútania pásov a zákazu fajčenia.</li>
-<li class="item indented special">Núdzové osvetlenie: Vypnite núdzové osvetlenie (emergency lights), uistite sa, že na palube nie sú žiadni cestujúci.</li>
-<li class="item indented special">Odber vzduchu z APU (APU Bleed): Uistite sa, že tlačidlo APU bleed je vypnuté.</li>
-<li class="item indented special">Externé napájanie: Ak je potrebné, uistite sa, že je pripojené externé napájanie.</li>
-<li class="item indented special">Vypnutie APU a batérií: Vypnite APU a počkajte približne 2 minúty po zhasnutí kontrolky "APU ail" (pre úplné zatvorenie klapky APU), potom vypnite batérie 1 a 2.</li>
-<li class="item indented indented">Poznámka: Vypnutie batérií pred zatvorením klapky APU môže spôsobiť dym v kabíne počas ďalšieho letu.</li>
-<li class="item indented special">Okná: Skontrolujte, či sú všetky okná zatvorené a zamknuté.</li>
-<li class="item indented special">Kontrolný zoznam zabezpečenia lietadla: Dokončite kontrolný zoznam: kyslík vypnutý, núdzové osvetlenie vypnuté, batérie vypnuté.</li>
-<li class="item indented">Zbernica pozemných služieb (voliteľné): Ak chcete dosiahnuť väčšiu realitu pri opúšťaní lietadla v noci, môžete použiť zbernicu pozemných služieb, ktorá sa nachádza tu (podľa videa).</li>
-<li class="item indented">Pozemné napájanie (voliteľné): Pozemné napájanie môže zostať zapnuté, ak je to potrebné; inak ho vypnite.</li>
+<h3 class="group-title" id="locgs">Approach using LOC / G/S Guidance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Approach using LOC / G/S Guidance" class="group-select-btn" data-group="locgs" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/locgs.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Approach using LOC / G/S Guidance">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> Approach minimum</span><span class="status">DETERMINE</span></li>
+<li class="item"><span class="label">Approach briefing</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">APPR pushbutton on FCU</span><span class="status">PRESS</span></li>
+<li class="item"><span class="label">Both AP</span><span class="status">ENGAGE</span></li>
+<li class="item"><span class="label">LOC</span><span class="status">CHECK ARMED</span></li>
+<li class="item"><span class="label">G/S</span><span class="status">CHECK ARMED</span></li>
+<li class="item"><span class="label">LOC capture</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">G/S capture</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">Go-around altitude</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flight parameters</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Announce deviations beyond ½ dot LOC / glide</span><span class="status">MONITOR / ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At 350 ft: LAND mode</span><span class="status">CHECK ENGAGED / ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At minimum +100 ft</span><span class="status">MONITOR / ANNOUNCE ONE HUNDRED ABOVE</span></li>
+<li class="item"><span class="label">At minimum</span><span class="status">ANNOUNCE CONTINUE OR GO-AROUND</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At minimum</span><span class="status">MONITOR / ANNOUNCE MINIMUM</span></li>
+<li class="item"><span class="label">CAT III no DH: at 100 ft RA, if no failure detected</span><span class="status">ANNOUNCE CONTINUE</span></li>
 </ul>
-
+<h3 class="group-title" id="fapp">Approach using F-LOC / F-G/S / FINAL APP / FPA<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Approach using F-LOC / F-G/S / FINAL APP / FPA" class="group-select-btn" data-group="fapp" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/fapp.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Approach using F-LOC / F-G/S / FINAL APP / FPA">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> Weather and landing information</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> F-PLN A page</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> PROG page</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label">Go-around strategy</span><span class="status">REVIEW</span></li>
+<li class="item"><span class="label">At 10,000 ft: navigation accuracy</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">For RNAV GNSS: GPS PRIMARY</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Barometric reference</span><span class="status">SET</span></li>
+<li class="item"><span class="label">Position</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">APPR pushbutton on FCU</span><span class="status">PRESS</span></li>
+<li class="item"><span class="label">APP NAV</span><span class="status">CHECK ARMED / ENGAGED</span></li>
+<li class="item"><span class="label">FINAL</span><span class="status">CHECK ARMED</span></li>
+<li class="item"><span class="label">At Final Descent Point: FINAL APP</span><span class="status">CHECK ENGAGED</span></li>
+<li class="item"><span class="label">Go-around altitude</span><span class="status">SET</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flight parameters</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Announce deviations: L/DEV &gt; ½ dot; V/DEV &gt; ½ dot; XTK &gt; 0.1 NM</span><span class="status">MONITOR / ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At minimum +100 ft</span><span class="status">MONITOR / ANNOUNCE ONE HUNDRED ABOVE</span></li>
+<li class="item"><span class="label">At minimum</span><span class="status">ANNOUNCE CONTINUE OR GO-AROUND</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At minimum</span><span class="status">MONITOR / ANNOUNCE MINIMUM</span></li>
+<li class="item"><span class="label">For LOC-only and ILS G/S out: LOC pushbutton</span><span class="status">PRESS</span></li>
+<li class="item"><span class="label">LOC</span><span class="status">CHECK ARMED</span></li>
+<li class="item"><span class="label">Back-course localizer: TRK/FPA mode</span><span class="status">USE FOR APPROACH</span></li>
+<li class="item"><span class="label">Lateral path</span><span class="status">INTERCEPT</span></li>
+<li class="item"><span class="label">TRK/FPA (bird)</span><span class="status">SELECT</span></li>
+<li class="item"><span class="label">FPA for final approach</span><span class="status">SET</span></li>
+<li class="item"><span class="label">At 0.3 NM from Final Descent Point: FPA selector</span><span class="status">PULL</span></li>
+<li class="item"><span class="label">FPA</span><span class="status">CHECK ENGAGED</span></li>
+<li class="item"><span class="label">Position / flight path</span><span class="status">MONITOR / ADJUST</span></li>
+</ul>
+<h3 class="group-title" id="landing">Manual Landing<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Manual Landing" class="group-select-btn" data-group="landing" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/landing.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Manual Landing">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">At stabilized approach, approx. 30 ft: flare</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Attitude</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">Thrust levers</span><span class="status">IDLE</span></li>
+<li class="item"><span class="label">At touchdown: derotation</span><span class="status">INITIATE</span></li>
+<li class="item"><span class="label">Both thrust levers</span><span class="status">REV MAX or REV IDLE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Ground spoilers</span><span class="status">CHECK / ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Reversers</span><span class="status">CHECK / ANNOUNCE</span></li>
+<li class="item"><span class="label">Directional control</span><span class="status">ENSURE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Directional control</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">Brakes</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Deceleration</span><span class="status">CHECK / ANNOUNCE</span></li>
+<li class="item"><span class="label">At 70 kt: both thrust levers</span><span class="status">REV IDLE</span></li>
+<li class="item"><span class="label">At taxi speed: reversers</span><span class="status">STOW</span></li>
+<li class="item"><span class="label">Before 20 kt: autobrake</span><span class="status">DISENGAGE</span></li>
+</ul>
+<h3 class="group-title" id="autoland">Autoland<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Autoland" class="group-select-btn" data-group="autoland" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/autoland.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Autoland">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> At 350 ft RA: ILS / GLS / MLS course on PFD</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Autocallouts</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At 40 ft RA: FLARE mode</span><span class="status">CHECK ENGAGED / ANNOUNCE</span></li>
+<li class="item"><span class="label">At 30 ft RA: THRUST IDLE mode</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">At 10 ft RA: both thrust levers</span><span class="status">IDLE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Lateral guidance</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At touchdown: ROLL OUT mode</span><span class="status">CHECK ENGAGED / ANNOUNCE</span></li>
+<li class="item"><span class="label">Both thrust levers</span><span class="status">REV MAX or REV IDLE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Ground spoilers</span><span class="status">CHECK / ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Reversers</span><span class="status">CHECK / ANNOUNCE</span></li>
+<li class="item"><span class="label">Directional control</span><span class="status">MONITOR / ENSURE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Directional control</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">Brakes</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Deceleration</span><span class="status">CHECK / ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At 70 kt</span><span class="status">ANNOUNCE SEVENTY KNOTS</span></li>
+<li class="item"><span class="label">Both thrust levers</span><span class="status">REV IDLE</span></li>
+<li class="item"><span class="label">Before 20 kt: autobrake</span><span class="status">DISENGAGE</span></li>
+<li class="item"><span class="label">End of roll-out: reversers</span><span class="status">STOW</span></li>
+</ul>
+<h3 class="group-title" id="goaround">Go-Around<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Go-Around" class="group-select-btn" data-group="goaround" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/goaround.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Go-Around">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">Thrust levers</span><span class="status">TOGA</span></li>
+<li class="item"><span class="label">Rotation</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Go-around</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Flaps lever</span><span class="status">SELECT AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> FMA</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Positive climb</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Landing gear</span><span class="status">ORDER UP / SELECT UP</span></li>
+<li class="item"><span class="label">Autopilot</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">NAV or HDG mode</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">At GA thrust reduction altitude: thrust levers</span><span class="status">CL</span></li>
+<li class="item"><span class="label">At GA acceleration altitude: speed</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At F speed: flaps 1</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> At S speed: flaps 0</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label">Autothrust speed</span><span class="status">DISARM</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
+</ul>
+<h3 class="group-title" id="afterlanding">After Landing<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Landing" class="group-select-btn" data-group="afterlanding" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/afterlanding.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu After Landing">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">When vacating runway: landing lights</span><span class="status">RETRACT</span></li>
+<li class="item"><span class="label">Strobe lights</span><span class="status">AUTO</span></li>
+<li class="item"><span class="label">Other exterior lights</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">When taxi clearance issued: ground spoilers</span><span class="status">DISARM</span></li>
+<li class="item"><span class="label">Radar</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">Predictive windshear</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">NORM</span></li>
+<li class="item"><span class="label">Flaps</span><span class="status">RETRACT</span></li>
+<li class="item"><span class="label">Landing lights</span><span class="status">STANDBY</span></li>
+<li class="item"><span class="label">Weather radar</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">APU</span><span class="status">START</span></li>
+<li class="item"><span class="label">Anti-ice</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Brake temperature</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Brake fans</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> After Landing checklist</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label">If one-engine taxi arrival: ENG 2</span><span class="status">SHUT DOWN</span></li>
+<li class="item"><span class="label">Yellow electric pump</span><span class="status">ON</span></li>
+</ul>
+<h3 class="group-title" id="parking">Parking<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Parking" class="group-select-btn" data-group="parking" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/parking.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Parking">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label"><span class="tag pm">PM</span> Approaching gate / stand: ground spoilers</span><span class="status">DISARM / ORDER</span></li>
+<li class="item"><span class="label">Stopped in final parking position: accumulator pressure</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Parking brake</span><span class="status">ON</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Yellow electric pump</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">All engine masters</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Slides</span><span class="status">CHECK DISARMED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> When engines below 10% N1 and slides disarmed: beacon light</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Fuel pumps</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">Other exterior lights</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Seat belts</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> IRS performance</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Fuel quantity</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> STATUS</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Brake fan</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> DUs</span><span class="status">DIM</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> All EFB transmitting mode</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Parking checklist</span><span class="status">COMPLETE</span></li>
+</ul>
+<h3 class="group-title" id="secure">Securing the Aircraft<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Securing the Aircraft" class="group-select-btn" data-group="secure" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/secure.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Securing the Aircraft">🖼 Obrázok</a></span></h3>
+<ul class="checklist">
+<li class="item"><span class="label">Parking brake</span><span class="status">CHECK ON</span></li>
+<li class="item"><span class="label">All IR mode selectors</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Oxygen crew supply pushbutton</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">Exterior lights</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">MAINT BUS switch</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">APU BLEED pushbutton</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">APU MASTER switch</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">Emergency exit lights switch</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">Signs switch</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">External power</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">BAT 1+2</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> EFB applications</span><span class="status">CLOSE</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> All EFB</span><span class="status">SWITCH OFF</span></li>
+<li class="item"><span class="label"><span class="tag pm">PM</span> Securing the aircraft checklist</span><span class="status">COMPLETE</span></li>
+</ul>
+<button id="scrollTopBtn" title="Späť na začiatok">↑</button><button id="menuToggle" title="Navigácia">☰</button><div id="sectionMenu"><div class="menu-content"><ul>
+<li class="menu-item" data-target="safety">Safety – Exterior Inspection</li>
+<li class="menu-item" data-target="prelim">Preliminary Cockpit Preparation</li>
+<li class="menu-item" data-target="cockpit">Cockpit Preparation</li>
+<li class="menu-item" data-target="pushback">Before Pushback or Start</li>
+<li class="menu-item" data-target="pushclear">At Pushback / Start Clearance</li><li class="menu-item" data-target="start">Engine Start</li>
+<li class="menu-item" data-target="afterstart">After Start</li>
+<li class="menu-item" data-target="taxi">Taxi</li>
+<li class="menu-item" data-target="departurechange">Departure Change (if required)</li><li class="menu-item" data-target="beforetakeoff">Before Takeoff</li>
+<li class="menu-item" data-target="takeoff">Takeoff</li>
+<li class="menu-item" data-target="aftertakeoff">After Takeoff / Climb</li>
+<li class="menu-item" data-target="cruise">Cruise</li>
+<li class="menu-item" data-target="desprep">Descent Preparation</li>
+<li class="menu-item" data-target="descent">Descent</li>
+<li class="menu-item" data-target="approachconfig">Aircraft Configuration for Approach</li>
+<li class="menu-item" data-target="locgs">Approach using LOC / G/S Guidance</li>
+<li class="menu-item" data-target="fapp">Approach using F-LOC / F-G/S / FINAL APP / FPA</li>
+<li class="menu-item" data-target="landing">Manual Landing</li>
+<li class="menu-item" data-target="autoland">Autoland</li>
+<li class="menu-item" data-target="goaround">Go-Around</li>
+<li class="menu-item" data-target="afterlanding">After Landing</li>
+<li class="menu-item" data-target="parking">Parking</li>
+<li class="menu-item" data-target="secure">Securing the Aircraft</li>
+</ul></div></div>
 <script>
-const items = document.querySelectorAll('.item');
-let selectedIndex = -1;
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+  const menuToggle = document.getElementById("menuToggle");
+  const sectionMenu = document.getElementById("sectionMenu");
+  const menuItems = document.querySelectorAll(".menu-item");
+  const allItems = Array.from(document.querySelectorAll("ul.checklist .item"));
+  const itemIndex = new Map(allItems.map((el, i) => [el, i]));
+  let completed = new Set();
+  let cursor = -1;
+  const history = [];
 
-document.body.addEventListener('click', (event) => {
-if (event.target.tagName !== 'BUTTON' && event.button === 0) { // Ľavé tlačidlo myši (označenie)
-if (selectedIndex < items.length - 1) {
-selectedIndex++;
-items[selectedIndex].classList.add('selected');
-items[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Posun na viditeľné miesto
-}
-}
-});
+  function saveState() {
+    history.push({ completed: new Set(completed), cursor });
+  }
 
-document.body.addEventListener('contextmenu', (event) => {
-event.preventDefault();
-if (event.target.tagName !== 'BUTTON') { // Pravé tlačidlo myši (odznačenie)
-if (selectedIndex >= 0) {
-items[selectedIndex].classList.remove('selected');
-selectedIndex--;
-if (selectedIndex >= 0) {
-items[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Posun na viditeľné miesto
-}
-}
-}
+  function render() {
+    allItems.forEach((el, i) => el.classList.toggle("selected", completed.has(i)));
+    document.querySelectorAll(".group-select-btn").forEach(btn => {
+      const ul = btn.closest("h3.group-title").nextElementSibling;
+      const items = Array.from(ul.querySelectorAll(".item")).map(el => itemIndex.get(el));
+      const allDone = items.length > 0 && items.every(i => completed.has(i));
+      btn.classList.toggle("group-complete", allDone);
+      btn.textContent = allDone ? "↶ Odznačiť skupinu" : "✓ Označiť celú skupinu";
+    });
+  }
+
+  scrollTopBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+  menuToggle.addEventListener("click", () => sectionMenu.classList.toggle("visible"));
+  menuItems.forEach(item => item.addEventListener("click", () => {
+    const target = document.getElementById(item.dataset.target);
+    if (target) target.scrollIntoView({behavior:"smooth", block:"start"});
+    sectionMenu.classList.remove("visible");
+    menuItems.forEach(el => el.classList.remove("active"));
+    item.classList.add("active");
+  }));
+  document.addEventListener("click", event => {
+    if (sectionMenu.classList.contains("visible") &&
+        !event.target.closest(".menu-content") &&
+        !event.target.closest("#menuToggle")) sectionMenu.classList.remove("visible");
+  });
+
+  document.querySelectorAll(".group-select-btn").forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      const heading = btn.closest("h3.group-title");
+      const ul = heading.nextElementSibling;
+      const indices = Array.from(ul.querySelectorAll(".item")).map(el => itemIndex.get(el));
+      if (!indices.length) return;
+      saveState();
+      const allDone = indices.every(i => completed.has(i));
+      if (allDone) indices.forEach(i => completed.delete(i));
+      else indices.forEach(i => completed.add(i));
+      cursor = completed.size ? Math.max(...completed) : -1;
+      render();
+    });
+  });
+
+  document.body.addEventListener("click", event => {
+    if (event.button !== 0 || event.target.closest("button") ||
+        event.target.closest("a") || event.target.closest(".menu-item") ||
+        sectionMenu.classList.contains("visible")) return;
+    let next = -1;
+    for (let i = Math.max(0, cursor + 1); i < allItems.length; i++) {
+      if (!completed.has(i)) { next = i; break; }
+    }
+    if (next < 0) {
+      for (let i = 0; i < Math.min(allItems.length, cursor + 1); i++) {
+        if (!completed.has(i)) { next = i; break; }
+      }
+    }
+    if (next >= 0) {
+      saveState();
+      completed.add(next);
+      cursor = next;
+      render();
+      allItems[next].scrollIntoView({behavior:"smooth", block:"center"});
+    }
+  });
+
+  document.body.addEventListener("contextmenu", event => {
+    if (event.target.closest("button") || event.target.closest("a") ||
+        event.target.closest(".menu-item")) return;
+    event.preventDefault();
+    if (history.length) {
+      const previous = history.pop();
+      completed = new Set(previous.completed);
+      cursor = previous.cursor;
+      render();
+      if (cursor >= 0) allItems[cursor].scrollIntoView({behavior:"smooth", block:"center"});
+    }
+  });
+
+  render();
 });
-</script>
-</body>
-</html>
+</script></body></html>
