@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="sk"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>A320 Checklist — Core normal-flight items</title>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="sk"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>A320 Checklist — Fenix QRH &amp; OMB SOPs v4</title>
 <style>
 body {
   background-color: #000;
@@ -80,29 +84,6 @@ p {
   border-top: 1px solid #fff;
   margin: 10px 0;
   pointer-events: none;
-}
-.tag {
-  display: inline-block;
-  padding: 2px 6px;
-  margin-right: 8px;
-  border-radius: 4px;
-  font-size: 0.75em;
-  font-weight: bold;
-  color: white;
-  background-color: #666;
-  text-transform: uppercase;
-  white-space: nowrap;
-  width: fit-content;
-  max-width: max-content;
-}
-.tag.g1000 {
-  background-color: #007ACC;
-}
-.tag.classic {
-  background-color: #AA0000;
-}
-.tag.wbsim {
-  background-color: #228B22;
 }
 table {
   width: 100%;
@@ -206,7 +187,6 @@ th {
     height: auto;
 }
 
-.tag.pm { background-color: #007ACC; }
 html { scroll-behavior: smooth; }
 h1 { margin: 12px 0 4px; font-size: 1.6em; }
 .notice { color:#aaa; font-style:italic; line-height:1.45; }
@@ -267,9 +247,6 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
   border: 2px solid #5dade2; box-shadow: 0 0 50px rgba(0,0,0,0.8); opacity: 0.95;
   cursor: default;
 }
-
-.tag.core { background-color: #8a5a00; color: #fff2c2; border: 1px solid #d9a441; letter-spacing: 0.3px; }
-.selected .tag.core { color: #ddd; opacity: 0.65; }
 </style>
 </head><body>
 <div aria-hidden="true" aria-label="Zobrazený obrázok" aria-modal="true" id="lightbox" role="dialog">
@@ -277,27 +254,27 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 </div>
 <h1>A320 — Normal Procedures / Single-Pilot Checklist</h1>
 <p class="notice">Simulačný checklist s krátkymi vysvetľujúcimi poznámkami doplnenými podľa OMB SOPs Version 4 (17-Jan-2024). Základ checklistu vychádza aj z Fenix A320 CFM QRH – Normal Procedures (revízia uvedená v PDF: 27-Apr-22); dokumenty sa môžu v detailoch líšiť. Nie je to oficiálny prevádzkový dokument ani náhrada aktuálneho QRH/FCOM. Používaj iba v simulátore a over si postupy podľa konkrétnej verzie lietadla/add-onu.</p>
-<p class="notice">Štítok CORE zvýrazňuje kľúčové položky bežného letu v simulátore. Neoznačené položky zostávajú súčasťou SOP; štítok neznamená, že ostatné položky možno automaticky preskočiť.</p><p class="notice">Sivé/kurzívne riadky pod položkami sú stručné poznámky a kontext z OMB SOPs v4; nemenia samotnú checklistovú položku.</p>
-<p class="notice">Cesty k obrázkom: v každej skupine uprav atribút href odkazu „Obrázok“ (predvolené images/ID-SKUPINY.jpg).</p>
-<p class="notice"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> = kľúčová položka bežného letu v simulátore. Označenie je orientačné: všetky ostatné položky zostávajú súčasťou SOP a podľa konkrétneho lietadla/add-onu ich nevynechávaj automaticky.</p><h3 class="group-title" id="safety">Safety – Exterior Inspection<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Safety – Exterior Inspection" class="group-select-btn" data-group="safety" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/safety.jpg" title="Otvoriť obrázok pre skupinu Safety – Exterior Inspection">🖼 Obrázok</a></span></h3>
+<p class="notice">Ľavým tlačidlom na checklist klikáš postupne na ďalšie položky; pravým tlačidlom vrátiš poslednú akciu. Tlačidlo „Označiť celú skupinu“ označí alebo odznačí všetky položky fázy. Odkaz „Obrázok“ zobrazí obrázok z priečinka images/ v prekryvnom okne; kliknutím mimo obrázka alebo klávesom Esc ho zavrieš. Položky vykonávané PM majú modrý štítok PM; ostatné sú bez štítka.</p><p class="notice">Sivé/kurzívne riadky pod položkami sú stručné poznámky a kontext z OMB SOPs v4; nemenia samotnú checklistovú položku.</p>
+<p> = Pilot Monitoring</p><p class="notice">Cesty k obrázkom: v každej skupine uprav atribút href odkazu „Obrázok“ (predvolené images/ID-SKUPINY.jpg).</p>
+<h3 class="group-title" id="safety">Safety – Exterior Inspection<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Safety – Exterior Inspection" class="group-select-btn" data-group="safety" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/safety.jpg" title="Otvoriť obrázok pre skupinu Safety – Exterior Inspection">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Wheel chocks<span class="description">If chocks are not in place, confirm parking brake set and accumulator pressure sufficient.</span></span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Flight / cargo doors<span class="description">Check landing gear doors and aircraft doors; confirm ground crew clearance before pressurising the green hydraulic system if a gear door is open.</span></span><span class="status">CHECK POSITION</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>APU area<span class="description">Ensure the APU inlet and outlet are clear.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"> Wheel chocks<span class="description">If chocks are not in place, confirm parking brake set and accumulator pressure sufficient.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"> Flight / cargo doors<span class="description">Check landing gear doors and aircraft doors; confirm ground crew clearance before pressurising the green hydraulic system if a gear door is open.</span></span><span class="status">CHECK POSITION</span></li>
+<li class="item"><span class="label">APU area<span class="description">Ensure the APU inlet and outlet are clear.</span></span><span class="status">CHECK</span></li>
 </ul>
 <h3 class="group-title" id="prelim">Preliminary Cockpit Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Preliminary Cockpit Preparation" class="group-select-btn" data-group="prelim" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/prelim.jpg" title="Otvoriť obrázok pre skupinu Preliminary Cockpit Preparation">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ENG masters 1, 2</span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ENG MODE selector</span><span class="status">NORM</span></li>
+<li class="item"><span class="label">ENG masters 1, 2</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">NORM</span></li>
 <li class="item"><span class="label">Weather radar<span class="description">Keep radar and predictive windshear OFF during preliminary setup.</span></span><span class="status">OFF</span></li><li class="item"><span class="label">Predictive windshear<span class="description">Keep OFF during preliminary setup.</span></span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Landing gear lever</span><span class="status">DOWN</span></li>
+<li class="item"><span class="label">Landing gear lever</span><span class="status">DOWN</span></li>
 <li class="item"><span class="label">Both wiper selectors</span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>BAT<span class="description">If the aircraft has been unpowered for 6 hours or more, check battery voltage; above 25.5 V is required for APU fire test/start.</span></span><span class="status">CHECK / AUTO</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>EXT PWR pushbutton<span class="description">Select ON only when AVAIL is indicated. If battery voltage is low, allow the required charging cycle.</span></span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>APU FIRE<span class="description">Check fire detection/extinguishing indications. Do not hold the test pushbutton for more than 3 seconds.</span></span><span class="status">CHECK / TEST</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>APU<span class="description">Wait at least 3 seconds between APU MASTER ON and START. If external power is available, delay start when practical unless air conditioning is needed.</span></span><span class="status">START</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>When APU AVAIL: EXT PWR<span class="description">Keeping external power connected can reduce APU load, especially in hot weather.</span></span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>AIR COND panel<span class="description">If ground air is connected, do not use APU BLEED. When practical, delay packs/bleed until shortly before engine start.</span></span><span class="status">SET</span></li>
+<li class="item"><span class="label">BAT<span class="description">If the aircraft has been unpowered for 6 hours or more, check battery voltage; above 25.5 V is required for APU fire test/start.</span></span><span class="status">CHECK / AUTO</span></li>
+<li class="item"><span class="label">EXT PWR pushbutton<span class="description">Select ON only when AVAIL is indicated. If battery voltage is low, allow the required charging cycle.</span></span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">APU FIRE<span class="description">Check fire detection/extinguishing indications. Do not hold the test pushbutton for more than 3 seconds.</span></span><span class="status">CHECK / TEST</span></li>
+<li class="item"><span class="label">APU<span class="description">Wait at least 3 seconds between APU MASTER ON and START. If external power is available, delay start when practical unless air conditioning is needed.</span></span><span class="status">START</span></li>
+<li class="item"><span class="label">When APU AVAIL: EXT PWR<span class="description">Keeping external power connected can reduce APU load, especially in hot weather.</span></span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">AIR COND panel<span class="description">If ground air is connected, do not use APU BLEED. When practical, delay packs/bleed until shortly before engine start.</span></span><span class="status">SET</span></li>
 <li class="item"><span class="label"> Cockpit lights</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> All EFB</span><span class="status">START</span></li>
 <li class="item"><span class="label"> EFB / eQRH version</span><span class="status">CHECK</span></li>
@@ -310,23 +287,23 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">ECAM/LOGBOOK check – PRG PD</span><span class="status">PRESS 3 s</span></li>
 <li class="item"><span class="label"> LOGBOOK</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label"> MEL/CDL</span><span class="status">CHECK DISPATCH CONDITIONS</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Aircraft acceptance</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">Aircraft acceptance</span><span class="status">PERFORM</span></li>
 <li class="item"><span class="label"> Airfield data</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label"> Preliminary loading (if LOADSHEET app used)</span><span class="status">COMPUTE / X-CHECK</span></li>
 <li class="item"><span class="label"> MEL/CDL items</span><span class="status">CHECK ACTIVATED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Preliminary takeoff performance data</span><span class="status">COMPUTE / CROSSCHECK</span></li>
+<li class="item"><span class="label"> Preliminary takeoff performance data</span><span class="status">COMPUTE / CROSSCHECK</span></li>
 <li class="item"><span class="label">OEB</span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ECAM OXY pressure / HYD quantity / ENG oil quantity<span class="description">Check oxygen pressure, hydraulic quantities and engine oil quantity on the relevant ECAM pages.</span></span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Flaps<span class="description">Compare the lever position with the indication on the upper ECAM display.</span></span><span class="status">CHECK POSITION</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Speed brake lever<span class="description">Confirm retracted and disarmed.</span></span><span class="status">CHECK RETRACTED AND DISARMED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Parking brake handle</span><span class="status">ON</span></li>
+<li class="item"><span class="label">ECAM OXY pressure / HYD quantity / ENG oil quantity<span class="description">Check oxygen pressure, hydraulic quantities and engine oil quantity on the relevant ECAM pages.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Flaps<span class="description">Compare the lever position with the indication on the upper ECAM display.</span></span><span class="status">CHECK POSITION</span></li>
+<li class="item"><span class="label">Speed brake lever<span class="description">Confirm retracted and disarmed.</span></span><span class="status">CHECK RETRACTED AND DISARMED</span></li>
+<li class="item"><span class="label">Parking brake handle</span><span class="status">ON</span></li>
 <li class="item"><span class="label">Accumulator / brakes pressure<span class="description">Confirm adequate accumulator pressure if wheel chocks are not installed.</span></span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Emergency equipment</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Rain repellent</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Security check</span><span class="status">PERFORM</span></li>
 <li class="item"><span class="label">Circuit breaker panels</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Gear pins and covers</span><span class="status">CHECK ONBOARD / STOWED</span></li>
-<li class="item"><span class="label">NAV &amp; LOGO lights<span class="description">Set ON as part of the exterior/initial setup flow.</span></span><span class="status">ON</span></li><li class="item"><span class="label">Fan cowl flags</span><span class="status">CHECK</span></li><li class="item"><span class="label">Cockpit door locking system<span class="description">Check the cockpit door locking system and associated indications.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Exterior walkaround<span class="description">Check aircraft condition and confirm the APU inlet/outlet and landing gear areas are clear.</span></span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">NAV &amp; LOGO lights<span class="description">Set ON as part of the exterior/initial setup flow.</span></span><span class="status">ON</span></li><li class="item"><span class="label">Fan cowl flags</span><span class="status">CHECK</span></li><li class="item"><span class="label">Cockpit door locking system<span class="description">Check the cockpit door locking system and associated indications.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label">Exterior walkaround<span class="description">Check aircraft condition and confirm the APU inlet/outlet and landing gear areas are clear.</span></span><span class="status">PERFORM</span></li>
 </ul>
 <h3 class="group-title" id="cockpit">Cockpit Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Cockpit Preparation" class="group-select-btn" data-group="cockpit" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/cockpit.jpg" title="Otvoriť obrázok pre skupinu Cockpit Preparation">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
@@ -335,7 +312,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">RCDR GND CTL pushbutton<span class="description">Set ON as required for ground recording.</span></span><span class="status">ON</span></li>
 <li class="item"><span class="label">CVR test pushbutton<span class="description">Perform the test and verify the expected indications for the installed simulation/add-on.</span></span><span class="status">PRESS</span></li>
 <li class="item"><span class="label">CAPT &amp; PURS / CAPT switch</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>All IR mode selectors<span class="description">The aircraft must be stopped on the ground for alignment.</span></span><span class="status">NAV</span></li>
+<li class="item"><span class="label">All IR mode selectors<span class="description">The aircraft must be stopped on the ground for alignment.</span></span><span class="status">NAV</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 <li class="item"><span class="label">Signs</span><span class="status">SET</span></li>
 <li class="item"><span class="label">Probe/window heat<span class="description">Check the expected AUTO setting and indications.</span></span><span class="status">AUTO</span></li>
@@ -362,89 +339,89 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">RMP</span><span class="status">SET</span></li>
 <li class="item"><span class="label">MCDU message record</span><span class="status">ERASE</span></li>
 <li class="item"><span class="label"> Navigation charts clipboard</span><span class="status">PREPARE</span></li>
-<li class="item"><span class="label">FMS</span><span class="status">PREPARE / CHECK</span></li><li class="item"><span class="label">Navaid deselection<span class="description">Deselect any navaids known to be unserviceable (DATA → POS MONITOR → SEL NAVAIDS).</span></span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>INIT A<span class="description">Enter/verify flight number, cost index, cruise level/temperature and request wind data as applicable.</span></span><span class="status">COMPLETE</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ADIRS position<span class="description">Verify the entered position against the aircraft position before completing alignment.</span></span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>F-PLAN<span class="description">Check departure runway/SID/transition and arrival approach/STAR/transition; enter step altitudes when planned.</span></span><span class="status">COMPLETE / CHECK</span></li><li class="item"><span class="label">RADIO NAV<span class="description">Check radio-navigation tuning and identifiers against the planned procedure.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>INIT B<span class="description">Enter planned fuel, weights and other required flight data as supported by the aircraft/FMS.</span></span><span class="status">ENTER PLANNED DATA</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>SEC F-PLAN<span class="description">Prepare a secondary flight plan when appropriate for the expected contingency or alternate routing.</span></span><span class="status">AS APPROPRIATE</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>FMS preparation<span class="description">Crosscheck the complete FMS setup; the OMB groups this scan as D-I-F-S-R-I-P.</span></span><span class="status">CROSSCHECK</span></li>
+<li class="item"><span class="label">FMS</span><span class="status">PREPARE / CHECK</span></li><li class="item"><span class="label">Navaid deselection<span class="description">Deselect any navaids known to be unserviceable (DATA → POS MONITOR → SEL NAVAIDS).</span></span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label">INIT A<span class="description">Enter/verify flight number, cost index, cruise level/temperature and request wind data as applicable.</span></span><span class="status">COMPLETE</span></li><li class="item"><span class="label">ADIRS position<span class="description">Verify the entered position against the aircraft position before completing alignment.</span></span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label">F-PLAN<span class="description">Check departure runway/SID/transition and arrival approach/STAR/transition; enter step altitudes when planned.</span></span><span class="status">COMPLETE / CHECK</span></li><li class="item"><span class="label">RADIO NAV<span class="description">Check radio-navigation tuning and identifiers against the planned procedure.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label">INIT B<span class="description">Enter planned fuel, weights and other required flight data as supported by the aircraft/FMS.</span></span><span class="status">ENTER PLANNED DATA</span></li><li class="item"><span class="label">SEC F-PLAN<span class="description">Prepare a secondary flight plan when appropriate for the expected contingency or alternate routing.</span></span><span class="status">AS APPROPRIATE</span></li><li class="item"><span class="label">FMS preparation<span class="description">Crosscheck the complete FMS setup; the OMB groups this scan as D-I-F-S-R-I-P.</span></span><span class="status">CROSSCHECK</span></li>
 <li class="item"><span class="label"> Barometric reference</span><span class="status">SET</span></li>
 <li class="item"><span class="label"> Flight directors</span><span class="status">CHECK ON</span></li>
 <li class="item"><span class="label"> LS / ILS</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> ND mode and range</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> VOR / ADF selector</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>FCU<span class="description">Crosscheck selected altitude and other FCU targets against the clearance and departure plan.</span></span><span class="status">SET</span></li>
+<li class="item"><span class="label">FCU<span class="description">Crosscheck selected altitude and other FCU targets against the clearance and departure plan.</span></span><span class="status">SET</span></li>
 <li class="item"><span class="label"> Oxygen mask</span><span class="status">TEST</span></li>
 <li class="item"><span class="label"> PFD-ND brightness</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> Loudspeaker knob</span><span class="status">SET</span></li>
 <li class="item"><span class="label"> PFD-ND</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">LDG ELEV (ECAM)</span><span class="status">CHECK AUTO</span></li>
 <li class="item"><span class="label"> IRS alignment</span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ECAM STATUS<span class="description">Review status messages and any limitations before continuing.</span></span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Takeoff briefing<span class="description">Cover runway/SID, thrust and flap settings, initial altitude, threats and the go-around/engine-failure strategy.</span></span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">ECAM STATUS<span class="description">Review status messages and any limitations before continuing.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Takeoff briefing<span class="description">Cover runway/SID, thrust and flap settings, initial altitude, threats and the go-around/engine-failure strategy.</span></span><span class="status">PERFORM</span></li>
 </ul>
 <h3 class="group-title" id="pushback">Before Pushback or Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Before Pushback or Start" class="group-select-btn" data-group="pushback" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushback.jpg" title="Otvoriť obrázok pre skupinu Before Pushback or Start">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Final loadsheet</span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> FOB</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"> Final loadsheet</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"> FOB</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">ACARS fuel report</span><span class="status">PREPARE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>If takeoff conditions changed: final T.O. performance data<span class="description">Recompute performance and revise FMGS data when conditions or loads have changed.</span></span><span class="status">RECOMPUTE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>FMS takeoff data<span class="description">Ensure final takeoff data matches the current runway, conditions and performance calculation.</span></span><span class="status">REVISE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>FMS final T.O. performance data</span><span class="status">CROSSCHECK</span></li>
+<li class="item"><span class="label">If takeoff conditions changed: final T.O. performance data<span class="description">Recompute performance and revise FMGS data when conditions or loads have changed.</span></span><span class="status">RECOMPUTE</span></li>
+<li class="item"><span class="label">FMS takeoff data<span class="description">Ensure final takeoff data matches the current runway, conditions and performance calculation.</span></span><span class="status">REVISE</span></li>
+<li class="item"><span class="label">FMS final T.O. performance data</span><span class="status">CROSSCHECK</span></li>
 <li class="item"><span class="label">EFB / MCDU green dot<span class="description">Crosscheck the value displayed in the EFB and MCDU.</span></span><span class="status">COMPARE</span></li>
 <li class="item"><span class="label"> Seating position</span><span class="status">ADJUST</span></li>
 <li class="item"><span class="label">FMS PERF TO page</span><span class="status">SELECT</span></li>
 <li class="item"><span class="label"> FMS F-PLN page</span><span class="status">SELECT</span></li>
 <li class="item"><span class="label">External power<span class="description">Check AVAIL before asking ground crew to disconnect it.</span></span><span class="status">CHECK AVAIL</span></li>
 <li class="item"><span class="label">External power disconnection<span class="description">Check AVAIL before asking ground crew to disconnect it.</span></span><span class="status">REQUEST</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Before Start C/L – above the line</span><span class="status">COMPLETE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Windows / doors</span><span class="status">CHECK CLOSED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Slides</span><span class="status">CHECK ARMED</span></li>
+<li class="item"><span class="label"> Before Start C/L – above the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> Windows / doors</span><span class="status">CHECK CLOSED</span></li>
+<li class="item"><span class="label"> Slides</span><span class="status">CHECK ARMED</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 <li class="item"><span class="label">Thrust levers</span><span class="status">IDLE</span></li>
 <li class="item"><span class="label">Accumulator pressure</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">N/W steering disconnect</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Parking brake</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Before Start C/L – below the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> Before Start C/L – below the line</span><span class="status">COMPLETE</span></li>
 </ul>
-<h3 class="group-title" id="pushclear">At Pushback / Start Clearance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: At Pushback / Start Clearance" class="group-select-btn" data-group="pushclear" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushclear.jpg" title="Otvoriť obrázok pre skupinu At Pushback / Start Clearance">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Pushback / start clearance from ground crew<span class="description">Establish communication and confirm ground checks are complete before requesting ATC clearance.</span></span><span class="status">OBTAIN</span></li><li class="item"><span class="label"> Pushback / start clearance from ATC</span><span class="status">OBTAIN</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Beacon<span class="description">Set ON when cleared to commence pushback/start.</span></span><span class="status">ON</span></li><li class="item"><span class="label">PED (EFB / phone)<span class="description">Select flight mode or switch off.</span></span><span class="status">FLIGHT MODE</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Transponder</span><span class="status">AUTO</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> If pushback is not required: Before Start checklist</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">If pushback is required: N/W STEER DISC memo<span class="description">Before conventional or towbarless pushback, confirm the selector is in tow position and the NW STRG DISC memo is displayed.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Before Start checklist (after clearance)</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">Elapsed time<span class="description">Run the elapsed timer as a backup for block-time recording if ACARS OOOI is unavailable.</span></span><span class="status">START</span></li></ul><h3 class="group-title" id="start">Engine Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Engine Start" class="group-select-btn" data-group="start" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/start.jpg" title="Otvoriť obrázok pre skupinu Engine Start">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="pushclear">At Pushback / Start Clearance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: At Pushback / Start Clearance" class="group-select-btn" data-group="pushclear" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushclear.jpg" title="Otvoriť obrázok pre skupinu At Pushback / Start Clearance">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label">Pushback / start clearance from ground crew<span class="description">Establish communication and confirm ground checks are complete before requesting ATC clearance.</span></span><span class="status">OBTAIN</span></li><li class="item"><span class="label"> Pushback / start clearance from ATC</span><span class="status">OBTAIN</span></li><li class="item"><span class="label">Beacon<span class="description">Set ON when cleared to commence pushback/start.</span></span><span class="status">ON</span></li><li class="item"><span class="label">PED (EFB / phone)<span class="description">Select flight mode or switch off.</span></span><span class="status">FLIGHT MODE</span></li><li class="item"><span class="label"> Transponder</span><span class="status">AUTO</span></li><li class="item"><span class="label"> If pushback is not required: Before Start checklist</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">If pushback is required: N/W STEER DISC memo<span class="description">Before conventional or towbarless pushback, confirm the selector is in tow position and the NW STRG DISC memo is displayed.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label"> Before Start checklist (after clearance)</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">Elapsed time<span class="description">Run the elapsed timer as a backup for block-time recording if ACARS OOOI is unavailable.</span></span><span class="status">START</span></li></ul><h3 class="group-title" id="start">Engine Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Engine Start" class="group-select-btn" data-group="start" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/start.jpg" title="Otvoriť obrázok pre skupinu Engine Start">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ENG MODE selector<span class="description">Confirm the selector is positively identified before selecting IGN/START; thrust levers must be at IDLE.</span></span><span class="status">IGN / START</span></li>
+<li class="item"><span class="label">ENG MODE selector<span class="description">Confirm the selector is positively identified before selecting IGN/START; thrust levers must be at IDLE.</span></span><span class="status">IGN / START</span></li>
 <li class="item"><span class="label"> Engine 2 start</span><span class="status">ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ENG MASTER 2<span class="description">Monitor the engine start sequence and verify normal indications on ECAM.</span></span><span class="status">ON</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Engine idle parameters<span class="description">Check the engine stabilises at idle and indications are normal before continuing.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">ENG MASTER 2<span class="description">Monitor the engine start sequence and verify normal indications on ECAM.</span></span><span class="status">ON</span></li>
+<li class="item"><span class="label">Engine idle parameters<span class="description">Check the engine stabilises at idle and indications are normal before continuing.</span></span><span class="status">CHECK</span></li>
 <li class="item"><span class="label"> Engine 1 start</span><span class="status">ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Repeat start sequence for engine 1<span class="description">Follow the same monitored start sequence for the other engine; use the applicable procedure if a start is abnormal.</span></span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">Repeat start sequence for engine 1<span class="description">Follow the same monitored start sequence for the other engine; use the applicable procedure if a start is abnormal.</span></span><span class="status">PERFORM</span></li>
 </ul>
 <h3 class="group-title" id="afterstart">After Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Start" class="group-select-btn" data-group="afterstart" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/afterstart.jpg" title="Otvoriť obrázok pre skupinu After Start">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ENG MODE selector</span><span class="status">NORM</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>APU BLEED pushbutton<span class="description">Select OFF after engine start as required. OMB guidance delays APU BLEED at least one minute after APU start for thermal stabilisation.</span></span><span class="status">OFF</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">NORM</span></li>
+<li class="item"><span class="label">APU BLEED pushbutton<span class="description">Select OFF after engine start as required. OMB guidance delays APU BLEED at least one minute after APU start for thermal stabilisation.</span></span><span class="status">OFF</span></li>
 <li class="item"><span class="label">ENG ANTI ICE<span class="description">Select according to icing conditions and the applicable procedure.</span></span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">WING ANTI ICE<span class="description">Select according to icing conditions and the applicable procedure.</span></span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>APU MASTER switch</span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label">Yellow electric pump<span class="description">Use as required; verify serviceability when relying on it for single-engine taxi.</span></span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> ECAM STATUS</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">APU MASTER switch</span><span class="status">AS REQUIRED</span></li><li class="item"><span class="label">Yellow electric pump<span class="description">Use as required; verify serviceability when relying on it for single-engine taxi.</span></span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"> ECAM STATUS</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">N/W STEER DISC memo<span class="description">After pushback is complete, confirm the disconnect memo is no longer displayed when normal steering is selected.</span></span><span class="status">CHECK NOT DISPLAYED</span></li>
 <li class="item"><span class="label"> Clear to disconnect</span><span class="status">ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> After Start checklist</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> After Start checklist</span><span class="status">COMPLETE</span></li>
 <li class="item"><span class="label"> Ground spoilers</span><span class="status">ARM</span></li>
 <li class="item"><span class="label"> Rudder trim</span><span class="status">ZERO</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Flaps</span><span class="status">SET</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Pitch trim</span><span class="status">SET</span></li>
+<li class="item"><span class="label"> Flaps</span><span class="status">SET</span></li>
+<li class="item"><span class="label"> Pitch trim</span><span class="status">SET</span></li>
 </ul>
 <h3 class="group-title" id="taxi">Taxi<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Taxi" class="group-select-btn" data-group="taxi" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/taxi.jpg" title="Otvoriť obrázok pre skupinu Taxi">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Taxi clearance</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label"> Taxi clearance</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 <li class="item"><span class="label">Parking brake handle</span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Brakes pressure<span class="description">Check brake response at low speed after taxi begins.</span></span><span class="status">CHECK AT ZERO</span></li>
+<li class="item"><span class="label"> Brakes pressure<span class="description">Check brake response at low speed after taxi begins.</span></span><span class="status">CHECK AT ZERO</span></li>
 <li class="item"><span class="label">Thrust levers</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Brakes<span class="description">Check brake response at low speed after taxi begins.</span></span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Tiller or rudder pedals<span class="description">Use the tiller for normal ground steering as appropriate; avoid excessive speed in turns.</span></span><span class="status">USE AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Flight controls</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"> Flight controls</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">ATC clearance</span><span class="status">CONFIRM</span></li>
 <li class="item"><span class="label">If takeoff conditions changed: final T.O. performance data<span class="description">Recompute takeoff performance and revise the FMS data as required.</span></span><span class="status">RECOMPUTE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>FMS takeoff data</span><span class="status">REVISE</span></li>
+<li class="item"><span class="label">FMS takeoff data</span><span class="status">REVISE</span></li>
 <li class="item"><span class="label"> FMS revised T.O. performance data</span><span class="status">CROSSCHECK</span></li>
 <li class="item"><span class="label">EFB / MCDU green dot</span><span class="status">COMPARE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Flaps lever</span><span class="status">AS APPROPRIATE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>FMS F-PLAN / SPD<span class="description">Verify the departure route and managed speed setup.</span></span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>FCU ALT / HDG<span class="description">Crosscheck selected altitude and heading against the clearance/SID.</span></span><span class="status">SET</span></li>
+<li class="item"><span class="label">Flaps lever</span><span class="status">AS APPROPRIATE</span></li>
+<li class="item"><span class="label">FMS F-PLAN / SPD<span class="description">Verify the departure route and managed speed setup.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">FCU ALT / HDG<span class="description">Crosscheck selected altitude and heading against the clearance/SID.</span></span><span class="status">SET</span></li>
 <li class="item"><span class="label">Both flight directors</span><span class="status">CHECK ON</span></li>
 <li class="item"><span class="label"> PFD / ND</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Takeoff briefing</span><span class="status">CONFIRM</span></li>
@@ -452,54 +429,54 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"> ATC code</span><span class="status">CONFIRM / SET FOR TAKEOFF</span></li>
 <li class="item"><span class="label"> Terrain on ND</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Autobrake<span class="description">Select the takeoff setting required by the aircraft procedure.</span></span><span class="status">MAX</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>T.O. CONFIG pushbutton<span class="description">Check takeoff configuration and resolve any warning before departure.</span></span><span class="status">TEST</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>T.O. memo<span class="description">Confirm the expected takeoff memo items are satisfied before line-up/takeoff.</span></span><span class="status">CHECK NO BLUE</span></li>
+<li class="item"><span class="label">T.O. CONFIG pushbutton<span class="description">Check takeoff configuration and resolve any warning before departure.</span></span><span class="status">TEST</span></li>
+<li class="item"><span class="label">T.O. memo<span class="description">Confirm the expected takeoff memo items are satisfied before line-up/takeoff.</span></span><span class="status">CHECK NO BLUE</span></li>
 <li class="item"><span class="label"> Cabin report</span><span class="status">RECEIVE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Before Takeoff C/L – above the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> Before Takeoff C/L – above the line</span><span class="status">COMPLETE</span></li>
 </ul>
 <h3 class="group-title" id="departurechange">Departure Change (if required)<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Departure Change (if required)" class="group-select-btn" data-group="departurechange" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/departurechange.jpg" title="Otvoriť obrázok pre skupinu Departure Change (if required)">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label">FMS F-PLN / SID<span class="description">Revise the route and SID/transition for the changed departure.</span></span><span class="status">REVISE AS REQUIRED</span></li><li class="item"><span class="label">FCU altitude<span class="description">Set and crosscheck the cleared initial altitude.</span></span><span class="status">CHECK / SET</span></li><li class="item"><span class="label">Takeoff data<span class="description">Recompute/revise performance if runway, weather, configuration or weight has changed.</span></span><span class="status">REVISE AS REQUIRED</span></li><li class="item"><span class="label">Flaps</span><span class="status">CHECK / SET</span></li><li class="item"><span class="label">Departure re-briefing<span class="description">Brief the revised routing, altitude constraints and relevant threats before continuing.</span></span><span class="status">COMPLETE</span></li><li class="item"><span class="label"> Departure Change checklist</span><span class="status">COMPLETE</span></li></ul><h3 class="group-title" id="beforetakeoff">Before Takeoff<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Before Takeoff" class="group-select-btn" data-group="beforetakeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/beforetakeoff.jpg" title="Otvoriť obrázok pre skupinu Before Takeoff">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">Brake temperature (if brake fan running)<span class="description">Check when brake fans have been running; follow the add-on’s indications and limitations.</span></span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Brake fan pushbutton (if running)</span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Line-up clearance</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label"> Line-up clearance</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label"> Brakes pressure</span><span class="status">CHECK AT ZERO</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 <li class="item"><span class="label">TCAS mode selector<span class="description">Select TA or TA/RA as required for the operation.</span></span><span class="status">TA or TA/RA</span></li>
 <li class="item"><span class="label"> Approach path</span><span class="status">CLEARED OF TRAFFIC</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Cabin crew<span class="description">Confirm cabin is ready for takeoff.</span></span><span class="status">ADVISE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ENG MODE selector</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Cabin crew<span class="description">Confirm cabin is ready for takeoff.</span></span><span class="status">ADVISE</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> Sliding table</span><span class="status">STOW</span></li>
 <li class="item"><span class="label"> All EFB transmitting mode</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> All EFB without mounted equipment</span><span class="status">STOW</span></li>
 <li class="item"><span class="label">Thrust bump</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Takeoff runway</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label"> Takeoff runway</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Packs<span class="description">Set as required for takeoff performance and the applicable procedure.</span></span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Before Takeoff C/L – below the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> Before Takeoff C/L – below the line</span><span class="status">COMPLETE</span></li>
 </ul>
 <h3 class="group-title" id="takeoff">Takeoff<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Takeoff" class="group-select-btn" data-group="takeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/takeoff.jpg" title="Otvoriť obrázok pre skupinu Takeoff">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Takeoff clearance</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label"> Takeoff clearance</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 <li class="item"><span class="label"> Takeoff</span><span class="status">ANNOUNCE</span></li>
 <li class="item"><span class="label">Brakes</span><span class="status">RELEASE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Thrust levers<span class="description">Set FLX/MCT or TOGA as calculated and required.</span></span><span class="status">FLX or TOGA</span></li>
+<li class="item"><span class="label">Thrust levers<span class="description">Set FLX/MCT or TOGA as calculated and required.</span></span><span class="status">FLX or TOGA</span></li>
 <li class="item"><span class="label"> Chrono</span><span class="status">START</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Directional control<span class="description">Maintain runway centreline with rudder; avoid using nosewheel steering at takeoff speed.</span></span><span class="status">USE RUDDER</span></li>
+<li class="item"><span class="label">Directional control<span class="description">Maintain runway centreline with rudder; avoid using nosewheel steering at takeoff speed.</span></span><span class="status">USE RUDDER</span></li>
 <li class="item"><span class="label"> Below 80 kt: N1</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label"> Thrust set</span><span class="status">ANNOUNCE</span></li>
 <li class="item"><span class="label"> PFD and engine indications</span><span class="status">MONITOR</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> At 100 kt</span><span class="status">ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>100 kt</span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> At V1</span><span class="status">ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> At VR</span><span class="status">ROTATION ORDER</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Rotation</span><span class="status">PERFORM</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> When positive climb</span><span class="status">ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Landing gear</span><span class="status">SELECT UP</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Autopilot</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>At thrust reduction altitude: thrust levers</span><span class="status">CL</span></li>
+<li class="item"><span class="label"> At 100 kt</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label">100 kt</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"> At V1</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"> At VR</span><span class="status">ROTATION ORDER</span></li>
+<li class="item"><span class="label">Rotation</span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label"> When positive climb</span><span class="status">ANNOUNCE</span></li>
+<li class="item"><span class="label"> Landing gear</span><span class="status">SELECT UP</span></li>
+<li class="item"><span class="label">Autopilot</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">At thrust reduction altitude: thrust levers</span><span class="status">CL</span></li>
 <li class="item"><span class="label"> Packs 1+2 (if applicable)</span><span class="status">CL</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> At F speed: flaps 1</span><span class="status">ORDER / SELECT</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> At S speed: flaps 0</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label"> At F speed: flaps 1</span><span class="status">ORDER / SELECT</span></li>
+<li class="item"><span class="label"> At S speed: flaps 0</span><span class="status">ORDER / SELECT</span></li>
 <li class="item"><span class="label"> Ground spoilers</span><span class="status">DISARM</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 </ul>
@@ -510,12 +487,12 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">ENG MODE selector</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">TCAS mode selector</span><span class="status">TA/RA</span></li>
 <li class="item"><span class="label">Anti-ice pushbuttons</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> After Takeoff / Climb C/L – above the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> After Takeoff / Climb C/L – above the line</span><span class="status">COMPLETE</span></li>
 <li class="item"><span class="label">MCDU</span><span class="status">PROG / PERF DESCENT or F-PLN</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>FCU / FMGS</span><span class="status">SET IF AP ON</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> At transition altitude: barometric reference</span><span class="status">SET STD / X-CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Standby altimeter<span class="description">Set STD and crosscheck with the primary altimeters.</span></span><span class="status">SET STD / X-CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> After Takeoff / Climb C/L – below the line</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label">FCU / FMGS</span><span class="status">SET IF AP ON</span></li>
+<li class="item"><span class="label"> At transition altitude: barometric reference</span><span class="status">SET STD / X-CHECK</span></li>
+<li class="item"><span class="label">Standby altimeter<span class="description">Set STD and crosscheck with the primary altimeters.</span></span><span class="status">SET STD / X-CHECK</span></li>
+<li class="item"><span class="label"> After Takeoff / Climb C/L – below the line</span><span class="status">COMPLETE</span></li>
 <li class="item"><span class="label">Radar</span><span class="status">ADJUST AS APPROPRIATE</span></li>
 <li class="item"><span class="label"> Engine anti-ice</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">At 10,000 ft: landing lights<span class="description">Set according to altitude, visibility and local procedure.</span></span><span class="status">RETRACT</span></li>
@@ -528,54 +505,54 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 </ul>
 <h3 class="group-title" id="cruise">Cruise<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Cruise" class="group-select-btn" data-group="cruise" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/cruise.jpg" title="Otvoriť obrázok pre skupinu Cruise">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> ECAM memo / SD pages</span><span class="status">REVIEW</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Flight progress</span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Fuel</span><span class="status">MONITOR</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Navigation accuracy</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"> ECAM memo / SD pages</span><span class="status">REVIEW</span></li>
+<li class="item"><span class="label"> Flight progress</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label"> Fuel</span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label"> Navigation accuracy</span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label">Radar<span class="description">Adjust range/tilt/gain as appropriate to weather and phase of flight.</span></span><span class="status">ADJUST AS APPROPRIATE</span></li>
 </ul>
 <h3 class="group-title" id="desprep">Descent Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Descent Preparation" class="group-select-btn" data-group="desprep" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/desprep.jpg" title="Otvoriť obrázok pre skupinu Descent Preparation">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Weather and landing information<span class="description">Obtain destination and alternate weather, runway in use and runway condition report/RWYCC.</span></span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label">Weather and landing information<span class="description">Obtain destination and alternate weather, runway in use and runway condition report/RWYCC.</span></span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label"> Navigation charts clipboard</span><span class="status">PREPARE</span></li>
 <li class="item"><span class="label"> Landing conditions</span><span class="status">CONFIRM</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>If landing conditions change: landing performance data<span class="description">Recompute landing performance and update the approach plan if conditions change.</span></span><span class="status">COMPUTE</span></li>
+<li class="item"><span class="label">If landing conditions change: landing performance data<span class="description">Recompute landing performance and update the approach plan if conditions change.</span></span><span class="status">COMPUTE</span></li>
 <li class="item"><span class="label"> Landing performance data</span><span class="status">CROSSCHECK</span></li>
 <li class="item"><span class="label"> FMS preparation</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">GPWS LDG FLAP 3<span class="description">Select as required by the landing configuration and procedure.</span></span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Landing elevation</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Autobrake<span class="description">Select the setting appropriate to runway condition and landing plan.</span></span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Approach briefing<span class="description">Complete before top of descent; include approach, minima, missed approach and threats.</span></span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">Approach briefing<span class="description">Complete before top of descent; include approach, minima, missed approach and threats.</span></span><span class="status">PERFORM</span></li>
 <li class="item"><span class="label"> Terrain on ND</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Radar</span><span class="status">ADJUST AS APPROPRIATE</span></li>
 <li class="item"><span class="label">Engine anti-ice</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Wing anti-ice</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> Descent clearance</span><span class="status">OBTAIN</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Cleared altitude on FCU<span class="description">Set the cleared altitude and crosscheck it against the ATC clearance.</span></span><span class="status">SET</span></li>
+<li class="item"><span class="label">Cleared altitude on FCU<span class="description">Set the cleared altitude and crosscheck it against the ATC clearance.</span></span><span class="status">SET</span></li>
 </ul>
 <h3 class="group-title" id="descent">Descent<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Descent" class="group-select-btn" data-group="descent" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/descent.jpg" title="Otvoriť obrázok pre skupinu Descent">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Descent</span><span class="status">INITIATE</span></li>
+<li class="item"><span class="label">Descent</span><span class="status">INITIATE</span></li>
 <li class="item"><span class="label">MCDU</span><span class="status">PROG / PERF DESCENT</span></li>
 <li class="item"><span class="label"> MCDU</span><span class="status">F-PLN</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Descent</span><span class="status">MONITOR / ADJUST</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> When approaching transition level and cleared: barometric reference</span><span class="status">SET / X-CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ECAM STATUS</span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>At 10,000 ft: landing lights<span class="description">Set as required for the descent and local procedure.</span></span><span class="status">SET</span></li>
+<li class="item"><span class="label">Descent</span><span class="status">MONITOR / ADJUST</span></li>
+<li class="item"><span class="label"> When approaching transition level and cleared: barometric reference</span><span class="status">SET / X-CHECK</span></li>
+<li class="item"><span class="label">ECAM STATUS</span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">At 10,000 ft: landing lights<span class="description">Set as required for the descent and local procedure.</span></span><span class="status">SET</span></li>
 <li class="item"><span class="label">Seat belts switch</span><span class="status">ON</span></li>
 <li class="item"><span class="label"> EFIS option</span><span class="status">CSTR</span></li>
 <li class="item"><span class="label"> LS pushbutton</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Radio navigation<span class="description">Tune and identify required aids for the planned approach.</span></span><span class="status">SELECT / IDENT</span></li>
+<li class="item"><span class="label">Radio navigation<span class="description">Tune and identify required aids for the planned approach.</span></span><span class="status">SELECT / IDENT</span></li>
 <li class="item"><span class="label">ENG MODE selector</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">If GPS PRIMARY unavailable: navigation accuracy<span class="description">Reassess navigation capability and use the applicable procedure if accuracy is insufficient.</span></span><span class="status">CHECK</span></li>
 </ul>
 <h3 class="group-title" id="approachconfig">Aircraft Configuration for Approach<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Aircraft Configuration for Approach" class="group-select-btn" data-group="approachconfig" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/approachconfig.jpg" title="Otvoriť obrázok pre skupinu Aircraft Configuration for Approach">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Initial approach: F-PLN sequencing<span class="description">Check waypoint sequencing and revise the flight plan as needed for the actual arrival.</span></span><span class="status">ADJUST</span></li>
+<li class="item"><span class="label">Initial approach: F-PLN sequencing<span class="description">Check waypoint sequencing and revise the flight plan as needed for the actual arrival.</span></span><span class="status">ADJUST</span></li>
 <li class="item"><span class="label"> MCDU</span><span class="status">F-PLN</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Approx. 15 NM from touchdown: APPR phase<span class="description">Activate the approach phase at the appropriate point, or use the aircraft-specific managed-speed method.</span></span><span class="status">ACTIVATE or set green dot</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Managed speed<span class="description">Verify the managed target is appropriate for the current configuration and approach.</span></span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Flight path<span class="description">Monitor flight path stability and energy; intervene early if the approach is not stable.</span></span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">Approx. 15 NM from touchdown: APPR phase<span class="description">Activate the approach phase at the appropriate point, or use the aircraft-specific managed-speed method.</span></span><span class="status">ACTIVATE or set green dot</span></li>
+<li class="item"><span class="label">Managed speed<span class="description">Verify the managed target is appropriate for the current configuration and approach.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Flight path<span class="description">Monitor flight path stability and energy; intervene early if the approach is not stable.</span></span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label"> Navigation accuracy</span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label">Speed brakes lever</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Radar</span><span class="status">ADJUST AS APPROPRIATE</span></li>
@@ -585,7 +562,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"> At 2,000 ft AGL minimum: flaps 2</span><span class="status">ORDER / SELECT</span></li>
 <li class="item"><span class="label">F speed</span><span class="status">CHECK OR SET</span></li>
 <li class="item"><span class="label"> When flaps 2: landing gear</span><span class="status">ORDER / SELECT DOWN</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Autobrake<span class="description">Select the planned landing setting.</span></span><span class="status">CONFIRM</span></li>
+<li class="item"><span class="label">Autobrake<span class="description">Select the planned landing setting.</span></span><span class="status">CONFIRM</span></li>
 <li class="item"><span class="label"> Ground spoilers</span><span class="status">ARM</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 <li class="item"><span class="label"> When landing gear down: flaps 3</span><span class="status">ORDER / SELECT</span></li>
@@ -596,47 +573,47 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">Wing anti-ice (if not required)</span><span class="status">OFF</span></li>
 <li class="item"><span class="label"> Sliding table</span><span class="status">STOW</span></li>
 <li class="item"><span class="label"> All EFB without mounted equipment</span><span class="status">STOW</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Landing memo<span class="description">Check landing configuration and required memo items.</span></span><span class="status">CHECK NO BLUE</span></li>
+<li class="item"><span class="label">Landing memo<span class="description">Check landing configuration and required memo items.</span></span><span class="status">CHECK NO BLUE</span></li>
 <li class="item"><span class="label"> Cabin report</span><span class="status">RECEIVE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Landing checklist</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> Landing checklist</span><span class="status">COMPLETE</span></li>
 <li class="item"><span class="label">Announce any FMA modification</span><span class="status">ANNOUNCE</span></li>
 <li class="item"><span class="label"> Flight parameters</span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label"> Announce deviations: V/S &gt; 1000 ft/min; IAS +10/-5 kt; pitch -2.5°/+10°; bank 7°</span><span class="status">MONITOR / ANNOUNCE</span></li>
 </ul>
 <h3 class="group-title" id="locgs">Approach using LOC / G/S Guidance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Approach using LOC / G/S Guidance" class="group-select-btn" data-group="locgs" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/locgs.jpg" title="Otvoriť obrázok pre skupinu Approach using LOC / G/S Guidance">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Approach minimum</span><span class="status">DETERMINE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Approach briefing<span class="description">Confirm approach type, minima, missed approach and go-around strategy.</span></span><span class="status">PERFORM</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>APPR pushbutton on FCU<span class="description">Arm the approach only when established/cleared as required by the procedure.</span></span><span class="status">PRESS</span></li>
+<li class="item"><span class="label"> Approach minimum</span><span class="status">DETERMINE</span></li>
+<li class="item"><span class="label">Approach briefing<span class="description">Confirm approach type, minima, missed approach and go-around strategy.</span></span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">APPR pushbutton on FCU<span class="description">Arm the approach only when established/cleared as required by the procedure.</span></span><span class="status">PRESS</span></li>
 <li class="item"><span class="label">Both AP<span class="description">Engage as required by the approach category and aircraft capability.</span></span><span class="status">ENGAGE</span></li>
 <li class="item"><span class="label">LOC<span class="description">Verify localizer capture/arming on the FMA.</span></span><span class="status">CHECK ARMED</span></li>
 <li class="item"><span class="label">G/S<span class="description">Verify glideslope capture/arming on the FMA.</span></span><span class="status">CHECK ARMED</span></li>
 <li class="item"><span class="label">LOC capture<span class="description">Verify localizer capture/arming on the FMA.</span></span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label">G/S capture<span class="description">Verify glideslope capture/arming on the FMA.</span></span><span class="status">MONITOR</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Go-around altitude<span class="description">Set the published/cleared go-around altitude and crosscheck it.</span></span><span class="status">SET</span></li>
+<li class="item"><span class="label">Go-around altitude<span class="description">Set the published/cleared go-around altitude and crosscheck it.</span></span><span class="status">SET</span></li>
 <li class="item"><span class="label"> Flight parameters</span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label"> Announce deviations beyond ½ dot LOC / glide</span><span class="status">MONITOR / ANNOUNCE</span></li>
 <li class="item"><span class="label"> At 350 ft: LAND mode</span><span class="status">CHECK ENGAGED / ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> At minimum +100 ft<span class="description">Continue only with required visual references and conditions met; otherwise go around.</span></span><span class="status">MONITOR / ANNOUNCE ONE HUNDRED ABOVE</span></li>
+<li class="item"><span class="label"> At minimum +100 ft<span class="description">Continue only with required visual references and conditions met; otherwise go around.</span></span><span class="status">MONITOR / ANNOUNCE ONE HUNDRED ABOVE</span></li>
 <li class="item"><span class="label">At minimum<span class="description">Continue only with required visual references and conditions met; otherwise go around.</span></span><span class="status">ANNOUNCE CONTINUE OR GO-AROUND</span></li>
 <li class="item"><span class="label"> At minimum<span class="description">Continue only with required visual references and conditions met; otherwise go around.</span></span><span class="status">MONITOR / ANNOUNCE MINIMUM</span></li>
 <li class="item"><span class="label">CAT III no DH: at 100 ft RA, if no failure detected</span><span class="status">ANNOUNCE CONTINUE</span></li>
 </ul>
 <h3 class="group-title" id="fapp">Approach using F-LOC / F-G/S / FINAL APP / FPA<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Approach using F-LOC / F-G/S / FINAL APP / FPA" class="group-select-btn" data-group="fapp" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/fapp.jpg" title="Otvoriť obrázok pre skupinu Approach using F-LOC / F-G/S / FINAL APP / FPA">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Weather and landing information</span><span class="status">OBTAIN</span></li>
+<li class="item"><span class="label"> Weather and landing information</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label"> F-PLN A page</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label"> PROG page</span><span class="status">COMPLETE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Go-around strategy<span class="description">Review missed approach routing and the intended lateral/vertical guidance.</span></span><span class="status">REVIEW</span></li>
+<li class="item"><span class="label">Go-around strategy<span class="description">Review missed approach routing and the intended lateral/vertical guidance.</span></span><span class="status">REVIEW</span></li>
 <li class="item"><span class="label">At 10,000 ft: navigation accuracy</span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>For RNAV GNSS: GPS PRIMARY<span class="description">Confirm GPS PRIMARY before relying on GNSS approach guidance.</span></span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Barometric reference<span class="description">Use the correct local barometric reference and crosscheck.</span></span><span class="status">SET</span></li>
+<li class="item"><span class="label">For RNAV GNSS: GPS PRIMARY<span class="description">Confirm GPS PRIMARY before relying on GNSS approach guidance.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Barometric reference<span class="description">Use the correct local barometric reference and crosscheck.</span></span><span class="status">SET</span></li>
 <li class="item"><span class="label">Position</span><span class="status">MONITOR</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>APPR pushbutton on FCU</span><span class="status">PRESS</span></li>
+<li class="item"><span class="label">APPR pushbutton on FCU</span><span class="status">PRESS</span></li>
 <li class="item"><span class="label">APP NAV<span class="description">Confirm the lateral approach mode is armed/engaged as expected.</span></span><span class="status">CHECK ARMED / ENGAGED</span></li>
 <li class="item"><span class="label">FINAL<span class="description">Confirm FINAL guidance is armed when using FINAL APP.</span></span><span class="status">CHECK ARMED</span></li>
 <li class="item"><span class="label">At Final Descent Point: FINAL APP<span class="description">Verify FINAL APP engages at the expected point and monitor the FMA.</span></span><span class="status">CHECK ENGAGED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Go-around altitude<span class="description">Set and crosscheck the applicable missed approach altitude.</span></span><span class="status">SET</span></li>
+<li class="item"><span class="label">Go-around altitude<span class="description">Set and crosscheck the applicable missed approach altitude.</span></span><span class="status">SET</span></li>
 <li class="item"><span class="label"> Flight parameters</span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label"> Announce deviations: L/DEV &gt; ½ dot; V/DEV &gt; ½ dot; XTK &gt; 0.1 NM</span><span class="status">MONITOR / ANNOUNCE</span></li>
 <li class="item"><span class="label"> At minimum +100 ft</span><span class="status">MONITOR / ANNOUNCE ONE HUNDRED ABOVE</span></li>
@@ -654,20 +631,20 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 </ul>
 <h3 class="group-title" id="landing">Manual Landing<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Manual Landing" class="group-select-btn" data-group="landing" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/landing.jpg" title="Otvoriť obrázok pre skupinu Manual Landing">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>At stabilized approach, approx. 30 ft: flare<span class="description">Begin flare at the appropriate height and avoid excessive pitch input.</span></span><span class="status">PERFORM</span></li>
+<li class="item"><span class="label">At stabilized approach, approx. 30 ft: flare<span class="description">Begin flare at the appropriate height and avoid excessive pitch input.</span></span><span class="status">PERFORM</span></li>
 <li class="item"><span class="label"> Attitude</span><span class="status">MONITOR</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Thrust levers</span><span class="status">IDLE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>At touchdown: derotation<span class="description">Lower the nose smoothly to the runway without aggressive input.</span></span><span class="status">INITIATE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Both thrust levers</span><span class="status">REV MAX or REV IDLE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Ground spoilers</span><span class="status">CHECK / ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Reversers</span><span class="status">CHECK / ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Directional control<span class="description">Maintain runway centreline using rudder/nosewheel steering as speed decreases.</span></span><span class="status">ENSURE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Directional control<span class="description">Maintain runway centreline using rudder/nosewheel steering as speed decreases.</span></span><span class="status">MONITOR</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Brakes</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Thrust levers</span><span class="status">IDLE</span></li>
+<li class="item"><span class="label">At touchdown: derotation<span class="description">Lower the nose smoothly to the runway without aggressive input.</span></span><span class="status">INITIATE</span></li>
+<li class="item"><span class="label">Both thrust levers</span><span class="status">REV MAX or REV IDLE</span></li>
+<li class="item"><span class="label"> Ground spoilers</span><span class="status">CHECK / ANNOUNCE</span></li>
+<li class="item"><span class="label"> Reversers</span><span class="status">CHECK / ANNOUNCE</span></li>
+<li class="item"><span class="label">Directional control<span class="description">Maintain runway centreline using rudder/nosewheel steering as speed decreases.</span></span><span class="status">ENSURE</span></li>
+<li class="item"><span class="label"> Directional control<span class="description">Maintain runway centreline using rudder/nosewheel steering as speed decreases.</span></span><span class="status">MONITOR</span></li>
+<li class="item"><span class="label">Brakes</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> Deceleration</span><span class="status">CHECK / ANNOUNCE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>At 70 kt: both thrust levers</span><span class="status">REV IDLE</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>At taxi speed: reversers<span class="description">Return reversers to idle in accordance with the procedure.</span></span><span class="status">STOW</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Before 20 kt: autobrake<span class="description">Disarm autobrake as required by the landing procedure.</span></span><span class="status">DISENGAGE</span></li>
+<li class="item"><span class="label">At 70 kt: both thrust levers</span><span class="status">REV IDLE</span></li>
+<li class="item"><span class="label">At taxi speed: reversers<span class="description">Return reversers to idle in accordance with the procedure.</span></span><span class="status">STOW</span></li>
+<li class="item"><span class="label">Before 20 kt: autobrake<span class="description">Disarm autobrake as required by the landing procedure.</span></span><span class="status">DISENGAGE</span></li>
 </ul>
 <h3 class="group-title" id="autoland">Autoland<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Autoland" class="group-select-btn" data-group="autoland" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/autoland.jpg" title="Otvoriť obrázok pre skupinu Autoland">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
@@ -710,34 +687,34 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 </ul>
 <h3 class="group-title" id="afterlanding">After Landing<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Landing" class="group-select-btn" data-group="afterlanding" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/afterlanding.jpg" title="Otvoriť obrázok pre skupinu After Landing">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>When vacating runway: landing lights<span class="description">Retract landing lights when vacating the runway as required by the procedure.</span></span><span class="status">RETRACT</span></li>
+<li class="item"><span class="label">When vacating runway: landing lights<span class="description">Retract landing lights when vacating the runway as required by the procedure.</span></span><span class="status">RETRACT</span></li>
 <li class="item"><span class="label">Strobe lights</span><span class="status">AUTO</span></li>
 <li class="item"><span class="label">Other exterior lights</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>When taxi clearance issued: ground spoilers<span class="description">Disarm after runway vacation/when taxi clearance is issued.</span></span><span class="status">DISARM</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Radar<span class="description">Switch OFF after landing to avoid unnecessary operation on the ground.</span></span><span class="status">OFF</span></li>
+<li class="item"><span class="label">When taxi clearance issued: ground spoilers<span class="description">Disarm after runway vacation/when taxi clearance is issued.</span></span><span class="status">DISARM</span></li>
+<li class="item"><span class="label">Radar<span class="description">Switch OFF after landing to avoid unnecessary operation on the ground.</span></span><span class="status">OFF</span></li>
 <li class="item"><span class="label">Predictive windshear<span class="description">Switch OFF after landing as specified in the OMB flow.</span></span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>ENG MODE selector</span><span class="status">NORM</span></li>
+<li class="item"><span class="label">ENG MODE selector</span><span class="status">NORM</span></li>
 <li class="item"><span class="label">Flaps</span><span class="status">RETRACT</span></li>
 <li class="item"><span class="label">Landing lights</span><span class="status">STANDBY</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Weather radar</span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">Weather radar</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">APU</span><span class="status">START</span></li>
 <li class="item"><span class="label">Anti-ice</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">Brake temperature<span class="description">Monitor brake temperature after landing.</span></span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Brake fans<span class="description">Use as required; the OMB notes delaying brake-fan selection for about 5 minutes after landing or until approaching the gate, as applicable.</span></span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> After Landing checklist</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> After Landing checklist</span><span class="status">COMPLETE</span></li>
 <li class="item"><span class="label">If one-engine taxi arrival: ENG 2</span><span class="status">SHUT DOWN</span></li>
 <li class="item"><span class="label">Yellow electric pump</span><span class="status">ON</span></li>
 </ul>
 <h3 class="group-title" id="parking">Parking<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Parking" class="group-select-btn" data-group="parking" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/parking.jpg" title="Otvoriť obrázok pre skupinu Parking">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"> Approaching gate / stand: ground spoilers</span><span class="status">DISARM / ORDER</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Stopped in final parking position: accumulator pressure<span class="description">Check brake accumulator pressure before relying on the parking brake.</span></span><span class="status">CHECK</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Parking brake<span class="description">Set once stopped and confirm the indication.</span></span><span class="status">ON</span></li>
+<li class="item"><span class="label">Stopped in final parking position: accumulator pressure<span class="description">Check brake accumulator pressure before relying on the parking brake.</span></span><span class="status">CHECK</span></li>
+<li class="item"><span class="label">Parking brake<span class="description">Set once stopped and confirm the indication.</span></span><span class="status">ON</span></li>
 <li class="item"><span class="label"> Yellow electric pump</span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>All engine masters</span><span class="status">OFF</span></li>
+<li class="item"><span class="label">All engine masters</span><span class="status">OFF</span></li>
 <li class="item"><span class="label"> Slides</span><span class="status">CHECK DISARMED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> When engines below 10% N1 and slides disarmed: beacon light</span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Fuel pumps</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"> When engines below 10% N1 and slides disarmed: beacon light</span><span class="status">OFF</span></li>
+<li class="item"><span class="label"> Fuel pumps</span><span class="status">OFF</span></li>
 <li class="item"><span class="label">Other exterior lights</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"> Seat belts</span><span class="status">OFF</span></li>
 <li class="item"><span class="label"> IRS performance</span><span class="status">CHECK</span></li>
@@ -746,12 +723,12 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">Brake fan</span><span class="status">OFF</span></li>
 <li class="item"><span class="label"> DUs</span><span class="status">DIM</span></li>
 <li class="item"><span class="label"> All EFB transmitting mode</span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Parking checklist</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> Parking checklist</span><span class="status">COMPLETE</span></li>
 </ul>
 <h3 class="group-title" id="secure">Securing the Aircraft<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Securing the Aircraft" class="group-select-btn" data-group="secure" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/secure.jpg" title="Otvoriť obrázok pre skupinu Securing the Aircraft">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>Parking brake</span><span class="status">CHECK ON</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>All IR mode selectors<span class="description">Select OFF only after the aircraft is parked and the shutdown flow is complete.</span></span><span class="status">OFF</span></li>
+<li class="item"><span class="label">Parking brake</span><span class="status">CHECK ON</span></li>
+<li class="item"><span class="label">All IR mode selectors<span class="description">Select OFF only after the aircraft is parked and the shutdown flow is complete.</span></span><span class="status">OFF</span></li>
 <li class="item"><span class="label"> Oxygen crew supply pushbutton</span><span class="status">OFF</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">OFF</span></li>
 <li class="item"><span class="label">MAINT BUS switch</span><span class="status">AS REQUIRED</span></li>
@@ -759,11 +736,11 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">APU MASTER switch</span><span class="status">OFF</span></li>
 <li class="item"><span class="label">Emergency exit lights switch</span><span class="status">OFF</span></li>
 <li class="item"><span class="label">Signs switch</span><span class="status">OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>External power<span class="description">Use as required; confirm the external supply indication before switching batteries off.</span></span><span class="status">AS REQUIRED</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span>BAT 1+2<span class="description">Switch OFF only at the appropriate final securing step.</span></span><span class="status">OFF</span></li>
+<li class="item"><span class="label">External power<span class="description">Use as required; confirm the external supply indication before switching batteries off.</span></span><span class="status">AS REQUIRED</span></li>
+<li class="item"><span class="label">BAT 1+2<span class="description">Switch OFF only at the appropriate final securing step.</span></span><span class="status">OFF</span></li>
 <li class="item"><span class="label"> EFB applications</span><span class="status">CLOSE</span></li>
 <li class="item"><span class="label"> All EFB</span><span class="status">SWITCH OFF</span></li>
-<li class="item"><span class="label"><span class="tag core" title="Kľúčová položka bežného letu v simulátore">CORE</span> Securing the aircraft checklist</span><span class="status">COMPLETE</span></li>
+<li class="item"><span class="label"> Securing the aircraft checklist</span><span class="status">COMPLETE</span></li>
 </ul>
 <button id="scrollTopBtn" title="Späť na začiatok">↑</button><button id="menuToggle" title="Navigácia">☰</button><div id="sectionMenu"><div class="menu-content"><ul>
 <li class="menu-item" data-target="safety">Safety – Exterior Inspection</li>
