@@ -259,19 +259,33 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 
 .description { display:block; font-size:0.84em; color:#aaa; text-transform:none; font-weight:normal; font-style:italic; margin-top:4px; line-height:1.35; }
 .selected .description { color:#777; }
+#lightbox {
+  display: none; position: fixed; z-index: 9999; inset: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center;
+  padding: 20px; box-sizing: border-box; cursor: zoom-out;
+}
+#lightbox.active { display: flex; }
+#lightbox img {
+  max-width: 90vw; max-height: 80vh; width: auto; height: auto; object-fit: contain;
+  border: 2px solid #5dade2; box-shadow: 0 0 50px rgba(0,0,0,0.8); opacity: 0.95;
+  cursor: default;
+}
 </style>
 </head><body>
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Zobrazený obrázok" aria-hidden="true">
+  <img id="lightbox-img" src="" alt="Checklist diagram">
+</div>
 <h1>A320 — Normal Procedures / Single-Pilot Checklist</h1>
 <p class="notice">Simulačný checklist s krátkymi vysvetľujúcimi poznámkami doplnenými podľa OMB SOPs Version 4 (17-Jan-2024). Základ checklistu vychádza aj z Fenix A320 CFM QRH – Normal Procedures (revízia uvedená v PDF: 27-Apr-22); dokumenty sa môžu v detailoch líšiť. Nie je to oficiálny prevádzkový dokument ani náhrada aktuálneho QRH/FCOM. Používaj iba v simulátore a over si postupy podľa konkrétnej verzie lietadla/add-onu.</p>
-<p class="notice">Ľavým tlačidlom na checklist klikáš postupne na ďalšie položky; pravým tlačidlom vrátiš poslednú akciu. Tlačidlo „Označiť celú skupinu“ označí alebo odznačí všetky položky fázy. Odkaz „Obrázok“ otvorí súbor z priečinka images/ — cesty k obrázkom si môžeš upraviť v HTML. Položky vykonávané PM majú modrý štítok PM; ostatné sú bez štítka.</p><p class="notice">Sivé/kurzívne riadky pod položkami sú stručné poznámky a kontext z OMB SOPs v4; nemenia samotnú checklistovú položku.</p>
+<p class="notice">Ľavým tlačidlom na checklist klikáš postupne na ďalšie položky; pravým tlačidlom vrátiš poslednú akciu. Tlačidlo „Označiť celú skupinu“ označí alebo odznačí všetky položky fázy. Odkaz „Obrázok“ zobrazí obrázok z priečinka images/ v prekryvnom okne; kliknutím mimo obrázka alebo klávesom Esc ho zavrieš. Položky vykonávané PM majú modrý štítok PM; ostatné sú bez štítka.</p><p class="notice">Sivé/kurzívne riadky pod položkami sú stručné poznámky a kontext z OMB SOPs v4; nemenia samotnú checklistovú položku.</p>
 <p><span class="tag pm">PM</span> = Pilot Monitoring</p><p class="notice">Cesty k obrázkom: v každej skupine uprav atribút href odkazu „Obrázok“ (predvolené images/ID-SKUPINY.jpg).</p>
-<h3 class="group-title" id="safety">Safety – Exterior Inspection<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Safety – Exterior Inspection" class="group-select-btn" data-group="safety" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/safety.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Safety – Exterior Inspection">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="safety">Safety – Exterior Inspection<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Safety – Exterior Inspection" class="group-select-btn" data-group="safety" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/safety.jpg" title="Otvoriť obrázok pre skupinu Safety – Exterior Inspection">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> Wheel chocks<span class="description">If chocks are not in place, confirm parking brake set and accumulator pressure sufficient.</span></span><span class="status">CHECK</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Flight / cargo doors<span class="description">Check landing gear doors and aircraft doors; confirm ground crew clearance before pressurising the green hydraulic system if a gear door is open.</span></span><span class="status">CHECK POSITION</span></li>
 <li class="item"><span class="label">APU area<span class="description">Ensure the APU inlet and outlet are clear.</span></span><span class="status">CHECK</span></li>
 </ul>
-<h3 class="group-title" id="prelim">Preliminary Cockpit Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Preliminary Cockpit Preparation" class="group-select-btn" data-group="prelim" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/prelim.png" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Preliminary Cockpit Preparation">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="prelim">Preliminary Cockpit Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Preliminary Cockpit Preparation" class="group-select-btn" data-group="prelim" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/prelim.png" title="Otvoriť obrázok pre skupinu Preliminary Cockpit Preparation">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">ENG masters 1, 2</span><span class="status">OFF</span></li>
 <li class="item"><span class="label">ENG MODE selector</span><span class="status">NORM</span></li>
@@ -314,7 +328,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">Gear pins and covers</span><span class="status">CHECK ONBOARD / STOWED</span></li>
 <li class="item"><span class="label">NAV &amp; LOGO lights<span class="description">Set ON as part of the exterior/initial setup flow.</span></span><span class="status">ON</span></li><li class="item"><span class="label">Fan cowl flags</span><span class="status">CHECK</span></li><li class="item"><span class="label">Cockpit door locking system<span class="description">Check the cockpit door locking system and associated indications.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label">Exterior walkaround<span class="description">Check aircraft condition and confirm the APU inlet/outlet and landing gear areas are clear.</span></span><span class="status">PERFORM</span></li>
 </ul>
-<h3 class="group-title" id="cockpit">Cockpit Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Cockpit Preparation" class="group-select-btn" data-group="cockpit" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/cockpit.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Cockpit Preparation">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="cockpit">Cockpit Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Cockpit Preparation" class="group-select-btn" data-group="cockpit" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/cockpit.jpg" title="Otvoriť obrázok pre skupinu Cockpit Preparation">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> Cockpit door</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">All white lights</span><span class="status">EXTINGUISH</span></li>
@@ -364,7 +378,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">ECAM STATUS<span class="description">Review status messages and any limitations before continuing.</span></span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Takeoff briefing<span class="description">Cover runway/SID, thrust and flap settings, initial altitude, threats and the go-around/engine-failure strategy.</span></span><span class="status">PERFORM</span></li>
 </ul>
-<h3 class="group-title" id="pushback">Before Pushback or Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Before Pushback or Start" class="group-select-btn" data-group="pushback" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushback.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Before Pushback or Start">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="pushback">Before Pushback or Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Before Pushback or Start" class="group-select-btn" data-group="pushback" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushback.jpg" title="Otvoriť obrázok pre skupinu Before Pushback or Start">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> Final loadsheet</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> FOB</span><span class="status">CHECK</span></li>
@@ -388,7 +402,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">Parking brake</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Before Start C/L – below the line</span><span class="status">COMPLETE</span></li>
 </ul>
-<h3 class="group-title" id="pushclear">At Pushback / Start Clearance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: At Pushback / Start Clearance" class="group-select-btn" data-group="pushclear" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushclear.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu At Pushback / Start Clearance">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label">Pushback / start clearance from ground crew<span class="description">Establish communication and confirm ground checks are complete before requesting ATC clearance.</span></span><span class="status">OBTAIN</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Pushback / start clearance from ATC</span><span class="status">OBTAIN</span></li><li class="item"><span class="label">Beacon<span class="description">Set ON when cleared to commence pushback/start.</span></span><span class="status">ON</span></li><li class="item"><span class="label">PED (EFB / phone)<span class="description">Select flight mode or switch off.</span></span><span class="status">FLIGHT MODE</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Transponder</span><span class="status">AUTO</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> If pushback is not required: Before Start checklist</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">If pushback is required: N/W STEER DISC memo<span class="description">Before conventional or towbarless pushback, confirm the selector is in tow position and the NW STRG DISC memo is displayed.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Before Start checklist (after clearance)</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">Elapsed time<span class="description">Run the elapsed timer as a backup for block-time recording if ACARS OOOI is unavailable.</span></span><span class="status">START</span></li></ul><h3 class="group-title" id="start">Engine Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Engine Start" class="group-select-btn" data-group="start" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/start.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Engine Start">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="pushclear">At Pushback / Start Clearance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: At Pushback / Start Clearance" class="group-select-btn" data-group="pushclear" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/pushclear.jpg" title="Otvoriť obrázok pre skupinu At Pushback / Start Clearance">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label">Pushback / start clearance from ground crew<span class="description">Establish communication and confirm ground checks are complete before requesting ATC clearance.</span></span><span class="status">OBTAIN</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Pushback / start clearance from ATC</span><span class="status">OBTAIN</span></li><li class="item"><span class="label">Beacon<span class="description">Set ON when cleared to commence pushback/start.</span></span><span class="status">ON</span></li><li class="item"><span class="label">PED (EFB / phone)<span class="description">Select flight mode or switch off.</span></span><span class="status">FLIGHT MODE</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Transponder</span><span class="status">AUTO</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> If pushback is not required: Before Start checklist</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">If pushback is required: N/W STEER DISC memo<span class="description">Before conventional or towbarless pushback, confirm the selector is in tow position and the NW STRG DISC memo is displayed.</span></span><span class="status">CHECK</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Before Start checklist (after clearance)</span><span class="status">COMPLETE</span></li><li class="item"><span class="label">Elapsed time<span class="description">Run the elapsed timer as a backup for block-time recording if ACARS OOOI is unavailable.</span></span><span class="status">START</span></li></ul><h3 class="group-title" id="start">Engine Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Engine Start" class="group-select-btn" data-group="start" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/start.jpg" title="Otvoriť obrázok pre skupinu Engine Start">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">ENG MODE selector<span class="description">Confirm the selector is positively identified before selecting IGN/START; thrust levers must be at IDLE.</span></span><span class="status">IGN / START</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Engine 2 start</span><span class="status">ANNOUNCE</span></li>
@@ -397,7 +411,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> Engine 1 start</span><span class="status">ANNOUNCE</span></li>
 <li class="item"><span class="label">Repeat start sequence for engine 1<span class="description">Follow the same monitored start sequence for the other engine; use the applicable procedure if a start is abnormal.</span></span><span class="status">PERFORM</span></li>
 </ul>
-<h3 class="group-title" id="afterstart">After Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Start" class="group-select-btn" data-group="afterstart" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/afterstart.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu After Start">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="afterstart">After Start<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Start" class="group-select-btn" data-group="afterstart" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/afterstart.jpg" title="Otvoriť obrázok pre skupinu After Start">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">ENG MODE selector</span><span class="status">NORM</span></li>
 <li class="item"><span class="label">APU BLEED pushbutton<span class="description">Select OFF after engine start as required. OMB guidance delays APU BLEED at least one minute after APU start for thermal stabilisation.</span></span><span class="status">OFF</span></li>
@@ -413,7 +427,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> Flaps</span><span class="status">SET</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Pitch trim</span><span class="status">SET</span></li>
 </ul>
-<h3 class="group-title" id="taxi">Taxi<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Taxi" class="group-select-btn" data-group="taxi" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/taxi.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Taxi">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="taxi">Taxi<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Taxi" class="group-select-btn" data-group="taxi" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/taxi.jpg" title="Otvoriť obrázok pre skupinu Taxi">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> Taxi clearance</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
@@ -443,7 +457,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> Cabin report</span><span class="status">RECEIVE</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Before Takeoff C/L – above the line</span><span class="status">COMPLETE</span></li>
 </ul>
-<h3 class="group-title" id="departurechange">Departure Change (if required)<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Departure Change (if required)" class="group-select-btn" data-group="departurechange" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/departurechange.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Departure Change (if required)">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label">FMS F-PLN / SID<span class="description">Revise the route and SID/transition for the changed departure.</span></span><span class="status">REVISE AS REQUIRED</span></li><li class="item"><span class="label">FCU altitude<span class="description">Set and crosscheck the cleared initial altitude.</span></span><span class="status">CHECK / SET</span></li><li class="item"><span class="label">Takeoff data<span class="description">Recompute/revise performance if runway, weather, configuration or weight has changed.</span></span><span class="status">REVISE AS REQUIRED</span></li><li class="item"><span class="label">Flaps</span><span class="status">CHECK / SET</span></li><li class="item"><span class="label">Departure re-briefing<span class="description">Brief the revised routing, altitude constraints and relevant threats before continuing.</span></span><span class="status">COMPLETE</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Departure Change checklist</span><span class="status">COMPLETE</span></li></ul><h3 class="group-title" id="beforetakeoff">Before Takeoff<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Before Takeoff" class="group-select-btn" data-group="beforetakeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/beforetakeoff.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Before Takeoff">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="departurechange">Departure Change (if required)<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Departure Change (if required)" class="group-select-btn" data-group="departurechange" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/departurechange.jpg" title="Otvoriť obrázok pre skupinu Departure Change (if required)">🖼 Obrázok</a></span></h3><ul class="checklist"><li class="item"><span class="label">FMS F-PLN / SID<span class="description">Revise the route and SID/transition for the changed departure.</span></span><span class="status">REVISE AS REQUIRED</span></li><li class="item"><span class="label">FCU altitude<span class="description">Set and crosscheck the cleared initial altitude.</span></span><span class="status">CHECK / SET</span></li><li class="item"><span class="label">Takeoff data<span class="description">Recompute/revise performance if runway, weather, configuration or weight has changed.</span></span><span class="status">REVISE AS REQUIRED</span></li><li class="item"><span class="label">Flaps</span><span class="status">CHECK / SET</span></li><li class="item"><span class="label">Departure re-briefing<span class="description">Brief the revised routing, altitude constraints and relevant threats before continuing.</span></span><span class="status">COMPLETE</span></li><li class="item"><span class="label"><span class="tag pm">PM</span> Departure Change checklist</span><span class="status">COMPLETE</span></li></ul><h3 class="group-title" id="beforetakeoff">Before Takeoff<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Before Takeoff" class="group-select-btn" data-group="beforetakeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/beforetakeoff.jpg" title="Otvoriť obrázok pre skupinu Before Takeoff">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">Brake temperature (if brake fan running)<span class="description">Check when brake fans have been running; follow the add-on’s indications and limitations.</span></span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Brake fan pushbutton (if running)</span><span class="status">OFF</span></li>
@@ -462,7 +476,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">Packs<span class="description">Set as required for takeoff performance and the applicable procedure.</span></span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Before Takeoff C/L – below the line</span><span class="status">COMPLETE</span></li>
 </ul>
-<h3 class="group-title" id="takeoff">Takeoff<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Takeoff" class="group-select-btn" data-group="takeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/takeoff.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Takeoff">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="takeoff">Takeoff<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Takeoff" class="group-select-btn" data-group="takeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/takeoff.jpg" title="Otvoriť obrázok pre skupinu Takeoff">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> Takeoff clearance</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
@@ -489,7 +503,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> Ground spoilers</span><span class="status">DISARM</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 </ul>
-<h3 class="group-title" id="aftertakeoff">After Takeoff / Climb<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Takeoff / Climb" class="group-select-btn" data-group="aftertakeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/aftertakeoff.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu After Takeoff / Climb">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="aftertakeoff">After Takeoff / Climb<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Takeoff / Climb" class="group-select-btn" data-group="aftertakeoff" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/aftertakeoff.jpg" title="Otvoriť obrázok pre skupinu After Takeoff / Climb">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">APU BLEED pushbutton</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">APU MASTER switch</span><span class="status">AS REQUIRED</span></li>
@@ -512,7 +526,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">Secondary flight plan</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">OPT / MAX ALT<span class="description">Review operational/max altitude information as relevant to weight and performance.</span></span><span class="status">AS REQUIRED</span></li>
 </ul>
-<h3 class="group-title" id="cruise">Cruise<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Cruise" class="group-select-btn" data-group="cruise" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/cruise.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Cruise">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="cruise">Cruise<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Cruise" class="group-select-btn" data-group="cruise" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/cruise.jpg" title="Otvoriť obrázok pre skupinu Cruise">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> ECAM memo / SD pages</span><span class="status">REVIEW</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Flight progress</span><span class="status">CHECK</span></li>
@@ -520,7 +534,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> Navigation accuracy</span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label">Radar<span class="description">Adjust range/tilt/gain as appropriate to weather and phase of flight.</span></span><span class="status">ADJUST AS APPROPRIATE</span></li>
 </ul>
-<h3 class="group-title" id="desprep">Descent Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Descent Preparation" class="group-select-btn" data-group="desprep" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/desprep.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Descent Preparation">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="desprep">Descent Preparation<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Descent Preparation" class="group-select-btn" data-group="desprep" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/desprep.jpg" title="Otvoriť obrázok pre skupinu Descent Preparation">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">Weather and landing information<span class="description">Obtain destination and alternate weather, runway in use and runway condition report/RWYCC.</span></span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Navigation charts clipboard</span><span class="status">PREPARE</span></li>
@@ -539,7 +553,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> Descent clearance</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label">Cleared altitude on FCU<span class="description">Set the cleared altitude and crosscheck it against the ATC clearance.</span></span><span class="status">SET</span></li>
 </ul>
-<h3 class="group-title" id="descent">Descent<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Descent" class="group-select-btn" data-group="descent" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/descent.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Descent">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="descent">Descent<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Descent" class="group-select-btn" data-group="descent" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/descent.jpg" title="Otvoriť obrázok pre skupinu Descent">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">Descent</span><span class="status">INITIATE</span></li>
 <li class="item"><span class="label">MCDU</span><span class="status">PROG / PERF DESCENT</span></li>
@@ -555,7 +569,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">ENG MODE selector</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label">If GPS PRIMARY unavailable: navigation accuracy<span class="description">Reassess navigation capability and use the applicable procedure if accuracy is insufficient.</span></span><span class="status">CHECK</span></li>
 </ul>
-<h3 class="group-title" id="approachconfig">Aircraft Configuration for Approach<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Aircraft Configuration for Approach" class="group-select-btn" data-group="approachconfig" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/approachconfig.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Aircraft Configuration for Approach">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="approachconfig">Aircraft Configuration for Approach<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Aircraft Configuration for Approach" class="group-select-btn" data-group="approachconfig" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/approachconfig.jpg" title="Otvoriť obrázok pre skupinu Aircraft Configuration for Approach">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">Initial approach: F-PLN sequencing<span class="description">Check waypoint sequencing and revise the flight plan as needed for the actual arrival.</span></span><span class="status">ADJUST</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> MCDU</span><span class="status">F-PLN</span></li>
@@ -589,7 +603,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> Flight parameters</span><span class="status">MONITOR</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Announce deviations: V/S &gt; 1000 ft/min; IAS +10/-5 kt; pitch -2.5°/+10°; bank 7°</span><span class="status">MONITOR / ANNOUNCE</span></li>
 </ul>
-<h3 class="group-title" id="locgs">Approach using LOC / G/S Guidance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Approach using LOC / G/S Guidance" class="group-select-btn" data-group="locgs" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/locgs.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Approach using LOC / G/S Guidance">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="locgs">Approach using LOC / G/S Guidance<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Approach using LOC / G/S Guidance" class="group-select-btn" data-group="locgs" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/locgs.jpg" title="Otvoriť obrázok pre skupinu Approach using LOC / G/S Guidance">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> Approach minimum</span><span class="status">DETERMINE</span></li>
 <li class="item"><span class="label">Approach briefing<span class="description">Confirm approach type, minima, missed approach and go-around strategy.</span></span><span class="status">PERFORM</span></li>
@@ -608,7 +622,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> At minimum<span class="description">Continue only with required visual references and conditions met; otherwise go around.</span></span><span class="status">MONITOR / ANNOUNCE MINIMUM</span></li>
 <li class="item"><span class="label">CAT III no DH: at 100 ft RA, if no failure detected</span><span class="status">ANNOUNCE CONTINUE</span></li>
 </ul>
-<h3 class="group-title" id="fapp">Approach using F-LOC / F-G/S / FINAL APP / FPA<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Approach using F-LOC / F-G/S / FINAL APP / FPA" class="group-select-btn" data-group="fapp" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/fapp.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Approach using F-LOC / F-G/S / FINAL APP / FPA">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="fapp">Approach using F-LOC / F-G/S / FINAL APP / FPA<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Approach using F-LOC / F-G/S / FINAL APP / FPA" class="group-select-btn" data-group="fapp" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/fapp.jpg" title="Otvoriť obrázok pre skupinu Approach using F-LOC / F-G/S / FINAL APP / FPA">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> Weather and landing information</span><span class="status">OBTAIN</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> F-PLN A page</span><span class="status">CHECK</span></li>
@@ -638,7 +652,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">FPA</span><span class="status">CHECK ENGAGED</span></li>
 <li class="item"><span class="label">Position / flight path</span><span class="status">MONITOR / ADJUST</span></li>
 </ul>
-<h3 class="group-title" id="landing">Manual Landing<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Manual Landing" class="group-select-btn" data-group="landing" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/landing.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Manual Landing">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="landing">Manual Landing<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Manual Landing" class="group-select-btn" data-group="landing" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/landing.jpg" title="Otvoriť obrázok pre skupinu Manual Landing">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">At stabilized approach, approx. 30 ft: flare<span class="description">Begin flare at the appropriate height and avoid excessive pitch input.</span></span><span class="status">PERFORM</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Attitude</span><span class="status">MONITOR</span></li>
@@ -655,7 +669,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">At taxi speed: reversers<span class="description">Return reversers to idle in accordance with the procedure.</span></span><span class="status">STOW</span></li>
 <li class="item"><span class="label">Before 20 kt: autobrake<span class="description">Disarm autobrake as required by the landing procedure.</span></span><span class="status">DISENGAGE</span></li>
 </ul>
-<h3 class="group-title" id="autoland">Autoland<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Autoland" class="group-select-btn" data-group="autoland" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/autoland.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Autoland">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="autoland">Autoland<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Autoland" class="group-select-btn" data-group="autoland" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/autoland.jpg" title="Otvoriť obrázok pre skupinu Autoland">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> At 350 ft RA: ILS / GLS / MLS course on PFD</span><span class="status">CHECK</span></li>
 <li class="item"><span class="label">Autocallouts</span><span class="status">MONITOR</span></li>
@@ -676,7 +690,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">Before 20 kt: autobrake<span class="description">Disarm as required by the rollout procedure.</span></span><span class="status">DISENGAGE</span></li>
 <li class="item"><span class="label">End of roll-out: reversers<span class="description">Return reversers to idle when the rollout is complete and as required.</span></span><span class="status">STOW</span></li>
 </ul>
-<h3 class="group-title" id="goaround">Go-Around<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Go-Around" class="group-select-btn" data-group="goaround" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/goaround.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Go-Around">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="goaround">Go-Around<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Go-Around" class="group-select-btn" data-group="goaround" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/goaround.jpg" title="Otvoriť obrázok pre skupinu Go-Around">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">Thrust levers<span class="description">Apply TOGA thrust and verify the expected thrust/FMA indications.</span></span><span class="status">TOGA</span></li>
 <li class="item"><span class="label">Rotation<span class="description">Follow the go-around pitch guidance; avoid excessive pitch.</span></span><span class="status">PERFORM</span></li>
@@ -694,7 +708,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">Autothrust speed</span><span class="status">DISARM</span></li>
 <li class="item"><span class="label">Exterior lights</span><span class="status">SET</span></li>
 </ul>
-<h3 class="group-title" id="afterlanding">After Landing<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Landing" class="group-select-btn" data-group="afterlanding" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/afterlanding.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu After Landing">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="afterlanding">After Landing<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: After Landing" class="group-select-btn" data-group="afterlanding" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/afterlanding.jpg" title="Otvoriť obrázok pre skupinu After Landing">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">When vacating runway: landing lights<span class="description">Retract landing lights when vacating the runway as required by the procedure.</span></span><span class="status">RETRACT</span></li>
 <li class="item"><span class="label">Strobe lights</span><span class="status">AUTO</span></li>
@@ -714,7 +728,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label">If one-engine taxi arrival: ENG 2</span><span class="status">SHUT DOWN</span></li>
 <li class="item"><span class="label">Yellow electric pump</span><span class="status">ON</span></li>
 </ul>
-<h3 class="group-title" id="parking">Parking<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Parking" class="group-select-btn" data-group="parking" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/parking.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Parking">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="parking">Parking<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Parking" class="group-select-btn" data-group="parking" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/parking.jpg" title="Otvoriť obrázok pre skupinu Parking">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label"><span class="tag pm">PM</span> Approaching gate / stand: ground spoilers</span><span class="status">DISARM / ORDER</span></li>
 <li class="item"><span class="label">Stopped in final parking position: accumulator pressure<span class="description">Check brake accumulator pressure before relying on the parking brake.</span></span><span class="status">CHECK</span></li>
@@ -734,7 +748,7 @@ h1 { margin: 12px 0 4px; font-size: 1.6em; }
 <li class="item"><span class="label"><span class="tag pm">PM</span> All EFB transmitting mode</span><span class="status">AS REQUIRED</span></li>
 <li class="item"><span class="label"><span class="tag pm">PM</span> Parking checklist</span><span class="status">COMPLETE</span></li>
 </ul>
-<h3 class="group-title" id="secure">Securing the Aircraft<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Securing the Aircraft" class="group-select-btn" data-group="secure" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/secure.jpg" rel="noopener noreferrer" target="_blank" title="Otvoriť obrázok pre skupinu Securing the Aircraft">🖼 Obrázok</a></span></h3>
+<h3 class="group-title" id="secure">Securing the Aircraft<span class="group-controls"><button aria-label="Označiť alebo odznačiť celú skupinu: Securing the Aircraft" class="group-select-btn" data-group="secure" type="button">✓ Označiť celú skupinu</button><a class="image-link" href="images/secure.jpg" title="Otvoriť obrázok pre skupinu Securing the Aircraft">🖼 Obrázok</a></span></h3>
 <ul class="checklist">
 <li class="item"><span class="label">Parking brake</span><span class="status">CHECK ON</span></li>
 <li class="item"><span class="label">All IR mode selectors<span class="description">Select OFF only after the aircraft is parked and the shutdown flow is complete.</span></span><span class="status">OFF</span></li>
@@ -781,6 +795,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menuToggle");
   const sectionMenu = document.getElementById("sectionMenu");
   const menuItems = document.querySelectorAll(".menu-item");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  document.querySelectorAll(".image-link").forEach(link => {
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      lightboxImg.src = link.href;
+      lightboxImg.alt = "Obrázok: " + (link.closest(".group-title")?.childNodes[0]?.textContent.trim() || "Checklist");
+      lightbox.classList.add("active");
+      lightbox.setAttribute("aria-hidden", "false");
+    });
+  });
+  lightbox.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+    lightbox.setAttribute("aria-hidden", "true");
+    lightboxImg.src = "";
+  });
+  lightboxImg.addEventListener("click", event => event.stopPropagation());
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && lightbox.classList.contains("active")) {
+      lightbox.classList.remove("active");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+    }
+  });
   const allItems = Array.from(document.querySelectorAll("ul.checklist .item"));
   const itemIndex = new Map(allItems.map((el, i) => [el, i]));
   let completed = new Set();
